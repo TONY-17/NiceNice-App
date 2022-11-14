@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/parentCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/fill_light"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:strokeColor="@color/light_gray"
+        app:strokeWidth="1dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/carImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/car"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/carNameLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:text="Katlego’s Toyota - Tembisa"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:fontFamily="@font/inter_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/carImage" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_outline_remove_red_eye_24"
+                app:layout_constraintStart_toStartOf="@+id/carNameLocation"
+                app:layout_constraintTop_toBottomOf="@+id/carNameLocation"
+                app:tint="@color/text_color" />
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="10 views"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:fontFamily="@font/inter_regular"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+                app:layout_constraintStart_toEndOf="@+id/imageView4"
+                app:layout_constraintTop_toTopOf="@+id/imageView4" />
+            <ImageView
+                android:id="@+id/imageView44"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_outline_supervisor_account_24"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+                app:layout_constraintStart_toEndOf="@+id/textView4"
+                app:layout_constraintTop_toTopOf="@+id/imageView4"
+                app:tint="@color/text_color" />
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="2/3 "
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:fontFamily="@font/inter_regular"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView44"
+                app:layout_constraintStart_toEndOf="@+id/imageView44"
+                app:layout_constraintTop_toTopOf="@+id/imageView44" />
+            <ImageView
+                android:id="@+id/imageView45"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_outline_access_time_24"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView44"
+                app:layout_constraintStart_toEndOf="@+id/textView5"
+                app:layout_constraintTop_toTopOf="@+id/imageView44"
+                app:tint="@color/text_color" />
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="4d. ago"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:fontFamily="@font/inter_regular"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView45"
+                app:layout_constraintStart_toEndOf="@+id/imageView45"
+                app:layout_constraintTop_toTopOf="@+id/imageView45" />
+
+            <ImageView
+                android:id="@+id/imageView46"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:visibility="gone"
+                android:src="@drawable/ic_outline_wb_sunny_24"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView45"
+                app:layout_constraintStart_toEndOf="@+id/textView6"
+                app:layout_constraintTop_toTopOf="@+id/imageView45"
+                app:tint="@color/text_color" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="A/C"
+                android:visibility="gone"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView46"
+                app:layout_constraintStart_toEndOf="@+id/imageView46"
+                app:layout_constraintTop_toTopOf="@+id/imageView46" />
+
+            <TextView
+                android:id="@+id/carViewsConnectionsAge"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="Views: 10 \u2022  Connections:  2/3 \u2022 Listed: 3 days ago"
+                android:textColor="@color/text_color"
+                android:textSize="16sp"
+                android:visibility="gone"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/imageView4"
+                app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/fill"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/carViewsConnectionsAge"
+                app:layout_constraintVertical_bias="0.0"
+                app:shapeAppearance="@style/ShapeAppearance.MediumComponent.Rounded"
+                app:strokeColor="@color/light_gray"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/ic_round_check_24"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/green" />
+
+                    <ImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:src="@drawable/ic_round_check_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+                        app:layout_constraintVertical_bias="0.0"
+                        app:tint="@color/green" />
+
+                    <TextView
+                        android:id="@+id/carHasDeposit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="No deposit "
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/inter_medium"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+                        app:layout_constraintStart_toEndOf="@+id/imageView6"
+                        app:layout_constraintTop_toTopOf="@+id/imageView6" />
+
+
+                    <TextView
+                        android:id="@+id/carPlatform"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Uber | Bolt"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/inter_medium"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView7"
+                        app:layout_constraintStart_toEndOf="@+id/imageView7"
+                        app:layout_constraintTop_toTopOf="@+id/imageView7" />
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="Weekly check-in/"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/inter_medium"
+                        app:layout_constraintBottom_toBottomOf="@+id/carHasDeposit"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/carHasDeposit" />
+
+
+                    <TextView
+                        android:id="@+id/carWeeklyCheckIn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="R250"
+                        android:textColor="@color/green"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/inter_medium"
+                        app:layout_constraintBottom_toBottomOf="@+id/carPlatform"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/carPlatform" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">NiceNice</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Discover</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_saved">Saved</string>
+    <string name="title_history">Messages</string>
+    <string name="title_profile">Profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dummy_data">At vero eos et accusamus et iusto odio ducim dignissimos ducimus qui blanditiis ducimus du praesentium voluptatum deleniti atque cdserer    quos dolores et quas molestias ereweewe fde  excepturi sint occaecati cupiditate.</string>
+</resources>

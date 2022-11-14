@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ShapeAppearance.MediumComponent.Rounded" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamilyTopLeft">rounded</item>
+        <item name="cornerFamilyBottomRight">rounded</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeBottomRight">12dp</item>
+        <item name="cornerSizeBottomLeft">12dp</item>
+    </style>
+
+    <style name="ShapeAppearance.MediumComponent.Rounded2" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamilyTopLeft">rounded</item>
+        <item name="cornerFamilyBottomRight">rounded</item>
+        <item name="cornerSizeTopLeft">16dp</item>
+        <item name="cornerSizeTopRight">16dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+
+    <style name="CustomCheckbox02" parent="@style/Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_selector</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+</resources>
