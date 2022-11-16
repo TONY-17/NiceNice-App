@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_history"
-        android:name="com.blueconnectionz.nicenice.ui.messaging.DashboardFragment"
+        android:name="com.blueconnectionz.nicenice.ui.messaging.Dialog"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 

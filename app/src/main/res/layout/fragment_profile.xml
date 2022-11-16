@@ -51,10 +51,9 @@
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialCardView12"
+            android:id="@+id/profileCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,6 +67,7 @@
                     android:id="@+id/imageView12"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     android:src="@drawable/user"
@@ -139,14 +139,13 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialCardView13"
+            android:id="@+id/changePasswordCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/materialCardView12">
+            app:layout_constraintTop_toBottomOf="@+id/profileCardView">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -156,6 +155,7 @@
                     android:id="@+id/im34"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     android:src="@drawable/ic_outline_lock_24"
@@ -226,14 +226,13 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialCardView14"
+            android:id="@+id/creditsCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/materialCardView13">
+            app:layout_constraintTop_toBottomOf="@+id/changePasswordCardView">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -243,6 +242,7 @@
                     android:id="@+id/im36"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     android:src="@drawable/ic_outline_credit_card_24"
@@ -278,7 +278,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/inter_medium"
-                    android:text="Payment Methods"
+                    android:text="Load Credits"
                     android:textColor="@color/black2"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toTopOf="@+id/v67"
@@ -292,7 +292,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/inter_regular"
-                    android:text="Add your debit &amp; credit cards"
+                    android:text="Manage your credits"
                     android:textColor="@color/text_color"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/im36"
@@ -320,7 +320,7 @@
             android:background="@color/fill_light"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/materialCardView14" />
+            app:layout_constraintTop_toBottomOf="@+id/creditsCardView" />
 
 
         <TextView
@@ -454,7 +454,6 @@
             android:id="@+id/materialCardView16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -469,6 +468,7 @@
                     android:id="@+id/im678"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     android:src="@drawable/ic_outline_star_outline_24"
@@ -538,10 +538,9 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialCardView17"
+            android:id="@+id/termsCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -555,13 +554,14 @@
                     android:id="@+id/im32"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     android:src="@drawable/ic_outline_feed_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/text_color" />
+                    app:tint="@color/green" />
 
                 <ImageView
 
@@ -626,15 +626,15 @@
 
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/logOutUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginBottom="80dp"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/materialCardView17">
+            app:layout_constraintTop_toBottomOf="@+id/termsCardView">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -644,6 +644,7 @@
                     android:id="@+id/logImv"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:layout_marginStart="16dp"
                     android:src="@drawable/ic_outline_logout_24"
                     app:layout_constraintBottom_toBottomOf="@+id/textView26"
                     app:layout_constraintStart_toStartOf="parent"

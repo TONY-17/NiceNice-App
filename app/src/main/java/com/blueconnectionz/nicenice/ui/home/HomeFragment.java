@@ -54,8 +54,8 @@ public class HomeFragment extends Fragment {
                     //view.setVisibility(View.VISIBLE);
                     filter.setVisibility(View.GONE);
                    /* search.setStrokeColor(getResources().getColor(R.color.card_stroke,null));
-                    search.setStrokeWidth(2);*/
-                    search.setElevation(8f);
+                    */
+                    search.setStrokeWidth(4);
                 });
             }else{
                 getActivity().runOnUiThread(() -> {
@@ -63,7 +63,7 @@ public class HomeFragment extends Fragment {
                     filter.setVisibility(View.VISIBLE);
 /*                    search.setStrokeColor(getResources().getColor(R.color.card_stroke,null));
                     search.setStrokeWidth(0);*/
-                    search.setElevation(0f);
+                    search.setStrokeWidth(2);
                 });
             }
         });

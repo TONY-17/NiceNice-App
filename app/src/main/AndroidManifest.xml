@@ -17,28 +17,40 @@
         android:theme="@style/Theme.NiceNice"
         tools:targetApi="31">
         <activity
-            android:name=".Channel"
+            android:name=".ui.entry.VerifyNumber"
             android:exported="false" />
         <activity
-            android:name=".ProfileInformation"
+            android:name=".ui.entry.ProfileUpload"
             android:exported="false" />
         <activity
-            android:name=".ui.Checkout"
+            android:name=".ui.entry.OnBoarding"
             android:exported="false" />
         <activity
-            android:name=".ui.PersonalDetails"
+            android:name=".ui.profile.pages.ChangePassword"
+            android:exported="false" />
+        <activity
+            android:name=".ui.messaging.Conversation"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profile.pages.ProfileInformation"
+            android:exported="false" />
+        <activity
+            android:name=".ui.cardetails.Checkout"
+            android:exported="false" />
+        <activity
+            android:name=".ui.entry.PersonalDetails"
             android:exported="false" />
         <activity
             android:name=".ui.WelcomePage"
             android:exported="false" />
         <activity
-            android:name=".ui.PostDetails"
+            android:name=".ui.cardetails.PostDetails"
             android:exported="false" />
         <activity
-            android:name=".ui.DocumentUpload"
+            android:name=".ui.entry.DocumentUpload"
             android:exported="false" />
         <activity
-            android:name=".ui.Splash"
+            android:name=".ui.entry.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

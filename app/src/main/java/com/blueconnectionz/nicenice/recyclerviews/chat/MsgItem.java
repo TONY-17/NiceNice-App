@@ -1,4 +1,4 @@
-package com.blueconnectionz.nicenice.recyclerviews.msgs;
+package com.blueconnectionz.nicenice.recyclerviews.chat;
 
 public class MsgItem {
     private String owner;

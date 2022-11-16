@@ -1,8 +1,8 @@
-package com.blueconnectionz.nicenice.recyclerviews.msgs;
+package com.blueconnectionz.nicenice.recyclerviews.chat;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,15 +14,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blueconnectionz.nicenice.R;
-import com.blueconnectionz.nicenice.recyclerviews.discover.HomeAdapter;
+import com.blueconnectionz.nicenice.ui.messaging.Conversation;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
 
-public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder>{
+public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder> {
 
     List<MsgItem> msgItemList;
     Activity activity;
+
     public MsgAdapter(List<MsgItem> msgItemList, Activity activity) {
         this.msgItemList = msgItemList;
         this.activity = activity;
@@ -37,7 +38,6 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder>{
         return new MsgAdapter.ViewHolder(view);
     }
 
-    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         TextView owner = holder.owner;
@@ -53,7 +53,12 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder>{
         ImageView rightIcon = holder.msgRightIcon;
         ImageView checkIcon = holder.msgCheckIcon;
 
-        if(msgItemList.get(position).rejected){
+
+
+        String[] statuses = new String[]{"Rejected", "Accepted", "InProgress"};
+
+
+        if (msgItemList.get(position).rejected) {
             activity.runOnUiThread(() -> {
                 owner.setTextColor(Color.BLACK);
                 statusCardView.setCardBackgroundColor(Color.RED);
@@ -64,10 +69,10 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder>{
             });
         }
 
-        if(msgItemList.get(position).accepted){
+        if (msgItemList.get(position).accepted) {
             activity.runOnUiThread(() -> {
                 owner.setTextColor(Color.BLACK);
-                statusCardView.setCardBackgroundColor(Color.GREEN);
+                statusCardView.setCardBackgroundColor(activity.getResources().getColor(R.color.green, null));
                 checkIcon.setVisibility(View.VISIBLE);
                 rightIcon.setVisibility(View.GONE);
                 sideCard.setVisibility(View.GONE);
@@ -76,16 +81,26 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder>{
             });
         }
 
-        if(msgItemList.get(position).newMessage){
+        if (msgItemList.get(position).newMessage) {
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    checkIcon.setVisibility(View.VISIBLE);
-
+                    //checkIcon.setVisibility(View.VISIBLE);
+                    holder.messageCount.setVisibility(View.VISIBLE);
                 }
             });
-
         }
+
+
+
+
+        MaterialCardView chatToCarOwner = holder.parent;
+        chatToCarOwner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.startActivity(new Intent(activity.getApplicationContext(), Conversation.class));
+            }
+        });
 
     }
 
@@ -94,12 +109,13 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder>{
         return msgItemList.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder {
         TextView owner, message, time;
         ImageView profilePicture;
         // Views that will change depending on the status of the message
         MaterialCardView msgStatusCardView, newMsgCardView, parent;
         ImageView msgRightIcon, msgCheckIcon;
+        TextView messageCount;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -113,6 +129,7 @@ public class MsgAdapter extends RecyclerView.Adapter<MsgAdapter.ViewHolder>{
             msgRightIcon = itemView.findViewById(R.id.msgRightIcon);
             msgCheckIcon = itemView.findViewById(R.id.msgCheckIcon);
             parent = itemView.findViewById(R.id.parentMsgCardView);
+            messageCount = itemView.findViewById(R.id.messageCount);
         }
     }
 }

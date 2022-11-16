@@ -2,7 +2,6 @@ package com.blueconnectionz.nicenice.recyclerviews.discover;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blueconnectionz.nicenice.R;
-import com.blueconnectionz.nicenice.ui.PostDetails;
-import com.bumptech.glide.Glide;
+import com.blueconnectionz.nicenice.ui.cardetails.PostDetails;
+
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
@@ -37,7 +36,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ImageView carImage = holder.carImage;
+        //ImageView carImage = holder.carImage;
 /*        Glide.with(carImage)
                 .asBitmap()
                 .placeholder(new ColorDrawable(carImage.getContext().getResources().getColor(R.color.light_gray, null)))

@@ -1,4 +1,4 @@
-package com.blueconnectionz.nicenice.ui;
+package com.blueconnectionz.nicenice.ui.entry;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -42,7 +42,7 @@ public class Splash extends AppCompatActivity {
 
         Handler handler = new Handler();
         handler.postDelayed(() -> {
-            startActivity(new Intent(Splash.this, MainActivity.class));
+            startActivity(new Intent(Splash.this, OnBoarding.class));
             finish();
         },2000);
     }

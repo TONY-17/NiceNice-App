@@ -31,17 +31,32 @@ android {
 }
 
 dependencies {
-    // Dependency for chat UI
-    //implementation 'tz.co.hosannahighertech:messagekit:1.0.0apha4'
+
+    /*
+    modules {
+        module("com.google.android:flexbox") {
+            replacedBy("com.google.android.flexbox:flexbox")
+        }
+    }
+    */
+
     // Glide dependency for displaying images faster
-    implementation 'com.github.bumptech.glide:glide:4.14.2'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    // Dependency for chat UI
+    implementation 'com.github.stfalcon-studio:Chatkit:0.4.1'
+    // Flexbox dependency required by Chat UI
+    implementation 'com.google.android:flexbox:1.0.0'
+
+
     // Lottie animation dependency
     def lottieVersion = "5.2.0"
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
+    implementation 'me.tankery.lib:circularSeekBar:1.4.1'
+
+
     implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.blueconnectionz.nicenice.R;
+import com.blueconnectionz.nicenice.ui.entry.DocumentUpload;
 import com.google.android.material.button.MaterialButton;
 
 
@@ -21,7 +22,7 @@ public class WelcomePage extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(WelcomePage.this,DocumentUpload.class));
+                startActivity(new Intent(WelcomePage.this, DocumentUpload.class));
             }
         });
 
