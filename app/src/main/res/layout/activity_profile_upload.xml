@@ -84,7 +84,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/uploadPicture"
+        android:id="@+id/openCamera"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
@@ -100,26 +100,27 @@
         app:layout_constraintTop_toBottomOf="@+id/textView34" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/openGallery"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
-        android:fontFamily="@font/inter_medium"
-        android:text="Choose from gallery"
-        app:strokeColor="@color/main"
-        app:strokeWidth="2dp"
-        app:cornerRadius="0dp"
-        android:elevation="0dp"
-        app:elevation="0dp"
         android:backgroundTint="@color/white"
+        android:elevation="0dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="Choose from device"
         android:textColor="@color/main"
+        app:cornerRadius="0dp"
+        app:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/uploadPicture"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/openCamera"
+        app:layout_constraintVertical_bias="0.0"
+        app:strokeColor="@color/main"
+        app:strokeWidth="2dp" />
 
 
 
