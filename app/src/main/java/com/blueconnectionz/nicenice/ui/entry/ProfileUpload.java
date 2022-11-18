@@ -5,12 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.Window;
@@ -52,7 +52,7 @@ public class ProfileUpload extends AppCompatActivity {
         });
 
         // Enables a driver to select an image from gallery
-        MaterialButton selectPictureFromGallery = findViewById(R.id.openGallery);
+        MaterialButton selectPictureFromGallery = findViewById(R.id.signUpDriver);
         selectPictureFromGallery.setOnClickListener(view -> openGalleryFolder());
     }
 
@@ -74,6 +74,15 @@ public class ProfileUpload extends AppCompatActivity {
                 Bundle extras = data.getExtras();
                 Bitmap imageBitmap = (Bitmap) extras.get("data");
                 //imageView.setImageBitmap(imageBitmap);
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(ProfileUpload.this,DocumentUpload.class));
+                    }
+                },1000);
+
             }
             // Select image from gallery
             if (requestCode == SELECT_PICTURE) {

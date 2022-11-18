@@ -15,6 +15,7 @@ import android.widget.ImageView;
 
 import com.blueconnectionz.nicenice.MainActivity;
 import com.blueconnectionz.nicenice.R;
+import com.blueconnectionz.nicenice.utils.Common;
 
 public class Splash extends AppCompatActivity {
 
@@ -23,22 +24,11 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         // Set the status bar color to white
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Window window = getWindow();
-            View view = window.getDecorView();
-            int flags = view.getSystemUiVisibility();
-            flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-            view.setSystemUiVisibility(flags);
-            this.getWindow().setStatusBarColor(Color.WHITE);
-        }
-
-        final Animation[] animation = new Animation[1];
-        animation[0] = AnimationUtils.loadAnimation(getApplicationContext(),
-                R.anim.bottom_to_original);
+        Common.setStatusBarColor(getWindow(),this);
 
         // View to be animated
         ImageView logo = findViewById(R.id.niceNiceLogo);
-        logo.setAnimation(animation[0]);
+        logo.setAnimation(Common.viewBottomToOriginalAnim(getApplicationContext()));
 
         Handler handler = new Handler();
         handler.postDelayed(() -> {

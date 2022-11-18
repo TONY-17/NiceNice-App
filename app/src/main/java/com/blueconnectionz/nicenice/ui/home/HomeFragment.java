@@ -18,6 +18,7 @@ import com.blueconnectionz.nicenice.R;
 import com.blueconnectionz.nicenice.databinding.FragmentHomeBinding;
 import com.blueconnectionz.nicenice.recyclerviews.discover.HomeAdapter;
 import com.blueconnectionz.nicenice.recyclerviews.discover.HomeItem;
+import com.blueconnectionz.nicenice.utils.Common;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
@@ -32,15 +33,14 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        // View bottom - top animation
-        final Animation[] animation = new Animation[1];
-        animation[0] = AnimationUtils.loadAnimation(getContext(),
-                R.anim.bottom_to_original);
+
 
         final RecyclerView recyclerView = binding.carsListRV;
         final View view = binding.view7;
+
         final MaterialCardView filter = binding.filterCardView;
-        filter.setAnimation(animation[0]);
+        filter.setAnimation(Common.viewBottomToOriginalAnim(getContext()));
+
         final MaterialCardView search = binding.searchCardView;
         HomeAdapter homeAdapter = new HomeAdapter(populateData());
         recyclerView.setAdapter(homeAdapter);

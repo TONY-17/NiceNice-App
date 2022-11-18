@@ -22,46 +22,37 @@
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/linearProgressIndicator"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="4dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        app:trackCornerRadius="2dp"
         android:layout_marginEnd="16dp"
         android:progressTint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView32" />
 
-    <com.google.android.material.card.MaterialCardView
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/materialCardView14"
         android:layout_width="140dp"
         android:layout_height="140dp"
         android:layout_marginTop="64dp"
-        app:cardBackgroundColor="@color/fill_light"
-        app:cardCornerRadius="70dp"
-        app:cardElevation="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:lottie_rawRes="@raw/upload_image_gif"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearProgressIndicator"
-        app:layout_constraintVertical_bias="0.0">
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_baseline_image_24"
-            app:tint="@color/text_color" />
-    </com.google.android.material.card.MaterialCardView>
+        app:layout_constraintTop_toBottomOf="@+id/linearProgressIndicator" />
 
     <TextView
         android:id="@+id/textView33"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/inter_medium"
-        android:text="Profile Picture"
+        android:text="Profile Photo"
         android:textColor="@color/black"
-        android:textSize="26sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,8 +65,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:fontFamily="@font/inter_regular"
-        android:text="Car owners will be able to see your profile image when you send them requests."
+        android:fontFamily="@font/inter_light"
+        android:text="Choose an image that will be used on your profile."
         android:textAlignment="center"
         android:textColor="@color/text_color"
         android:textSize="18sp"
@@ -85,23 +76,27 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/openCamera"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="64dp"
         android:elevation="0dp"
-        app:elevation="0dp"
-        app:cornerRadius="0dp"
-        android:layout_marginEnd="16dp"
         android:fontFamily="@font/inter_medium"
-        android:text="take a picture"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="use camera"
+        app:cornerRadius="6dp"
+        app:elevation="0dp"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/main"
+        app:strokeColor="@color/main"
+        app:icon="@drawable/ic_baseline_camera_alt_24"
+        app:iconTint="@color/main"
+        app:strokeWidth="2dp"
+        app:layout_constraintEnd_toEndOf="@+id/signUpDriver"
+        app:layout_constraintStart_toStartOf="@+id/signUpDriver"
         app:layout_constraintTop_toBottomOf="@+id/textView34" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/openGallery"
-        android:layout_width="match_parent"
+        android:id="@+id/signUpDriver"
+        android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
@@ -112,7 +107,9 @@
         android:fontFamily="@font/inter_medium"
         android:text="Choose from device"
         android:textColor="@color/main"
-        app:cornerRadius="0dp"
+        app:icon="@drawable/ic_baseline_image_24"
+        app:iconTint="@color/main"
+        app:cornerRadius="6dp"
         app:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -121,8 +118,6 @@
         app:layout_constraintVertical_bias="0.0"
         app:strokeColor="@color/main"
         app:strokeWidth="2dp" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

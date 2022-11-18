@@ -51,7 +51,7 @@ public class OnBoarding extends AppCompatActivity {
         dotsLayout = findViewById(R.id.dots);
         letsGetStarted = findViewById(R.id.get_started_btn);
         letsGetStarted.setOnClickListener(view -> {
-            startActivity(new Intent(OnBoarding.this, ProfileUpload.class));
+            startActivity(new Intent(OnBoarding.this, LandingPage.class));
             finish();
         });
         //Call adapter

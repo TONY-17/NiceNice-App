@@ -20,7 +20,6 @@
             android:layout_height="match_parent">
 
 
-
             <TextView
                 android:id="@+id/textView32"
                 android:layout_width="wrap_content"
@@ -37,14 +36,15 @@
             <com.google.android.material.progressindicator.LinearProgressIndicator
                 android:id="@+id/linearProgressIndicator"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="4dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:progressTint="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView32" />
+                app:layout_constraintTop_toBottomOf="@+id/textView32"
+                app:trackCornerRadius="2dp" />
 
 
             <TextView
@@ -67,9 +67,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:fontFamily="@font/inter_regular"
+                android:fontFamily="@font/inter_light"
                 android:text="Please make sure you upload all the documents"
                 android:textAlignment="textStart"
                 android:textColor="@color/text_color"
@@ -80,14 +79,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/materialCardView"
+                android:id="@+id/uploadLicense"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 app:cardBackgroundColor="@color/fill_light"
-                app:cardCornerRadius="2dp"
+                app:cardCornerRadius="6dp"
                 app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -106,7 +105,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="16dp"
                         android:fontFamily="@font/inter_medium"
-                        android:text="Licence with PDP"
+                        android:text="SELECT FILE"
                         android:textAllCaps="true"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -143,13 +142,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="(2)"
-                android:fontFamily="@font/inter_medium"
+                android:fontFamily="@font/inter_regular"
+                android:text="(2) ID COPY"
+                android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
+                app:layout_constraintTop_toBottomOf="@+id/uploadLicense" />
 
             <TextView
                 android:id="@+id/textView35"
@@ -157,9 +156,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
-                android:fontFamily="@font/inter_medium"
-                android:text="(1)"
-
+                android:fontFamily="@font/inter_regular"
+                android:text="(1) Licence with PDP"
+                android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -171,9 +170,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="(3)"
+                android:fontFamily="@font/inter_regular"
+                android:text="(3) Fingerprint report"
+                android:textAllCaps="true"
                 android:textColor="@color/black"
-                android:fontFamily="@font/inter_medium"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView2" />
@@ -186,7 +186,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 app:cardBackgroundColor="@color/fill_light"
-                app:cardCornerRadius="2dp"
+                app:cardCornerRadius="6dp"
                 app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -204,7 +204,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="16dp"
                         android:fontFamily="@font/inter_medium"
-                        android:text="Licence with PDP"
+                        android:text="SELECT FILE"
                         android:textAllCaps="true"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -244,7 +244,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 app:cardBackgroundColor="@color/fill_light"
-                app:cardCornerRadius="2dp"
+                app:cardCornerRadius="6dp"
                 app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -262,7 +262,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="16dp"
                         android:fontFamily="@font/inter_medium"
-                        android:text="Fingerprint report"
+                        android:text="select file"
                         android:textAllCaps="true"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -300,12 +300,88 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="(4)"
-                android:fontFamily="@font/inter_medium"
+                android:fontFamily="@font/inter_regular"
+                android:text="(4) Proof of address"
+                android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView3" />
+
+            <TextView
+                android:id="@+id/textView41"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/inter_regular"
+                android:text="(5) Ride star rating"
+                android:textAllCaps="true"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView4" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="32dp"
+                app:cardBackgroundColor="@color/fill_light"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/view3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView41"
+                app:strokeColor="@color/card_stroke"
+                app:strokeWidth="2dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="16dp"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="select file"
+                        android:textAllCaps="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/light_gray"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/cb55"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <CheckBox
+                        android:id="@+id/cb55"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView4"
@@ -314,11 +390,9 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="32dp"
                 app:cardBackgroundColor="@color/fill_light"
-                app:cardCornerRadius="2dp"
+                app:cardCornerRadius="6dp"
                 app:cardElevation="0dp"
-                app:layout_constraintBottom_toBottomOf="@+id/view3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView10"
@@ -335,7 +409,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="16dp"
                         android:fontFamily="@font/inter_medium"
-                        android:text="Proof of address"
+                        android:text="select file"
                         android:textAllCaps="true"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -372,8 +446,7 @@
                 android:id="@+id/view3"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginBottom="16dp"
-                android:background="@color/light_gray"
+                android:background="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/uploadDocuments"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -389,15 +462,13 @@
                 android:elevation="0dp"
                 android:fontFamily="@font/inter_semibold"
                 android:text="Continue"
-                app:cornerRadius="0dp"
+                app:cornerRadius="6dp"
                 app:elevation="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
