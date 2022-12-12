@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:background="@color/light_gray"
-    tools:context=".ui.entry.OnBoarding">
+    tools:context=".driver.entry.OnBoarding">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/slider"
@@ -69,6 +70,7 @@
                 app:cardBackgroundColor="@color/main"
                 app:cardCornerRadius="30dp"
                 app:cardElevation="0dp"
+                android:visibility="gone"
                 app:icon="@drawable/ic_baseline_keyboard_arrow_right_24">
 
                 <ImageView
@@ -91,6 +93,7 @@
                 app:cs_disable_pointer="true"
                 app:cs_end_angle="270"
                 app:cs_max="9"
+                android:visibility="gone"
                 app:cs_negative_enabled="false"
                 app:cs_pointer_angle="0"
                 app:cs_pointer_color="#FFFFFF"

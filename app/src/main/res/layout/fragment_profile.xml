@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profile.ProfileFragment">
+    tools:context=".driver.profile.ProfileFragment">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
@@ -22,6 +24,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/textView2"
             android:layout_width="0dp"
@@ -30,11 +33,11 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
 
+            android:fontFamily="@font/inter_regular"
             android:text="Update your settings like notifications, payments, profile edit etc."
             android:textAlignment="textStart"
             android:textColor="@color/text_color"
             android:textSize="16sp"
-            android:fontFamily="@font/inter_regular"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -336,6 +339,7 @@
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view8" />
+
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView15"
             android:layout_width="match_parent"
@@ -362,17 +366,16 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/text_color"
-                    />
+                    app:tint="@color/text_color" />
 
-                <Switch
+                <com.google.android.material.switchmaterial.SwitchMaterial
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+                    app:trackTint="@color/switch_track_selector"
+                    app:thumbTint="@color/switch_thumb_selector"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/black2" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <View
                     android:id="@+id/v543"
@@ -381,8 +384,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/im89"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/im89"
-                    />
+                    app:layout_constraintTop_toTopOf="@+id/im89" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -408,8 +410,7 @@
                     android:textColor="@color/text_color"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/im89"
-                    app:layout_constraintTop_toBottomOf="@+id/v543"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/v543" />
 
                 <View
                     android:layout_width="0dp"
@@ -451,7 +452,7 @@
             app:layout_constraintTop_toBottomOf="@+id/view9" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialCardView16"
+            android:id="@+id/feedBack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -471,7 +472,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
-                    android:src="@drawable/ic_outline_star_outline_24"
+                    android:src="@drawable/ic_baseline_question_mark_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -503,7 +504,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/inter_medium"
-                    android:text="Give us feedback"
+                    android:text="Help Centre"
                     android:textColor="@color/black2"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toTopOf="@+id/v90"
@@ -517,7 +518,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/inter_regular"
-                    android:text="Rate us on the playstore"
+                    android:text="WhatsApp help centre"
                     android:textColor="@color/text_color"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/im678"
@@ -544,7 +545,7 @@
             app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/materialCardView16">
+            app:layout_constraintTop_toBottomOf="@+id/feedBack">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -649,7 +650,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/textView26"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView26"
-                    app:tint="@color/text_color" />
+                    app:tint="@color/red" />
 
                 <ImageView
 
@@ -680,7 +681,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

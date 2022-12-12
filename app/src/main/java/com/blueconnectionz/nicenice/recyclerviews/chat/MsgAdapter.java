@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blueconnectionz.nicenice.R;
-import com.blueconnectionz.nicenice.ui.messaging.Conversation;
+import com.blueconnectionz.nicenice.driver.messaging.Conversation;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;

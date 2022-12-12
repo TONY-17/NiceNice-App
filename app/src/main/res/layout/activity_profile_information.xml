@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ui.profile.pages.ProfileInformation">
+    tools:context=".driver.profile.pages.ProfileInformation">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -38,7 +38,7 @@
             android:text="Full Name"
             android:textAllCaps="true"
             android:fontFamily="@font/inter_regular"
-            android:textColor="@color/text_color"
+            android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -56,10 +56,10 @@
             android:fontFamily="@font/inter_medium"
             app:boxBackgroundColor="@color/white"
 
-            app:boxCornerRadiusBottomEnd="8dp"
-            app:boxCornerRadiusBottomStart="8dp"
-            app:boxCornerRadiusTopEnd="8dp"
-            app:boxCornerRadiusTopStart="0dp"
+            app:boxCornerRadiusBottomEnd="6dp"
+            app:boxCornerRadiusBottomStart="6dp"
+            app:boxCornerRadiusTopEnd="6dp"
+            app:boxCornerRadiusTopStart="6dp"
 
             app:boxStrokeColor="@color/text_color"
             app:boxStrokeWidth="1dp"
@@ -71,11 +71,11 @@
             app:layout_constraintTop_toBottomOf="@+id/textView29">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/userFullName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_regular"
-                android:inputType="text"
-                android:text="John Doe Maseremula" />
+                android:inputType="text"/>
 
         </com.google.android.material.textfield.TextInputLayout>
         <TextView
@@ -87,7 +87,7 @@
             android:fontFamily="@font/inter_regular"
             android:text="Email Address"
             android:textAllCaps="true"
-            android:textColor="@color/text_color"
+            android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -105,11 +105,11 @@
 
             android:fontFamily="@font/inter_medium"
             app:boxBackgroundColor="@color/white"
-            app:boxCornerRadiusBottomEnd="8dp"
-            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusBottomEnd="6dp"
+            app:boxCornerRadiusBottomStart="6dp"
 
-            app:boxCornerRadiusTopEnd="8dp"
-            app:boxCornerRadiusTopStart="0dp"
+            app:boxCornerRadiusTopEnd="6dp"
+            app:boxCornerRadiusTopStart="6dp"
             app:boxStrokeColor="@color/text_color"
             app:boxStrokeWidth="1dp"
             app:errorEnabled="true"
@@ -120,12 +120,12 @@
             app:startIconDrawable="@drawable/ic_outline_email_24">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/userEmailAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
                 android:fontFamily="@font/inter_regular"
-                android:inputType="textEmailAddress"
-                android:text="John1@blue.connectionz.com" />
+                android:inputType="textEmailAddress"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -138,7 +138,7 @@
             android:fontFamily="@font/inter_regular"
             android:text="Phone Number"
             android:textAllCaps="true"
-            android:textColor="@color/text_color"
+            android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -158,10 +158,10 @@
             android:fontFamily="@font/inter_medium"
 
             app:boxBackgroundColor="@color/white"
-            app:boxCornerRadiusBottomEnd="8dp"
-            app:boxCornerRadiusBottomStart="8dp"
-            app:boxCornerRadiusTopEnd="8dp"
-            app:boxCornerRadiusTopStart="0dp"
+            app:boxCornerRadiusBottomEnd="6dp"
+            app:boxCornerRadiusBottomStart="6dp"
+            app:boxCornerRadiusTopEnd="6dp"
+            app:boxCornerRadiusTopStart="6dp"
             app:boxStrokeColor="@color/text_color"
             app:boxStrokeWidth="1dp"
             app:errorEnabled="true"
@@ -172,11 +172,11 @@
             app:startIconDrawable="@drawable/ic_baseline_numbers_24">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/userPhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_regular"
-                android:inputType="number"
-                android:text="+27755434543" />
+                android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -191,7 +191,7 @@
             android:backgroundTint="@color/main"
             android:elevation="0dp"
             android:text="change settings"
-            app:cornerRadius="12dp"
+            app:cornerRadius="6dp"
             app:elevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

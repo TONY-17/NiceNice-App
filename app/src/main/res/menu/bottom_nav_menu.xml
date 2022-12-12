@@ -13,16 +13,11 @@
         android:iconTint="@color/card_stroke"
         android:title="@string/title_history" />
 
-<!--    <item
-        android:id="@+id/navigation_saved"
-        android:icon="@drawable/ic_round_bookmark_border_24"
-        android:iconTint="@color/card_stroke"
-        android:title="@string/title_saved" />-->
-
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/user"
         android:iconTint="@color/card_stroke"
         android:title="@string/title_profile" />
+
 
 </menu>

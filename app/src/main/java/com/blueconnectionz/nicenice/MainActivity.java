@@ -1,21 +1,17 @@
 package com.blueconnectionz.nicenice;
 
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.blueconnectionz.nicenice.databinding.ActivityMainBinding;
+import com.blueconnectionz.nicenice.utils.Common;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,26 +23,22 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         // Set the status bar color to white
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Window window = getWindow();
-            View view = window.getDecorView();
-            int flags = view.getSystemUiVisibility();
-            flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-            view.setSystemUiVisibility(flags);
-            this.getWindow().setStatusBarColor(Color.WHITE);
-        }
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        Common.setStatusBarColor(getWindow(),this, Color.WHITE);
+        BottomNavigationView navView = findViewById(R.id.nav_view_driver);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-   /*     AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home,
-                R.id.navigation_dashboard,
-                R.id.navigation_notifications)
-                .build();*/
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+        // Open the custom chat activity
+/*        View item = findViewById(R.id.navigation_history);
+        item.setOnClickListener(view ->
+                startActivity(new Intent(MainActivity.this, AmityChatHomePageActivity.class))
+
+        );*/
+        NavigationUI.setupWithNavController(navView, navController);
     }
 
 }

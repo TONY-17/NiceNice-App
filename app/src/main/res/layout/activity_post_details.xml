@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".ui.cardetails.PostDetails">
+    tools:context=".driver.cardetails.PostDetails">
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
@@ -79,20 +79,32 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
-            <ImageView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_round_bookmark_border_24"
+                app:cardBackgroundColor="@color/red"
+                app:cardCornerRadius="2dp"
+                app:cardElevation="0dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView11"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView11" />
+                app:layout_constraintTop_toTopOf="@+id/textView11">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/inter_medium"
+                    android:padding="2dp"
+                    android:text="Not available"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </com.google.android.material.card.MaterialCardView>
 
 
             <ImageView
                 android:id="@+id/imageView5"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
@@ -136,7 +148,7 @@
                         app:tint="@color/text_color" />
 
                     <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/viewsTXT"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -155,12 +167,12 @@
                         android:layout_marginStart="16dp"
                         android:src="@drawable/ic_outline_supervisor_account_24"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-                        app:layout_constraintStart_toEndOf="@+id/textView4"
+                        app:layout_constraintStart_toEndOf="@+id/viewsTXT"
                         app:layout_constraintTop_toTopOf="@+id/imageView4"
                         app:tint="@color/text_color" />
 
                     <TextView
-                        android:id="@+id/textView5"
+                        android:id="@+id/connectionsTXT"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -179,12 +191,12 @@
                         android:layout_marginStart="16dp"
                         android:src="@drawable/ic_outline_access_time_24"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView44"
-                        app:layout_constraintStart_toEndOf="@+id/textView5"
+                        app:layout_constraintStart_toEndOf="@+id/connectionsTXT"
                         app:layout_constraintTop_toTopOf="@+id/imageView44"
                         app:tint="@color/text_color" />
 
                     <TextView
-                        android:id="@+id/textView6"
+                        android:id="@+id/driverJoinedDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -309,7 +321,6 @@
                         android:layout_marginEnd="8dp"
                         android:fontFamily="@font/inter_medium"
                         android:text="Insurance"
-
                         android:textColor="@color/text_color"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
@@ -457,8 +468,35 @@
             </com.google.android.material.card.MaterialCardView>
 
 
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/inter_medium"
+                android:text="Tembisa south west "
+                android:textSize="16sp"
+                android:textColor="@color/text_color"
+                app:layout_constraintStart_toEndOf="@+id/imageView14"
+                app:layout_constraintTop_toBottomOf="@+id/view15" />
+
+
             <View
                 android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/light_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+
+            <View
+                android:id="@+id/view15"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginStart="16dp"
@@ -469,6 +507,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView5" />
 
+            <ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_outline_location_on_24"
+                app:layout_constraintBottom_toBottomOf="@+id/textView7"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView7"
+                app:tint="@color/text_color" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -641,12 +689,13 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="16dp"
                 android:fontFamily="@font/inter_semibold"
-                android:text="R250/Week"
+                android:text="R1250/Week"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"

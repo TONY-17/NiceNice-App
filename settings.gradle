@@ -5,7 +5,7 @@ pluginManagement {
         mavenCentral()
         jcenter()
         maven { url 'https://jitpack.io' }
-        //maven { url "https://google.bintray.com/flexbox-layout" }
+        maven { url "https://repo.sendbird.com/public/maven" }
 
     }
 }
@@ -17,7 +17,7 @@ dependencyResolutionManagement {
         jcenter()
         maven { url 'https://jitpack.io' }
         maven { url "https://google.bintray.com/flexbox-layout" }
-
+        maven { url "https://repo.sendbird.com/public/maven" }
     }
 }
 rootProject.name = "NiceNice"

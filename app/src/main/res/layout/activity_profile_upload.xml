@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:animateLayoutChanges="true"
     android:layout_height="match_parent"
-    tools:context=".ui.entry.ProfileUpload">
+    tools:context=".driver.entry.ProfileUpload">
 
     <TextView
         android:id="@+id/textView32"
@@ -52,7 +53,7 @@
         android:fontFamily="@font/inter_medium"
         android:text="Profile Photo"
         android:textColor="@color/black"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -69,13 +70,13 @@
         android:text="Choose an image that will be used on your profile."
         android:textAlignment="center"
         android:textColor="@color/text_color"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/openCamera"
+        android:id="@+id/signUpUser"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginTop="64dp"
@@ -83,19 +84,20 @@
         android:fontFamily="@font/inter_medium"
         android:text="use camera"
         app:cornerRadius="6dp"
+        android:animateLayoutChanges="true"
         app:elevation="0dp"
         android:backgroundTint="@color/white"
         android:textColor="@color/main"
         app:strokeColor="@color/main"
         app:icon="@drawable/ic_baseline_camera_alt_24"
         app:iconTint="@color/main"
-        app:strokeWidth="2dp"
-        app:layout_constraintEnd_toEndOf="@+id/signUpDriver"
-        app:layout_constraintStart_toStartOf="@+id/signUpDriver"
+        app:strokeWidth="1dp"
+        app:layout_constraintEnd_toEndOf="@+id/signUpOwner"
+        app:layout_constraintStart_toStartOf="@+id/signUpOwner"
         app:layout_constraintTop_toBottomOf="@+id/textView34" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/signUpDriver"
+        android:id="@+id/signUpOwner"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
@@ -103,6 +105,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
         android:backgroundTint="@color/white"
+        android:animateLayoutChanges="true"
         android:elevation="0dp"
         android:fontFamily="@font/inter_medium"
         android:text="Choose from device"
@@ -114,10 +117,36 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/openCamera"
+        app:layout_constraintTop_toBottomOf="@+id/signUpUser"
         app:layout_constraintVertical_bias="0.0"
         app:strokeColor="@color/main"
-        app:strokeWidth="2dp" />
+        app:strokeWidth="1dp" />
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        style="@style/AVLoadingIndicatorView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:indicatorColor="@color/main"
+        app:indicatorName="BallPulseSyncIndicator"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <View
+        android:id="@+id/loadingView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
