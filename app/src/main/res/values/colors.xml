@@ -9,8 +9,10 @@
     <color name="black2">#16161A</color>
     <color name="red">#FF0000</color>
     <color name="main">#C117BC</color>
+    <color name="colorBlue">#226DFF</color>
     <color name="white">#FFFFFFFF</color>
     <color name="light_gray">#E2E2E2</color>
+    <color name="shimmer">#dddddd</color>
     <color name="background">#80000000</color>
     <color name="fill">#EAECF0</color>
     <color name="fill_light">#F5F6F8</color>

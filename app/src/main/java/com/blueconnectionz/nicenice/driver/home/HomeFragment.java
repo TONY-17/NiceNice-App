@@ -21,6 +21,7 @@ import com.blueconnectionz.nicenice.network.RetrofitClient;
 import com.blueconnectionz.nicenice.recyclerviews.discover.HomeAdapter;
 import com.blueconnectionz.nicenice.recyclerviews.discover.HomeItem;
 import com.blueconnectionz.nicenice.utils.Common;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.card.MaterialCardView;
 import com.stone.vega.library.VegaLayoutManager;
 
@@ -42,6 +43,8 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     public static List<HomeItem> items = new ArrayList<>();
     RecyclerView recyclerView;
+    ShimmerFrameLayout shimmerFrameLayout;
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -49,11 +52,14 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        shimmerFrameLayout = root.findViewById(R.id.shimmer_view_container);
+        shimmerFrameLayout.startShimmer();
+
 
         recyclerView = binding.carsListRV;
 
 
-            final MaterialCardView filter = binding.filterCardView;
+        final MaterialCardView filter = binding.filterCardView;
         filter.setAnimation(Common.viewBottomToOriginalAnim(getContext()));
 
         final MaterialCardView search = binding.searchCardView;
@@ -63,12 +69,12 @@ public class HomeFragment extends Fragment {
 
         recyclerView.setOnScrollChangeListener((view1, i, i1, i2, i3) -> {
             float scrollPercentage = recyclerViewScrollPercentage(recyclerView);
-            if(scrollPercentage >= 10){
+            if (scrollPercentage >= 10) {
                 getActivity().runOnUiThread(() -> {
-                   // filter.setVisibility(View.GONE);
+                    // filter.setVisibility(View.GONE);
                     search.setStrokeWidth(4);
                 });
-            }else{
+            } else {
                 getActivity().runOnUiThread(() -> {
                     //filter.setVisibility(View.VISIBLE);
                     search.setStrokeWidth(2);
@@ -109,14 +115,17 @@ public class HomeFragment extends Fragment {
                                 boolean depositRequired = carJsonObj.getBoolean("depositRequired");
                                 boolean hasInsurance = carJsonObj.getBoolean("hasInsurance");
                                 boolean hasTracker = carJsonObj.getBoolean("hasTracker");
-                                boolean  activeOnHailingPlatforms= carJsonObj.getBoolean("activeOnHailingPlatforms");
+                                boolean activeOnHailingPlatforms = carJsonObj.getBoolean("activeOnHailingPlatforms");
                                 String views = carJsonObj.getString("views");
                                 String age = carJsonObj.getString("age");
                                 String numConnections = carJsonObj.getString("numConnections");
 
-                                homeItemList.add(new HomeItem(id,R.drawable.car_img1, make, model, city, weeklyTarget, depositRequired, description,
-                                        Integer.valueOf(views),Integer.valueOf(numConnections),Integer.valueOf(age),activeOnHailingPlatforms));
 
+                                homeItemList.add(new HomeItem(id, R.drawable.car_img1, make, model, city, weeklyTarget, depositRequired, description,
+                                        Integer.valueOf(views), Integer.valueOf(numConnections), Integer.valueOf(age), activeOnHailingPlatforms));
+
+                                shimmerFrameLayout.stopShimmer();
+                                shimmerFrameLayout.setVisibility(View.GONE);
                             }
 
                             HomeAdapter homeAdapter = new HomeAdapter(homeItemList);
@@ -157,5 +166,19 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        shimmerFrameLayout.startShimmer();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        shimmerFrameLayout.stopShimmer();
     }
 }

@@ -57,10 +57,21 @@ import com.wang.avi.AVLoadingIndicatorView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+
+import org.json.simple.JSONValue;
+
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -138,7 +149,7 @@ public class OwnerSignUp extends AppCompatActivity implements PickiTCallbacks {
         signUp.setOnClickListener(view -> {
             try {
                 createAccount();
-            } catch (JSONException e) {
+            } catch (JSONException | IOException e) {
                 e.printStackTrace();
             }
         });
@@ -177,7 +188,7 @@ public class OwnerSignUp extends AppCompatActivity implements PickiTCallbacks {
                         } else {
                             pickiT.getPath(data.getData(), Build.VERSION.SDK_INT);
                             System.out.println("FILE CONTENT " + data.getData());
-                           // selectedDocumentTXT.setText(String.valueOf(data.getData()));
+                            // selectedDocumentTXT.setText(String.valueOf(data.getData()));
                         }
                         checkBox.setImageResource(R.drawable.ic_baseline_check_circle_24);
                     }
@@ -185,15 +196,17 @@ public class OwnerSignUp extends AppCompatActivity implements PickiTCallbacks {
 
             });
 
-    private void convertToFile(String path) throws Exception {
+    private void convertToFile(String path) {
         file = new File(path);
+        Random random = new Random();
+        String fileName = random.nextInt(1000) + file.getName();
         RequestBody fileBody = RequestBody.create(file, MediaType.parse("multipart/form-data"));
-        document = MultipartBody.Part.createFormData("document", file.getName(), fileBody);
+        document = MultipartBody.Part.createFormData("document", fileName, fileBody);
     }
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    private void createAccount() throws JSONException {
+    private void createAccount() throws JSONException, IOException {
         Common.hideKeyboard(this);
         String email = Objects.requireNonNull(emailField.getText()).toString().trim();
         String number = Objects.requireNonNull(phoneNumberField.getText()).toString().trim();
@@ -244,47 +257,42 @@ public class OwnerSignUp extends AppCompatActivity implements PickiTCallbacks {
             avLoadingIndicatorView.setVisibility(View.VISIBLE);
             signUp.setVisibility(View.GONE);
 
+            // User Object
+            Map<String, Object> obj = new HashMap<>();
+            obj.put("email", emailField.getText().toString().trim());
+            obj.put("password", passwordField.getText().toString().trim());
+            obj.put("role", Role.OWNER);
 
-            JSONObject user = new JSONObject();
-            user.put("email", emailField.getText().toString().trim());
-            user.put("password", passwordField.getText().toString().trim());
-            user.put("role", Role.OWNER);
+            // Owner Object
+            Map<String, Object> obj1 = new HashMap<>();
+            obj1.put("phoneNumber", phoneNumberField.getText().toString().trim());
+            obj1.put("approved", false);
+            obj1.put("reported", false);
+            obj1.put("creditBalance", 0);
 
-            JSONObject owner = new JSONObject();
-            owner.put("phoneNumber", phoneNumberField.getText().toString().trim());
-            owner.put("approved", false);
-            owner.put("uniqueDocumentId", "automated");
-            owner.put("reported", false);
-            owner.put("user", user);
 
-            String userReq = user.toString();
-            String ownerReq = owner.toString();
-
-            System.out.println("REQUEST 11 " + userReq);
-            System.out.println("REQUEST 11 " + ownerReq);
-
-            Call<ResponseBody> registerOwner = RetrofitClient.getRetrofitClient().getAPI().registerOwner(userReq,
-                    ownerReq,
+            Call<ResponseBody> registerOwner = RetrofitClient.getRetrofitClient().getAPI().registerOwner(
+                    obj,
+                    obj1,
                     document);
+
             registerOwner.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.isSuccessful()) {
                         runOnUiThread(() -> {
-                            try {
-                                String data = response.body().string();
-                                Snackbar.make(getCurrentFocus(), "Account created", Snackbar.LENGTH_LONG).show();
-                                startActivity(new Intent(OwnerSignUp.this, LandingPage.class));
-                                finish();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                            Common.statusToast(1,"Account created",OwnerSignUp.this);
+                            startActivity(new Intent(OwnerSignUp.this, LandingPage.class));
+                            finish();
                         });
                     } else {
                         runOnUiThread(() -> {
                             try {
-                                System.out.println("UPLOAD ERR " + response.errorBody().string());
-                                Snackbar.make(getCurrentFocus(), "Account already exists", Snackbar.LENGTH_LONG).show();
+                                String errMsg = response.errorBody().string();
+                                if(errMsg.contains("EXISTS")){
+                                    Common.statusToast(2,"Account already exists",OwnerSignUp.this);
+                                }
+
                                 loadingView.setVisibility(View.GONE);
                                 avLoadingIndicatorView.setVisibility(View.GONE);
                                 Common.setStatusBarColor(getWindow(), OwnerSignUp.this, Color.WHITE);
@@ -299,8 +307,7 @@ public class OwnerSignUp extends AppCompatActivity implements PickiTCallbacks {
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
                     runOnUiThread(() -> {
-                        System.out.println("SERVER ERR " + t.getMessage());
-                        Snackbar.make(getCurrentFocus(), "Server error", Snackbar.LENGTH_LONG).show();
+                        Common.statusToast(2,"Network error",OwnerSignUp.this);
                         loadingView.setVisibility(View.GONE);
                         avLoadingIndicatorView.setVisibility(View.GONE);
                         signUp.setVisibility(View.VISIBLE);

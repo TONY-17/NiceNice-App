@@ -40,6 +40,9 @@ android {
 }
 
 dependencies {
+    //Beautiful toast messages
+    implementation 'com.github.Spikeysanju:MotionToast:1.4'
+    // URI Convertor
     implementation 'com.github.HBiSoft:PickiT:2.0.5'
     // Animate Recyclerview items
     implementation 'com.stone.vega.library:VegaLayoutManager:1.0.6'
@@ -73,7 +76,11 @@ dependencies {
     // Glide image loading
     implementation 'com.github.bumptech.glide:glide:4.14.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
-
+    // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+    implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1'
+    // Shimmer loading effect
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'

@@ -23,6 +23,9 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.wang.avi.AVLoadingIndicatorView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProfileUpload extends AppCompatActivity {
 
     int SELECT_PICTURE = 200;
@@ -34,7 +37,7 @@ public class ProfileUpload extends AppCompatActivity {
     MaterialButton openCamera;
 
     // Driver profile image
-    public static Intent driverProfilePicture;
+    public static List<Intent> documents = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,7 @@ public class ProfileUpload extends AppCompatActivity {
         avLoadingIndicatorView = findViewById(R.id.avi);
 
         LinearProgressIndicator progressBar = findViewById(R.id.linearProgressIndicator);
-        ObjectAnimator animation = ObjectAnimator.ofInt(progressBar, "progress", 0, 25);
+        ObjectAnimator animation = ObjectAnimator.ofInt(progressBar, "progress", 0, 35);
         animation.setDuration(1000); // 3.5 second
         animation.setInterpolator(new DecelerateInterpolator());
         animation.start();
@@ -64,6 +67,8 @@ public class ProfileUpload extends AppCompatActivity {
     }
 
 
+
+
     private void openGalleryFolder() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -78,27 +83,36 @@ public class ProfileUpload extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             // Select image from camera
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
-                Bundle extras = data.getExtras();
-                /* driverProfilePicture = (Bitmap) extras.get("data");*/
-                driverProfilePicture = data;
-                runOnUiThread(() -> {
-                    //imageView.setImageBitmap(imageBitmap);
-                    loadingView.setVisibility(View.VISIBLE);
-                    avLoadingIndicatorView.setVisibility(View.VISIBLE);
-                    openCamera.setVisibility(View.GONE);
-                    selectPictureFromGallery.setVisibility(View.GONE);
-                    Common.setStatusBarColor(getWindow(), ProfileUpload.this, getResources().getColor(R.color.background, null));
-                    Handler handler = new Handler();
-                    handler.postDelayed(() -> startActivity(new Intent(ProfileUpload.this, DocumentUpload.class)), 2000);
 
-                });
+                if (null != data && data.getData() != null) {
+                    documents.add(data);
+                    System.out.println("CAMERA IMAGE " + data.getData().toString());
+
+                    runOnUiThread(() -> {
+                        //imageView.setImageBitmap(imageBitmap);
+                        loadingView.setVisibility(View.VISIBLE);
+                        avLoadingIndicatorView.setVisibility(View.VISIBLE);
+                        openCamera.setVisibility(View.GONE);
+                        selectPictureFromGallery.setVisibility(View.GONE);
+                        Common.setStatusBarColor(getWindow(), ProfileUpload.this, getResources().getColor(R.color.background, null));
+                        Handler handler = new Handler();
+                        handler.postDelayed(() -> startActivity(new Intent(ProfileUpload.this, DocumentUpload.class)), 2000);
+
+                    });
+                } else {
+
+                    return;
+                }
             }
             // Select image from gallery
             if (requestCode == SELECT_PICTURE) {
-                Uri selectedImageUri = data.getData();
-                //driverProfilePicture = Common.uriToBitmap(selectedImageUri, this);
-                driverProfilePicture = data;
-                if (null != selectedImageUri) {
+
+                if (null != data && data.getData() != null) {
+                    documents.add(data);
+
+                    System.out.println("CAMERA IMAGE " + data.getData().toString());
+
+
                     runOnUiThread(() -> {
                         //IVPreviewImage.setImageURI(selectedImageUri);
                         loadingView.setVisibility(View.VISIBLE);
@@ -111,6 +125,8 @@ public class ProfileUpload extends AppCompatActivity {
                         handler.postDelayed(() -> startActivity(new Intent(ProfileUpload.this, DocumentUpload.class)), 2000);
 
                     });
+                } else {
+                    return;
                 }
             }
         }

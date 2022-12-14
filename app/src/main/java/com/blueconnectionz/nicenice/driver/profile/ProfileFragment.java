@@ -98,7 +98,7 @@ public class ProfileFragment extends Fragment {
             startActivity(new Intent(getContext(), ChangePassword.class));
         });
         // Opens the loading credit page
-        root.findViewById(R.id.creditsCardView).setOnClickListener(view -> openCreditsView());
+        root.findViewById(R.id.creditsCardView).setOnClickListener(view -> startActivity(new Intent(getContext(),CreditActivity.class)));
         // Opens the Terms and Conditions Dialog
         root.findViewById(R.id.termsCardView).setOnClickListener(view -> openTermsDialog());
         // Opens WhatsApp Help center

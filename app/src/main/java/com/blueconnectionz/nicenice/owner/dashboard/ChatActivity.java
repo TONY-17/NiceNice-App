@@ -50,13 +50,13 @@ public class ChatActivity extends AppCompatActivity {
 
         // Step 3 - Authenticate and connect the user
         User user = new User();
-        // An email will be used an ID so the user can recieve messages
         String email = LandingPage.userEmail.toLowerCase();
         int atIndex = email.indexOf('@');
         user.setId(email.replaceAll("[.]", ""));
-        // Only the first portion of the email will be the display name
         user.setName(email.substring(0, atIndex));
-        user.setImage("https://bit.ly/2TIt8NR");
+        // replace with Avatar API collection
+        String profileURL = "https://avatars.dicebear.com/api/adventurer/" + Common.randomString() + ".svg";
+        user.setImage(profileURL);
 
         client.connectUser(
                 user,

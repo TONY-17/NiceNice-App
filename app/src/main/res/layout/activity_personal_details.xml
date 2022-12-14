@@ -16,7 +16,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/inter_medium"
-            android:text="Step 3/4: Login credentials"
+            android:text="Step 3/3: Login credentials"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,7 @@
             android:text="@string/your_email_and_password_will_be_required_for_you_to_login"
             android:textAlignment="textStart"
             android:textColor="@color/text_color"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -97,6 +97,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_regular"
                 android:hint="Full Name"
+                android:textSize="16sp"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -141,6 +142,7 @@
                 android:maxLength="10"
                 android:fontFamily="@font/inter_regular"
                 android:hint="Phone Number"
+                android:textSize="16sp"
                 android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -179,6 +181,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_regular"
                 android:hint="Email"
+                android:textSize="16sp"
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -218,6 +221,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_regular"
                 android:hint="Password"
+                android:textSize="16sp"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>

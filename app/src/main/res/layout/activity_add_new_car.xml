@@ -9,9 +9,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ImageView
             android:id="@+id/imageView13"
             android:layout_width="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
@@ -96,15 +98,12 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
             app:cardBackgroundColor="@color/fill_light"
             app:cardCornerRadius="6dp"
             app:cardElevation="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/uploadIdCopyTXT"
-            app:layout_constraintVertical_bias="0.0"
             app:strokeColor="@color/card_stroke"
             app:strokeWidth="1dp">
 
@@ -113,6 +112,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
+                    android:id="@+id/selectedFile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -255,6 +255,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView29">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/make"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_regular"
@@ -306,6 +307,7 @@
             app:layout_constraintTop_toBottomOf="@+id/modelTXT">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/model"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_regular"
@@ -357,6 +359,7 @@
             app:layout_constraintTop_toBottomOf="@+id/yearTXT">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/year"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_regular"
@@ -408,6 +411,7 @@
             app:layout_constraintTop_toBottomOf="@+id/CityTXT">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_regular"
@@ -486,6 +490,7 @@
             app:layout_constraintTop_toBottomOf="@+id/weeklyTarget">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/target"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_regular"
@@ -549,11 +554,69 @@
             app:layout_constraintTop_toBottomOf="@+id/materialCheckBox4" />
 
 
+
+
+        <View
+            android:id="@+id/v32"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginTop="24dp"
+            android:background="@color/fill_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialCheckBox33" />
+
+        <TextView
+            android:id="@+id/txtAboutCar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="About"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v32" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout7"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/inter_regular"
+            app:boxBackgroundColor="@color/white"
+            app:boxCornerRadiusBottomEnd="8dp"
+            app:boxCornerRadiusBottomStart="8dp"
+            app:boxCornerRadiusTopEnd="8dp"
+            app:boxCornerRadiusTopStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtAboutCar">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="start"
+                android:hint="Brief car description"
+                android:inputType="textMultiLine" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/submit"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
             android:backgroundTint="@color/main"
@@ -564,7 +627,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/materialCheckBox33"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout7"
             app:layout_constraintVertical_bias="1.0" />
 
 

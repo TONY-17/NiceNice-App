@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blueconnectionz.nicenice.R;
@@ -22,6 +23,10 @@ public class ChangePassword extends AppCompatActivity {
         setContentView(R.layout.activity_change_password);
         // Set the status bar color to white
         Common.setStatusBarColor(getWindow(),this,Color.WHITE);
+
+
+        ImageView backButton = findViewById(R.id.imageView13);
+        backButton.setOnClickListener(view -> ChangePassword.super.onBackPressed());
 
         TextView header = findViewById(R.id.textView29);
         TextInputLayout current = findViewById(R.id.outlinedTextField);

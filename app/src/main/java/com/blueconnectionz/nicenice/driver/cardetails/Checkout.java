@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,9 @@ public class Checkout extends AppCompatActivity {
         setContentView(R.layout.activity_checkout);
         // Set the status bar color to white
         Common.setStatusBarColor(getWindow(),this,Color.WHITE);
+        ImageView backButtton = findViewById(R.id.imageView3);
+        backButtton.setOnClickListener(view -> Checkout.super.onBackPressed());
+
         loadingView = findViewById(R.id.loadingView);
         avLoadingIndicatorView = findViewById(R.id.avi);
         connect = findViewById(R.id.connect);

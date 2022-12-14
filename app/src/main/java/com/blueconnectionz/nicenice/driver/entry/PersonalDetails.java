@@ -31,7 +31,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import okhttp3.MultipartBody;
@@ -67,7 +69,7 @@ public class PersonalDetails extends AppCompatActivity {
         passwordField = findViewById(R.id.passwordTxT);
 
 
-        Common.linearProgressBarAnimator(findViewById(R.id.linearProgressIndicator));
+        Common.linearProgressBarAnimator(findViewById(R.id.linearProgressIndicator), 70, 100);
 
         verifyNumber = findViewById(R.id.verifyNumber);
         verifyNumber.setOnClickListener(view -> {
@@ -125,57 +127,60 @@ public class PersonalDetails extends AppCompatActivity {
             return;
         }
 
+
         Common.setStatusBarColor(getWindow(), PersonalDetails.this, getResources().getColor(R.color.background, null));
         loadingView.setVisibility(View.VISIBLE);
         avLoadingIndicatorView.setVisibility(View.VISIBLE);
-        //verifyNumber.setVisibility(View.GONE);
 
-        // User JSON-OBJECT
-        // {"email":"209@gmail.com","password":"12345678","role":null}
-        JSONObject user = new JSONObject();
-        user.put("email", email);
-        user.put("password", password);
-        user.put("role", Role.DRIVER);
+        Map<String, Object> userMap = new HashMap<>();
+        userMap.put("email", email);
+        userMap.put("password", password);
+        userMap.put("role", Role.DRIVER);
 
-        // Driver JSON-OBJECT
-        JSONObject driver = new JSONObject();
-        driver.put("fullName", name);
-        driver.put("phoneNumber", number);
-        driver.put("location", "Edenvale");
-        driver.put("approved", false);
-        driver.put("reported", false);
-        driver.put("uniqueDocumentId", "IMAGE-ID");
-        driver.put("creditBalance", 0);
-        driver.put("platform", "UBER");
-        driver.put("reference1", "0875643453");//
-        driver.put("reference2", "0875643453");//
+        Map<String, Object> driverMap = new HashMap<>();
+        driverMap.put("fullName", name);
+        driverMap.put("phoneNumber", number);
+        driverMap.put("location", "Edenvale");
+        driverMap.put("approved", false);
+        driverMap.put("reported", false);
+        driverMap.put("uniqueDocumentId", "IMAGE-ID");
+        driverMap.put("creditBalance", 0);
+        driverMap.put("platform", "UBER");
+        driverMap.put("reference1", "0875643453");//
+        driverMap.put("reference2", "0875643453");//
+
 
         List<MultipartBody.Part> documents = DocumentUpload.document;
 
-        Call<ResponseBody> registerUser = RetrofitClient.getRetrofitClient().getAPI().registerDriver(user.toString(),
-                driver.toString(),
+        Call<ResponseBody> registerUser = RetrofitClient.getRetrofitClient().getAPI().registerDriver(
+                userMap,
+                driverMap,
                 documents);
         registerUser.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     runOnUiThread(() -> {
+                        Common.statusToast(1, "Account created", PersonalDetails.this);
                         startActivity(new Intent(PersonalDetails.this, LandingPage.class));
-                        Snackbar.make(getCurrentFocus(), "Account registered", Snackbar.LENGTH_LONG).show();
+                        finish();
                     });
                 } else {
                     runOnUiThread(() -> {
                         try {
-                            System.out.println("RESPONSE " + response.errorBody().string());
-                            Snackbar.make(getCurrentFocus(), "Account already exists", Snackbar.LENGTH_LONG).show();
+                            String errMsg = response.errorBody().string();
+                            System.out.println("ERROR MESSAGE " + errMsg);
+                            if (errMsg.contains("registered")) {
+                                Common.statusToast(2, errMsg, PersonalDetails.this);
+                            }
                             loadingView.setVisibility(View.GONE);
                             avLoadingIndicatorView.setVisibility(View.GONE);
                             Common.setStatusBarColor(getWindow(), PersonalDetails.this, Color.WHITE);
-                        } catch (IOException e) {
+
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
 
-                        //verifyNumber.setVisibility(View.VISIBLE);
                     });
                 }
             }
@@ -183,11 +188,12 @@ public class PersonalDetails extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 runOnUiThread(() -> {
-                    Snackbar.make(getCurrentFocus(), "Server error", Snackbar.LENGTH_LONG).show();
+                    Common.statusToast(2, "Network error", PersonalDetails.this);
                     loadingView.setVisibility(View.GONE);
                     avLoadingIndicatorView.setVisibility(View.GONE);
                     Common.setStatusBarColor(getWindow(), PersonalDetails.this, Color.WHITE);
-                    //verifyNumber.setVisibility(View.VISIBLE);
+
+
                 });
             }
         });

@@ -1,7 +1,10 @@
 package com.blueconnectionz.nicenice;
 
+import static com.blueconnectionz.nicenice.utils.Common.featureComingSoon;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +13,9 @@ import android.widget.TextView;
 import com.blueconnectionz.nicenice.utils.Common;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputLayout;
+import com.saadahmedsoft.popupdialog.PopupDialog;
+import com.saadahmedsoft.popupdialog.Styles;
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 
 public class ForgotPassword extends AppCompatActivity {
 
@@ -29,6 +35,8 @@ public class ForgotPassword extends AppCompatActivity {
         MaterialButton send = findViewById(R.id.sendInstructions);
         MaterialButton update = findViewById(R.id.updatePassword);
         send.setOnClickListener(view -> {
+            featureComingSoon(this,"This feature is not yet available");
+            /*
             email.setVisibility(View.GONE);
             send.setVisibility(View.GONE);
             password.setVisibility(View.VISIBLE);
@@ -36,6 +44,10 @@ public class ForgotPassword extends AppCompatActivity {
             password2.setVisibility(View.VISIBLE);
             header.setText("Create new password");
             description.setText("Your new password must be different from previous used passwords.");
+            */
         });
     }
+
+
+
 }

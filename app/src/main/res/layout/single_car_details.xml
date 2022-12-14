@@ -60,6 +60,7 @@
                 android:layout_marginStart="16dp"
                 app:cardBackgroundColor="@color/red"
                 app:cardCornerRadius="2dp"
+                android:visibility="gone"
                 app:cardElevation="0dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/carImage"

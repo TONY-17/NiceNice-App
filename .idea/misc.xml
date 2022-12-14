@@ -23,8 +23,8 @@
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/activity_channel.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/activity_channel2.xml" value="0.14023086789226166" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/activity_chat.xml" value="0.14666666666666667" />
-        <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/activity_checkout.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/activity_credit.xml" value="0.38333333333333336" />
+        <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/activity_checkout.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/activity_credit.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/activity_custom_web_view.xml" value="0.1513467293715263" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/activity_document_upload.xml" value="0.22" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/activity_driver_filter.xml" value="0.3333333333333333" />
@@ -57,6 +57,7 @@
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/owner_fragment_home.xml" value="0.22" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/owner_fragment_profile.xml" value="0.22" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/single_car_details.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/single_car_shimmer.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/single_driver_details.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/single_msg_item.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/slides_layout.xml" value="0.16666666666666666" />

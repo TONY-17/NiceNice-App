@@ -3,13 +3,14 @@ package com.blueconnectionz.nicenice.utils;
 import android.Manifest;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ContentUris;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -17,6 +18,7 @@ import android.os.ParcelFileDescriptor;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.Animation;
@@ -26,12 +28,15 @@ import android.view.inputmethod.InputMethodManager;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.blueconnectionz.nicenice.R;
-import com.blueconnectionz.nicenice.owner.OwnerSignUp;
 import com.droidbyme.dialoglib.AnimUtils;
 import com.droidbyme.dialoglib.DroidDialog;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
+import com.saadahmedsoft.popupdialog.PopupDialog;
+import com.saadahmedsoft.popupdialog.Styles;
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -41,11 +46,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.security.SecureRandom;
+import java.util.Random;
+
+import www.sanju.motiontoast.MotionToast;
+import www.sanju.motiontoast.MotionToastStyle;
 
 public class Common {
 
-    public static void termsAndConditions(Context context){
+    public static void termsAndConditions(Context context) {
         new DroidDialog.Builder(context)
                 .icon(R.drawable.ic_outline_library_books_24)
                 .title("Terms & Conditions")
@@ -59,7 +70,7 @@ public class Common {
     }
 
     // Changes the status bar color to white across all the activities
-    public static void setStatusBarColor(Window window, Activity activity, int color){
+    public static void setStatusBarColor(Window window, Activity activity, int color) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             View view = window.getDecorView();
             int flags = view.getSystemUiVisibility();
@@ -69,8 +80,91 @@ public class Common {
         }
     }
 
+
+    public static void featureComingSoon(Activity activity, String message) {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                PopupDialog.getInstance(activity)
+                        .setStyle(Styles.ALERT)
+                        .setHeading("Pending")
+                        .setDescription(message)
+                        .setCancelable(false)
+                        .showDialog(new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                            }
+                        });
+            }
+        });
+    }
+
+    public static void statusToast(int type, String message, Activity activity) {
+        switch (type) {
+            case 1:
+                MotionToast.Companion.createColorToast(activity, "Success",
+                        message,
+                        MotionToastStyle.SUCCESS,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(activity, R.font.inter_regular));
+                break;
+            case 2:
+                MotionToast.Companion.createColorToast(activity, "Error",
+                        message,
+                        MotionToastStyle.ERROR,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(activity, R.font.inter_regular));
+
+        }
+    }
+
+    private void openWhatsApp(String driver, Activity activity) {
+        try {
+            String number = "+27 0732811089";
+            String message = "Hello support@blueconnectionz I would like to connect with " + driver;
+            PackageManager packageManager = activity.getPackageManager();
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            String url = "https://api.whatsapp.com/send?phone=" + number + "&text=" + URLEncoder.encode(message, "UTF-8");
+            i.setPackage("com.whatsapp");
+            i.setData(Uri.parse(url));
+            if (i.resolveActivity(packageManager) != null) {
+                activity.startActivity(i);
+            } else {
+                // Snackbar.make(activity.getView(),"No WhatsApp",Snackbar.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            Log.e("ERROR WHATSAPP", e.toString());
+            //Snackbar.make(getView(),"No WhatsApp",Snackbar.LENGTH_LONG).show();
+        }
+    }
+
+    public static String randomString() {
+        byte[] array = new byte[7]; // length is bounded by 7
+        new Random().nextBytes(array);
+        String generatedString = new String(array, Charset.forName("UTF-8"));
+
+        return generatedString;
+    }
+
+    public static void loadingBalls(Activity activity){
+        PopupDialog popupDialog = PopupDialog.getInstance(activity);
+        popupDialog.setStyle(Styles.LOTTIE_ANIMATION)
+                //Required if no RawRes
+                .setLottieAssetName("technologies.json")
+                //Required if no Asset
+                .setLottieRawRes(R.raw.loading_balls)
+                .setCancelable(false)
+                .showDialog();
+
+
+    }
+
+
     // Bottom to original position view animation
-    public static Animation viewBottomToOriginalAnim(Context context){
+    public static Animation viewBottomToOriginalAnim(Context context) {
         final Animation[] animation = new Animation[1];
         animation[0] = AnimationUtils.loadAnimation(context,
                 R.anim.bottom_to_original);
@@ -93,8 +187,7 @@ public class Common {
     }
 
 
-
-    public static void checkPerms(Activity activity, Context context){
+    public static void checkPerms(Activity activity, Context context) {
         if (ContextCompat.checkSelfPermission(context,
                 Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -337,7 +430,6 @@ public class Common {
     }
 
 
-
     public static File saveBitmap(Bitmap bmp, String name) {
         String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
         OutputStream outStream = null;
@@ -374,8 +466,8 @@ public class Common {
         return password.toString();
     }
 
-    public static void linearProgressBarAnimator(LinearProgressIndicator progressBar){
-        ObjectAnimator animation = ObjectAnimator.ofInt(progressBar, "progress", 25, 50);
+    public static void linearProgressBarAnimator(LinearProgressIndicator progressBar, int val1, int val2) {
+        ObjectAnimator animation = ObjectAnimator.ofInt(progressBar, "progress", val1, val2);
         animation.setDuration(1000);
         animation.setInterpolator(new DecelerateInterpolator());
         animation.start();
@@ -392,7 +484,7 @@ public class Common {
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-    public static void intent(){
+    public static void intent() {
 
     }
 

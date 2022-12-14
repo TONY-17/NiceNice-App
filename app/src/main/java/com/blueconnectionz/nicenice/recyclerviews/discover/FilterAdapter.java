@@ -53,6 +53,15 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
 
             Intent i = new Intent(activity.getApplicationContext(), PostDetails.class);
 
+            i.putExtra("image", items.get(position).getImage());
+            i.putExtra("price", items.get(position).getWeeklyCheckInAmount());
+            i.putExtra("description", items.get(position).getDescription());
+            i.putExtra("location", items.get(position).getLocation());
+            i.putExtra("make", items.get(position).getCar());
+            i.putExtra("model", items.get(position).getOwner());
+
+
+
             activity.startActivity(i);
             activity.finish();
         });

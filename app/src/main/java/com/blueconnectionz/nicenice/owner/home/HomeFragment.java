@@ -6,6 +6,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,9 +17,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blueconnectionz.nicenice.R;
+import com.blueconnectionz.nicenice.driver.entry.LandingPage;
 import com.blueconnectionz.nicenice.driver.messaging.Dialog;
 import com.blueconnectionz.nicenice.network.RetrofitClient;
 import com.blueconnectionz.nicenice.owner.dashboard.ChatActivity;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -41,6 +44,13 @@ public class HomeFragment extends Fragment {
     View root;
     RecyclerView recyclerView;
     ArrayList<SingleRecyclerViewLocation> driversList;
+
+    ShimmerFrameLayout shimmerFrameLayout;
+
+
+    ImageView noDriver1;
+    TextView noDriver2;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.owner_fragment_home, container, false);
@@ -48,8 +58,15 @@ public class HomeFragment extends Fragment {
         String text = "<font color=#FF000000>Find </font> <font color=#C117BC> DRIVERS </font> <font color=#FF000000> For Your Fleet</font>";
         HEADER_TEXT.setText(Html.fromHtml(text));
         recyclerView = root.findViewById(R.id.rv_on_top_of_map);
+
+        noDriver1 = root.findViewById(R.id.imageView18);
+        noDriver2 = root.findViewById(R.id.txtN);
+
+        shimmerFrameLayout = root.findViewById(R.id.shimmer_view_container);
+        shimmerFrameLayout.startShimmer();
         fetchDrivers();
         initRecyclerView();
+
 
         MaterialCardView notifications = root.findViewById(R.id.notifications);
         notifications.setOnClickListener(view ->
@@ -70,7 +87,7 @@ public class HomeFragment extends Fragment {
 
     private void fetchDrivers(){
         driversList = new ArrayList<>();
-        Call<ResponseBody> allDrivers = RetrofitClient.getRetrofitClient().getAPI().getAllDrivers();
+        Call<ResponseBody> allDrivers = RetrofitClient.getRetrofitClient().getAPI().getAllDrivers(LandingPage.userID);
         allDrivers.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -78,87 +95,78 @@ public class HomeFragment extends Fragment {
                     try {
                         String data = response.body().string();
                         System.out.println("ALL DRIVERS " + data);
-                        JSONArray jsonArray = new JSONArray(data);
-                        for(int i = 0; i < jsonArray.length();i++){
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            Long id = jsonObject.getLong("id");
-                            String fullName = jsonObject.getString("fullName");
-                            int views = jsonObject.getInt("views");
-                            int age = jsonObject.getInt("age");
-                            String location = jsonObject.getString("location");
-                            int numReferences = jsonObject.getInt("numReferences");
-                            String imageURL = jsonObject.getString("imageURL");
+                        if(data.contains("No drivers yet")){
+                            noDriver1.setVisibility(View.VISIBLE);
+                            noDriver2.setVisibility(View.VISIBLE);
+                            shimmerFrameLayout.stopShimmer();
+                            shimmerFrameLayout.setVisibility(View.GONE);
+                        }else{
 
-                            SingleRecyclerViewLocation singleLocation = new SingleRecyclerViewLocation();
-                            singleLocation.setId(id);
-                            singleLocation.setName(fullName);
-                            singleLocation.setImage(imageURL);
-                            singleLocation.setJoinedDate(age + "d. ago");
-                            singleLocation.setNumReferences(numReferences);
-                            singleLocation.setLocation(location);
-                            singleLocation.setViews(views);
+                            JSONArray jsonArray = new JSONArray(data);
+                            for(int i = 0; i < jsonArray.length();i++){
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                Long id = jsonObject.getLong("id");
+                                String fullName = jsonObject.getString("fullName");
+                                int views = jsonObject.getInt("views");
+                                int age = jsonObject.getInt("age");
+                                String location = jsonObject.getString("location");
+                                int numReferences = jsonObject.getInt("numReferences");
+                                String imageURL = jsonObject.getString("imageURL");
 
-                            driversList.add(singleLocation);
+                                SingleRecyclerViewLocation singleLocation = new SingleRecyclerViewLocation();
+                                singleLocation.setId(id);
+                                singleLocation.setName(fullName);
+                                singleLocation.setImage(imageURL);
+                                singleLocation.setJoinedDate(age + "d. ago");
+                                singleLocation.setNumReferences(numReferences);
+                                singleLocation.setLocation(location);
+                                singleLocation.setViews(views);
 
+                                driversList.add(singleLocation);
+
+                                shimmerFrameLayout.stopShimmer();
+                                shimmerFrameLayout.setVisibility(View.GONE);
+                            }
+                            LocationRecyclerViewAdapter locationAdapter =
+                                    new LocationRecyclerViewAdapter(driversList, getActivity());
+                            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                            recyclerView.setItemAnimator(new DefaultItemAnimator());
+                            recyclerView.setAdapter(locationAdapter);
                         }
-                        LocationRecyclerViewAdapter locationAdapter =
-                                new LocationRecyclerViewAdapter(driversList, getActivity());
-                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                        recyclerView.setItemAnimator(new DefaultItemAnimator());
-                        recyclerView.setAdapter(locationAdapter);
 
                     } catch (IOException | JSONException e) {
                         e.printStackTrace();
                     }
                 }else{
                     Toast.makeText(getContext(), "FAILED TO FETCH DRIVERS", Toast.LENGTH_SHORT).show();
+                    noDriver1.setVisibility(View.VISIBLE);
+                    noDriver2.setVisibility(View.VISIBLE);
+                    shimmerFrameLayout.stopShimmer();
+                    shimmerFrameLayout.setVisibility(View.GONE);
                 }
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(getContext(), "FAILED TO FETCH DRIVERS", Toast.LENGTH_SHORT).show();
+                noDriver1.setVisibility(View.VISIBLE);
+                noDriver2.setVisibility(View.VISIBLE);
+                shimmerFrameLayout.stopShimmer();
+                shimmerFrameLayout.setVisibility(View.GONE);
             }
         });
-    }
-
-
-    private String driverName(int position) {
-        List<String> names = new ArrayList<>();
-        names.add("Molokane Tlaka");
-        names.add("Ntuthuko Nkomo");
-        names.add("Renaldo Francis");
-        names.add("Mkhari Harvey");
-        names.add("Tumelo Selepe");
-        names.add("Bongani  Moyo");
-        names.add("Makhosonke Robbson");
-        names.add("Karabo Mashishi");
-        return names.get(position);
-    }
-
-
-    private String driverLocation(int position) {
-        List<String> names = new ArrayList<>();
-        names.add("Daveyton ");
-        names.add("Diepsloot ");
-        names.add("Windmill Park");
-        names.add("Germiston ");
-        names.add("Malvern east ");
-        names.add("Vosloorus ");
-        names.add("Half Way House Midrand ");
-        names.add("Soshanguve ");
-        return names.get(position);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        shimmerFrameLayout.startShimmer();
 
     }
 
     @Override
     public void onPause() {
         super.onPause();
-
+        shimmerFrameLayout.stopShimmer();
     }
 
     @Override

@@ -26,6 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:background="?android:attr/selectableItemBackground"
                 android:layout_marginTop="24dp"
                 android:src="@drawable/ic_baseline_arrow_back_ios_24"
                 app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +68,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/inter_bold"
-                android:text="200 Cr"
+                android:text="-"
                 android:textColor="@color/white"
                 android:textSize="32sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -78,9 +79,10 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/loadMoreCredit"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        app:cornerRadius="0dp"
+        app:cornerRadius="6dp"
         app:icon="@drawable/ic_baseline_account_balance_wallet_24"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
@@ -93,4 +95,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialCardView3"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pastTransactions"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loadMoreCredit" />
 </androidx.constraintlayout.widget.ConstraintLayout>

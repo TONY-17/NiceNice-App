@@ -1,5 +1,7 @@
 package com.blueconnectionz.nicenice.owner.home;
 
+import static com.blueconnectionz.nicenice.driver.entry.LandingPage.userEmail;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -25,6 +27,7 @@ import com.blueconnectionz.nicenice.R;
 import com.blueconnectionz.nicenice.driver.entry.LandingPage;
 import com.blueconnectionz.nicenice.network.RetrofitClient;
 import com.blueconnectionz.nicenice.owner.dashboard.ChatActivity;
+import com.blueconnectionz.nicenice.utils.Common;
 import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 
@@ -73,12 +76,11 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         SingleRecyclerViewLocation single = locationList.get(position);
-        //holder.image.setImageResource(single.getImage());
+
         Glide.with(holder.image)
                 .asBitmap()
                 .placeholder(new ColorDrawable(activity.getResources().getColor(R.color.light_gray, null)))
-                //.load(single.getImage())
-                .load("https://images.unsplash.com/photo-1664575600850-c4b712e6e2bf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80")
+                .load(single.getImage())
                 .into(holder.image);
         holder.name.setText(single.getName());
         holder.location.setText(single.getLocation());
@@ -128,27 +130,11 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
         void onClick(View view, int position);
     }
 
-    private void openWhatsApp(String driver) {
-        try {
-            String number = "+27 0732811089";
-            String message = "Hello support@blueconnectionz I would like to connect with " + driver;
-            PackageManager packageManager = activity.getPackageManager();
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            String url = "https://api.whatsapp.com/send?phone=" + number + "&text=" + URLEncoder.encode(message, "UTF-8");
-            i.setPackage("com.whatsapp");
-            i.setData(Uri.parse(url));
-            if (i.resolveActivity(packageManager) != null) {
-                activity.startActivity(i);
-            } else {
-                // Snackbar.make(activity.getView(),"No WhatsApp",Snackbar.LENGTH_LONG).show();
-            }
-        } catch (Exception e) {
-            Log.e("ERROR WHATSAPP", e.toString());
-            //Snackbar.make(getView(),"No WhatsApp",Snackbar.LENGTH_LONG).show();
-        }
-    }
 
     private void connectWithDriver(Long driverID) {
+
+
+
         Call<ResponseBody> connect = RetrofitClient.getRetrofitClient().getAPI().connectWithDriver(
                 LandingPage.userID,
                 driverID);
@@ -170,11 +156,13 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
 
                             // Client requires User object
                             User user = new User();
-                            int atIndex = ownerID.indexOf('@');
-                            user.setId(ownerID.replaceAll("[.]", ""));
-                            // Only the first portion of the email will be the display name
-                            user.setName(ownerID.substring(0, atIndex));
-                            user.setImage("https://bit.ly/2TIt8NR");
+                            String email = ownerID.toLowerCase();
+                            int atIndex = email.indexOf('@');
+                            user.setId(email.replaceAll("[.]", ""));
+                            user.setName(email.substring(0, atIndex));
+                            // replace with Avatar API collection
+                            String profileURL = "https://avatars.dicebear.com/api/adventurer/" + Common.randomString() + ".svg";
+                            user.setImage(profileURL);
 
                             // List of users in the channel
                             Map<String, Object> extraData = new HashMap<>();
@@ -183,17 +171,20 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
                             memberIds.add(ownerID.replaceAll("[.]", ""));
                             memberIds.add(driverID.replaceAll("[.]", ""));
 
-                            io.getstream.chat.android.client.call.Call<Channel> newChannel =  client.createChannel("messaging", "", memberIds, extraData);
+                            io.getstream.chat.android.client.call.Call<Channel> newChannel = client.createChannel("messaging", "", memberIds, extraData);
                             newChannel.enqueue(result -> {
-                                if(result.isSuccess()){
+                                if (result.isSuccess()) {
                                     Channel newChannel1 = result.data();
+
+
                                     activity.startActivity(ChannelActivity.newIntent(activity, newChannel1));
-                                }else{
-                                    // Handle result.error()
+
+
+                                } else {
+
                                     System.out.println("MESSAGE ERR " + result.error());
                                 }
                             });
-
 
 
                             client.connectUser(user, client.devToken(user.getId())).enqueue((result) -> {
@@ -218,6 +209,8 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
+
                     Toast.makeText(activity, "CONNECTION FAILED", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -225,6 +218,9 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                // Dismiss loading dialog
+
                 System.out.println("CONNECTION DRIVER : " + t.getMessage());
                 Toast.makeText(activity, "CONNECTION FAILED", Toast.LENGTH_SHORT).show();
                 return;

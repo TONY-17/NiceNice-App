@@ -1,6 +1,7 @@
 package com.blueconnectionz.nicenice.driver.entry;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.ObjectAnimator;
@@ -42,6 +43,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -88,16 +90,18 @@ public class DocumentUpload extends AppCompatActivity implements PickiTCallbacks
     AVLoadingIndicatorView avLoadingIndicatorView;
     ScrollView scrollView;
 
+    int count = 0;
     // Stores all the driver documentation including the profile image
     public static List<MultipartBody.Part> files = new ArrayList<>();
 
     PickiT pickiT;
-    List<Intent> documents = new ArrayList<>();
+    List<Intent> documents = ProfileUpload.documents;
 
 
     public static List<MultipartBody.Part> document = new ArrayList<>();
     File file = null;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,7 +115,7 @@ public class DocumentUpload extends AppCompatActivity implements PickiTCallbacks
         avLoadingIndicatorView = findViewById(R.id.avi);
         scrollView = findViewById(R.id.nestedScrollView);
 
-        Common.linearProgressBarAnimator(findViewById(R.id.linearProgressIndicator));
+        Common.linearProgressBarAnimator(findViewById(R.id.linearProgressIndicator),35,70);
 
         MaterialCardView license = findViewById(R.id.uploadLicense);
         idCopy = findViewById(R.id.uploadIdCopy);
@@ -139,8 +143,6 @@ public class DocumentUpload extends AppCompatActivity implements PickiTCallbacks
         ratingCB = findViewById(R.id.cb3);
         uploadDocumentsCB = findViewById(R.id.cb55);
 
-        // First file stored will be the profile picture
-        documents.add(ProfileUpload.driverProfilePicture);
         license.setOnClickListener(view -> pdfIntent(PICK_PDF_FILE_1));
         idCopy.setOnClickListener(view -> pdfIntent(PICK_PDF_FILE_2));
         report.setOnClickListener(view -> pdfIntent(PICK_PDF_FILE_3));
@@ -149,14 +151,9 @@ public class DocumentUpload extends AppCompatActivity implements PickiTCallbacks
 
 
         uploadDocuments = findViewById(R.id.uploadDocuments);
-        uploadDocuments.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("DOCUMENTS SIZE " + documents.size());
-
-
-                convertToMultipart(documents);
-            }
+        uploadDocuments.setOnClickListener(view -> {
+            System.out.println("DOCUMENTS SIZE " + documents.toString());
+            convertToMultipart(documents);
         });
 
 
@@ -275,44 +272,33 @@ public class DocumentUpload extends AppCompatActivity implements PickiTCallbacks
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void convertToMultipart(List<Intent> documents) {
-/*        String[] names = new String[]{"ID_COPY", "ID_COPY", "ID_COPY", "ID_COPY", "ID_COPY", "ID_COPY"};
-        for (int i = 0; i < documents.size(); i++) {
-            String fileName = names[i] + Common.generatePassword(10);
-            File file = Common.saveBitmap(documents.get(i), fileName);
-            RequestBody fileBody = RequestBody.create(file, MediaType.parse("multipart/form-data"));
-            MultipartBody.Part filePart = MultipartBody.Part.createFormData("files", file.getName(), fileBody);
-            // Add each bitmap to list to send to server
-            files.add(filePart);
-        }*/
 
         for(Intent data : documents){
+            try{
 
-            System.out.println("INTENT " + documents.indexOf(data) + " " + data.getData().toString());
-            ClipData clipData = Objects.requireNonNull(data).getClipData();
-            if (clipData != null) {
-                int numberOfFilesSelected = clipData.getItemCount();
-                if (numberOfFilesSelected > 1) {
-                    pickiT.getMultiplePaths(clipData);
-                    StringBuilder allPaths = new StringBuilder("Multiple Files Selected:" + "\n");
-                    for (int i = 0; i < clipData.getItemCount(); i++) {
-                        allPaths.append("\n\n").append(clipData.getItemAt(i).getUri());
+                ClipData clipData = Objects.requireNonNull(data).getClipData();
+                if (clipData != null) {
+                    int numberOfFilesSelected = clipData.getItemCount();
+                    if (numberOfFilesSelected > 1) {
+                        pickiT.getMultiplePaths(clipData);
+                        StringBuilder allPaths = new StringBuilder("Multiple Files Selected:" + "\n");
+                        for (int i = 0; i < clipData.getItemCount(); i++) {
+                            allPaths.append("\n\n").append(clipData.getItemAt(i).getUri());
+                        }
+                    } else {
+                        pickiT.getPath(clipData.getItemAt(0).getUri(), Build.VERSION.SDK_INT);
                     }
-                    System.out.println("FILE CONTENT " + allPaths.toString());
-                    //selectedDocumentTXT.setText(allPaths.toString());
                 } else {
-                    pickiT.getPath(clipData.getItemAt(0).getUri(), Build.VERSION.SDK_INT);
-                    System.out.println("FILE CONTENT " + String.valueOf(clipData.getItemAt(0).getUri()));
-                    //selectedDocumentTXT.setText(String.valueOf(clipData.getItemAt(0).getUri()));
+                    pickiT.getPath(data.getData(), Build.VERSION.SDK_INT);
                 }
-            } else {
-                pickiT.getPath(data.getData(), Build.VERSION.SDK_INT);
-                System.out.println("FILE CONTENT " + data.getData());
-                // selectedDocumentTXT.setText(String.valueOf(data.getData()));
+            }catch (NullPointerException e){
+                documents.stream().skip(documents.indexOf(data));
+                e.printStackTrace();
             }
+
         }
-
-
 
         startActivity(new Intent(DocumentUpload.this, PersonalDetails.class));
     }
@@ -367,29 +353,30 @@ public class DocumentUpload extends AppCompatActivity implements PickiTCallbacks
         if (mdialog != null && mdialog.isShowing()) {
             mdialog.cancel();
         }
-        //  Chick if it was successful
+        System.out.println("PickiTonCompleteListener "  + count++);
+
+
         if (wasSuccessful) {
-            //  Set returned path to TextView
-            if (path.contains("/proc/")) {
-                // "Sub-directory inside Downloads was selected." + "\n" + " We will be making use of the /proc/ protocol." + "\n" + " You can use this path as you would normally." + "\n\n" + "PickiT path:" + "\n" +
-            } else {
-                System.out.println("FILE CONTENT 2" + path);
-            }
             try {
                 convertToFile(path);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
+
             Toast.makeText(this,reason,Toast.LENGTH_LONG).show();
             //selectedDocumentTXT.setText(reason);
         }
     }
 
     private void convertToFile(String path) {
+        System.out.println("METHOD RUNNING " + count++);
         file = new File(path);
+        Random random = new Random();
+        String fileName = random.nextInt(1000) + file.getName();
         RequestBody fileBody = RequestBody.create(file, MediaType.parse("multipart/form-data"));
-        document.add(MultipartBody.Part.createFormData("documents", file.getName(), fileBody));
+        MultipartBody.Part filePart = MultipartBody.Part.createFormData("documents", fileName, fileBody);
+        document.add(filePart);
     }
 
     @Override
@@ -401,6 +388,8 @@ public class DocumentUpload extends AppCompatActivity implements PickiTCallbacks
         for (int i = 0; i < paths.size(); i++) {
             allPaths.append("\n").append(paths.get(i)).append("\n");
         }
+
+        System.out.println("ALL PATHS " + allPaths.toString());
     }
 
     @Override

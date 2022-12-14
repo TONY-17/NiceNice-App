@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true">
 
     <TextView
         android:id="@+id/searchCardView"
@@ -27,19 +27,20 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_notifications_black_24dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="0dp"
-        app:strokeColor="@color/light_gray"
-        app:strokeWidth="1dp"
-        android:src="@drawable/ic_notifications_black_24dp"
         app:layout_constraintBottom_toBottomOf="@+id/searchCardView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/searchCardView">
+        app:layout_constraintTop_toTopOf="@+id/searchCardView"
+        app:strokeColor="@color/light_gray"
+        app:strokeWidth="1dp">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/ic_notifications_black_24dp"/>
+            android:src="@drawable/ic_notifications_black_24dp" />
     </com.google.android.material.card.MaterialCardView>
 
     <View
@@ -67,6 +68,69 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view7" />
 
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view7"
+        app:shimmer_duration="800">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/single_car_shimmer" />
+
+            <include layout="@layout/single_car_shimmer" />
+
+            <include layout="@layout/single_car_shimmer" />
+
+            <include layout="@layout/single_car_shimmer" />
+
+            <include layout="@layout/single_car_shimmer" />
+
+            <include layout="@layout/single_car_shimmer" />
+
+            <include layout="@layout/single_car_shimmer" />
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <ImageView
+        android:id="@+id/imageView18"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:animateLayoutChanges="true"
+        android:src="@drawable/ic_outline_supervisor_account_24"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/shimmer_view_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view7"
+        app:tint="@color/text_color" />
+
+    <TextView
+        android:id="@+id/txtN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:fontFamily="@font/inter_semibold"
+        android:text="NO DRIVERS YET"
+        android:textColor="@color/text_color"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/imageView18"
+        app:layout_constraintStart_toStartOf="@+id/imageView18"
+        app:layout_constraintTop_toBottomOf="@+id/imageView18" />
+
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/filterCardView"
         android:layout_width="wrap_content"
@@ -74,10 +138,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="75dp"
+        android:visibility="gone"
         app:cardBackgroundColor="@color/main"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -102,10 +166,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="16dp"
+                android:fontFamily="@font/inter_semibold"
                 android:text="Filter"
                 android:textColor="@color/white"
                 android:textSize="18sp"
-                android:fontFamily="@font/inter_semibold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -114,7 +178,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

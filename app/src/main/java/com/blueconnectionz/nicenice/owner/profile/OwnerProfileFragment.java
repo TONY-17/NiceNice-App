@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.blueconnectionz.nicenice.R;
 import com.blueconnectionz.nicenice.driver.entry.LandingPage;
 import com.blueconnectionz.nicenice.driver.profile.pages.ChangePassword;
+import com.blueconnectionz.nicenice.driver.profile.pages.CreditActivity;
 import com.blueconnectionz.nicenice.driver.profile.pages.ProfileInformation;
 import com.blueconnectionz.nicenice.owner.OwnerMainActivity;
 import com.droidbyme.dialoglib.AnimUtils;
@@ -41,7 +42,7 @@ public class OwnerProfileFragment extends Fragment {
         changePassword.setOnClickListener(view -> startActivity(new Intent(getContext(), ChangePassword.class)));
 
         MaterialCardView loadCredits = root.findViewById(R.id.creditsCardView);
-        loadCredits.setOnClickListener(view -> openCreditsView());
+        loadCredits.setOnClickListener(view -> startActivity(new Intent(getContext(), CreditActivity.class)));
 
         MaterialCardView terms = root.findViewById(R.id.termsCardView);
         terms.setOnClickListener(view ->

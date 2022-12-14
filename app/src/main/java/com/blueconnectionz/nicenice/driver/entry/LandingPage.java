@@ -1,5 +1,8 @@
 package com.blueconnectionz.nicenice.driver.entry;
 
+import static com.blueconnectionz.nicenice.utils.Common.featureComingSoon;
+import static com.blueconnectionz.nicenice.utils.Common.statusToast;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -36,7 +39,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Random;
 
+import io.getstream.chat.android.client.models.User;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,7 +62,6 @@ public class LandingPage extends AppCompatActivity {
 
     public static Long userID;
     public static String userEmail;
-
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -80,26 +84,23 @@ public class LandingPage extends AppCompatActivity {
                 runOnUiThread(() -> Common.termsAndConditions(LandingPage.this)));
 
         signInUser = findViewById(R.id.signUpUser);
-        signInUser.setOnClickListener(view -> loginUser());
+        signInUser.setOnClickListener(view -> {
+            loginUser();
+        });
 
         signUpOwner = findViewById(R.id.signUpOwner);
         signUpOwner.setOnClickListener(view ->
-                //startActivity(new Intent(LandingPage.this, OwnerSignUp.class))
-                startActivity(new Intent(LandingPage.this, OwnerSignUp.class))
+                //startActivity(new Intent(LandingPage.this, OwnerMainActivity.class))
+               startActivity(new Intent(LandingPage.this, OwnerSignUp.class))
         );
 
         signUpDriver = findViewById(R.id.signUpDriver);
         signUpDriver.setOnClickListener(view ->
-                //startActivity(new Intent(LandingPage.this, ProfileUpload.class))
-                startActivity(new Intent(LandingPage.this, MainActivity.class))
+                startActivity(new Intent(LandingPage.this, ProfileUpload.class))
         );
 
 
         findViewById(R.id.forgotPassword).setOnClickListener(view -> startActivity(new Intent(LandingPage.this, ForgotPassword.class)));
-    }
-
-    private void fakeLogin() {
-        startActivity(new Intent(LandingPage.this, MainActivity.class));
     }
 
 
@@ -136,7 +137,6 @@ public class LandingPage extends AppCompatActivity {
         loginRequest.setPassword(password);
 
         runOnUiThread(() -> {
-
             // Hide buttons when login button clicked
             hideOrShowButtons(View.GONE);
             // Show the loading views
@@ -160,8 +160,16 @@ public class LandingPage extends AppCompatActivity {
                 } else {
                     runOnUiThread(() -> {
                         try {
-                            System.out.println("RESPONSE " + response.errorBody().string());
-                            Snackbar.make(getCurrentFocus(), "Wrong credentials", Snackbar.LENGTH_LONG).show();
+                            String errMsg = response.errorBody().string();
+                            System.out.println("LOG IN RESPONSE " + errMsg);
+                            // User has entered the wrong credentials
+                            if(errMsg.contains("Bad credentials")){
+                                statusToast(2,"Bad Credentials",LandingPage.this);
+                            }
+                            // User's account was yet approved
+                            else if(errMsg.contains("reviewed")){
+                                featureComingSoon(LandingPage.this,"Your account is still being reviewed");
+                            }
                             loadingView.setVisibility(View.GONE);
                             avLoadingIndicatorView.setVisibility(View.GONE);
                             Common.setStatusBarColor(getWindow(), LandingPage.this, Color.WHITE);
@@ -177,7 +185,7 @@ public class LandingPage extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 runOnUiThread(() -> {
-                    Snackbar.make(getCurrentFocus(), "Server error", Snackbar.LENGTH_LONG).show();
+                    statusToast(2,"Server Error",LandingPage.this);
                     loadingView.setVisibility(View.GONE);
                     avLoadingIndicatorView.setVisibility(View.GONE);
                     hideOrShowButtons(View.VISIBLE);
@@ -210,6 +218,8 @@ public class LandingPage extends AppCompatActivity {
         userID = jsonObject.getLong("id");
         userEmail = jsonObject.getString("email");
         myEdit.putFloat("ID", userID);
+
+
 
         System.out.println("USER ID " + data);
         JSONArray jsonArray = jsonObject.getJSONArray("role");

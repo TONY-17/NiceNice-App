@@ -33,6 +33,10 @@ public class PostDetails extends AppCompatActivity {
         // Set the status bar color to white
         Common.setStatusBarColor(getWindow(), this, Color.WHITE);
 
+
+        ImageView backButton = findViewById(R.id.imageView3);
+        backButton.setOnClickListener(view -> PostDetails.super.onBackPressed());
+
         // Animate the bottom card from bottom to its current location
         MaterialCardView checkInCardView = findViewById(R.id.checkInCardView);
         checkInCardView.setAnimation(Common.viewBottomToOriginalAnim(this));
