@@ -98,6 +98,7 @@ public class DocumentUpload extends AppCompatActivity implements PickiTCallbacks
     List<Intent> documents = ProfileUpload.documents;
 
 
+
     public static List<MultipartBody.Part> document = new ArrayList<>();
     File file = null;
 
@@ -111,11 +112,13 @@ public class DocumentUpload extends AppCompatActivity implements PickiTCallbacks
 
         pickiT = new PickiT(this, this, this);
 
+        convertToMultipart2(documents.get(0));
+
         loadingView = findViewById(R.id.loadingView);
         avLoadingIndicatorView = findViewById(R.id.avi);
         scrollView = findViewById(R.id.nestedScrollView);
 
-        Common.linearProgressBarAnimator(findViewById(R.id.linearProgressIndicator),35,70);
+        Common.linearProgressBarAnimator(findViewById(R.id.linearProgressIndicator), 35, 70);
 
         MaterialCardView license = findViewById(R.id.uploadLicense);
         idCopy = findViewById(R.id.uploadIdCopy);
@@ -152,8 +155,13 @@ public class DocumentUpload extends AppCompatActivity implements PickiTCallbacks
 
         uploadDocuments = findViewById(R.id.uploadDocuments);
         uploadDocuments.setOnClickListener(view -> {
-            System.out.println("DOCUMENTS SIZE " + documents.toString());
-            convertToMultipart(documents);
+            System.out.println("DOCUMENTS SIZE " + document.toString());
+            //convertToMultipart(documents);
+            if(document.size() >= 6){
+                startActivity(new Intent(DocumentUpload.this, PersonalDetails.class));
+            }else{
+                Common.statusToast(2,"Files missing",this);
+            }
         });
 
 
@@ -173,134 +181,98 @@ public class DocumentUpload extends AppCompatActivity implements PickiTCallbacks
             if (requestCode == PICK_PDF_FILE_1) {
                 Uri sUri = data.getData();
                 documents.add(data);
+                convertToMultipart2(data);
 
                 String sPath = sUri.getPath();
                 uploadLicenseTXT.setText(sPath);
-                //loadingView.setVisibility(View.VISIBLE);
-                avLoadingIndicatorView.setVisibility(View.VISIBLE);
-                //Common.setStatusBarColor(getWindow(),DocumentUpload.this,getResources().getColor(R.color.background,null));
-                Handler handler = new Handler();
-                handler.postDelayed(() -> {
-                    idCopyTXT.setVisibility(View.VISIBLE);
-                    idCopy.setVisibility(View.VISIBLE);
-                    idCopyCB.setImageResource(R.drawable.ic_baseline_check_circle_24);
-                    //idCopyCB.setBackgroundColor(getResources().getColor(R.color.main,null));
-                    avLoadingIndicatorView.hide();
-                }, 1000);
+                idCopyTXT.setVisibility(View.VISIBLE);
+                idCopy.setVisibility(View.VISIBLE);
+                idCopyCB.setImageResource(R.drawable.ic_baseline_check_circle_24);
 
 
             }
             if (requestCode == PICK_PDF_FILE_2) {
                 Uri sUri = data.getData();
                 documents.add(data);
-
+                convertToMultipart2(data);
                 //loadingView.setVisibility(View.VISIBLE);
-                avLoadingIndicatorView.setVisibility(View.VISIBLE);
-                //Common.setStatusBarColor(getWindow(),DocumentUpload.this,getResources().getColor(R.color.background,null));
+
                 String sPath = sUri.getPath();
                 idCopyFILE.setText(sPath);
-                Handler handler = new Handler();
-                handler.postDelayed(() -> {
-                    report.setVisibility(View.VISIBLE);
-                    reportTXT.setVisibility(View.VISIBLE);
-                    reportCB.setImageResource(R.drawable.ic_baseline_check_circle_24);
-                    avLoadingIndicatorView.hide();
-                    //idCopyCB.setBackgroundColor(getResources().getColor(R.color.main,null));
-                }, 1000);
-
+                report.setVisibility(View.VISIBLE);
+                reportTXT.setVisibility(View.VISIBLE);
+                reportCB.setImageResource(R.drawable.ic_baseline_check_circle_24);
             }
             if (requestCode == PICK_PDF_FILE_3) {
                 Uri sUri = data.getData();
                 documents.add(data);
-
+                convertToMultipart2(data);
                 address.setVisibility(View.VISIBLE);
                 addressTXT.setVisibility(View.VISIBLE);
 
-                //loadingView.setVisibility(View.VISIBLE);
-                avLoadingIndicatorView.setVisibility(View.VISIBLE);
-                //Common.setStatusBarColor(getWindow(),DocumentUpload.this,getResources().getColor(R.color.background,null));
-
                 String sPath = sUri.getPath();
                 reportFILE.setText(sPath);
-                Handler handler = new Handler();
-                handler.postDelayed(() -> {
-                    address.setVisibility(View.VISIBLE);
-                    addressTXT.setVisibility(View.VISIBLE);
-                    addressCB.setImageResource(R.drawable.ic_baseline_check_circle_24);
-                    avLoadingIndicatorView.hide();
-                    //idCopyCB.setBackgroundColor(getResources().getColor(R.color.main,null));
-                }, 1000);
-
+                address.setVisibility(View.VISIBLE);
+                addressTXT.setVisibility(View.VISIBLE);
+                addressCB.setImageResource(R.drawable.ic_baseline_check_circle_24);
+                scrollView.post(() -> scrollView.fullScroll(ScrollView.FOCUS_DOWN));
             }
             if (requestCode == PICK_PDF_FILE_4) {
                 Uri sUri = data.getData();
                 documents.add(data);
-
+                convertToMultipart2(data);
                 //loadingView.setVisibility(View.VISIBLE);
-                avLoadingIndicatorView.setVisibility(View.VISIBLE);
+
                 //Common.setStatusBarColor(getWindow(),DocumentUpload.this,getResources().getColor(R.color.background,null));
                 String sPath = sUri.getPath();
                 addressFILE.setText(sPath);
-                Handler handler = new Handler();
-                handler.postDelayed(() -> {
-                    rating.setVisibility(View.VISIBLE);
-                    ratingTXT.setVisibility(View.VISIBLE);
-                    avLoadingIndicatorView.hide();
-                    ratingCB.setImageResource(R.drawable.ic_baseline_check_circle_24);
-                    scrollView.post(() -> scrollView.fullScroll(ScrollView.FOCUS_DOWN));
-                    //idCopyCB.setBackgroundColor(getResources().getColor(R.color.main,null));
-                }, 1000);
+
+                rating.setVisibility(View.VISIBLE);
+                ratingTXT.setVisibility(View.VISIBLE);
+                avLoadingIndicatorView.hide();
+                ratingCB.setImageResource(R.drawable.ic_baseline_check_circle_24);
+                scrollView.post(() -> scrollView.fullScroll(ScrollView.FOCUS_DOWN));
             }
             if (requestCode == PICK_PDF_FILE_5) {
                 Uri sUri = data.getData();
                 documents.add(data);
-                avLoadingIndicatorView.setVisibility(View.VISIBLE);
+                convertToMultipart2(data);
+
                 //Common.setStatusBarColor(getWindow(),DocumentUpload.this,getResources().getColor(R.color.background,null));
                 String sPath = sUri.getPath();
                 ratingFILE.setText(sPath);
-                Handler handler = new Handler();
-                handler.postDelayed(() -> {
-                    avLoadingIndicatorView.hide();
-                    uploadDocumentsCB.setImageResource(R.drawable.ic_baseline_check_circle_24);
-                    // Enable button to continue to next page
-                    uploadDocuments.setVisibility(View.VISIBLE);
-                    // Scroll to bottom of view to make it easier for the user to see the button
-                    scrollView.post(() -> scrollView.fullScroll(ScrollView.FOCUS_DOWN));
-                }, 1000);
+
+
+                uploadDocumentsCB.setImageResource(R.drawable.ic_baseline_check_circle_24);
+                // Enable button to continue to next page
+                uploadDocuments.setVisibility(View.VISIBLE);
+                // Scroll to bottom of view to make it easier for the user to see the button
+                scrollView.post(() -> scrollView.fullScroll(ScrollView.FOCUS_DOWN));
             }
         }
     }
 
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    private void convertToMultipart(List<Intent> documents) {
-
-        for(Intent data : documents){
-            try{
-
-                ClipData clipData = Objects.requireNonNull(data).getClipData();
-                if (clipData != null) {
-                    int numberOfFilesSelected = clipData.getItemCount();
-                    if (numberOfFilesSelected > 1) {
-                        pickiT.getMultiplePaths(clipData);
-                        StringBuilder allPaths = new StringBuilder("Multiple Files Selected:" + "\n");
-                        for (int i = 0; i < clipData.getItemCount(); i++) {
-                            allPaths.append("\n\n").append(clipData.getItemAt(i).getUri());
-                        }
-                    } else {
-                        pickiT.getPath(clipData.getItemAt(0).getUri(), Build.VERSION.SDK_INT);
+    private void convertToMultipart2(Intent data) {
+        try {
+            ClipData clipData = Objects.requireNonNull(data).getClipData();
+            if (clipData != null) {
+                int numberOfFilesSelected = clipData.getItemCount();
+                if (numberOfFilesSelected > 1) {
+                    pickiT.getMultiplePaths(clipData);
+                    StringBuilder allPaths = new StringBuilder("Multiple Files Selected:" + "\n");
+                    for (int i = 0; i < clipData.getItemCount(); i++) {
+                        allPaths.append("\n\n").append(clipData.getItemAt(i).getUri());
                     }
                 } else {
-                    pickiT.getPath(data.getData(), Build.VERSION.SDK_INT);
+                    pickiT.getPath(clipData.getItemAt(0).getUri(), Build.VERSION.SDK_INT);
                 }
-            }catch (NullPointerException e){
-                documents.stream().skip(documents.indexOf(data));
-                e.printStackTrace();
+            } else {
+                pickiT.getPath(data.getData(), Build.VERSION.SDK_INT);
             }
-
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
 
-        startActivity(new Intent(DocumentUpload.this, PersonalDetails.class));
     }
 
     ProgressBar mProgressBar;
@@ -353,7 +325,7 @@ public class DocumentUpload extends AppCompatActivity implements PickiTCallbacks
         if (mdialog != null && mdialog.isShowing()) {
             mdialog.cancel();
         }
-        System.out.println("PickiTonCompleteListener "  + count++);
+        System.out.println("PickiTonCompleteListener " + count++);
 
 
         if (wasSuccessful) {
@@ -364,7 +336,7 @@ public class DocumentUpload extends AppCompatActivity implements PickiTCallbacks
             }
         } else {
 
-            Toast.makeText(this,reason,Toast.LENGTH_LONG).show();
+            Toast.makeText(this, reason, Toast.LENGTH_LONG).show();
             //selectedDocumentTXT.setText(reason);
         }
     }

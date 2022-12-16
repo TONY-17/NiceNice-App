@@ -1,6 +1,7 @@
 package com.blueconnectionz.nicenice.owner;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -18,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +35,7 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputEditText;
 import com.hbisoft.pickit.PickiT;
 import com.hbisoft.pickit.PickiTCallbacks;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -66,6 +69,10 @@ public class AddNewCar extends AppCompatActivity implements PickiTCallbacks {
     int SELECT_PICTURE = 200;
     PickiT pickiT;
 
+
+    AVLoadingIndicatorView avLoadingIndicatorView;
+    ScrollView scrollView;
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,59 +89,58 @@ public class AddNewCar extends AppCompatActivity implements PickiTCallbacks {
         license.setOnClickListener(view -> openGalleryFolder());
 
         MaterialButton submit = findViewById(R.id.submit);
-        submit.setOnClickListener(new View.OnClickListener() {
-
-
-
-            @Override
-            public void onClick(View view) {
+        submit.setOnClickListener(view -> {
+            try {
                 validateFields();
-                try {
-                    System.out.println("JSON REQ 1 " +  LandingPage.userID);
-                    System.out.println("JSON REQ 2 " +  requestJSONObject());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    Call<ResponseBody> newCar = RetrofitClient.getRetrofitClient().getAPI().addNewCar(
-                            LandingPage.userID,
-                            requestJSONObject(),
-                            document);
-                    newCar.enqueue(new Callback<ResponseBody>() {
-                        @Override
-                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                            if(response.isSuccessful()){
-                                try {
-                                    System.out.println("CAR UPLOAD MSG " + response.body().string() );
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            }else{
-                                try {
-                                    System.out.println("CAR UPLOAD ERR " + response.errorBody().string());
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
+                scrollView.scrollTo(0, scrollView.getBottom()/2);
+                avLoadingIndicatorView.show();
+                Call<ResponseBody> newCar = RetrofitClient.getRetrofitClient().getAPI().addNewCar(
+                        LandingPage.userID,
+                        requestJSONObject(),
+                        document);
+                newCar.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if(response.isSuccessful()){
+                            try {
+                                System.out.println("CAR UPLOAD MSG " + response.body().string());
+                                avLoadingIndicatorView.hide();
+                                Common.successMessage(AddNewCar.this);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }else{
+                            try {
+                                System.out.println("CAR UPLOAD ERR " + response.errorBody().string());
+                                Common.statusToast(2,response.errorBody().string(),AddNewCar.this);
+                                avLoadingIndicatorView.hide();
+                                return;
+                            } catch (IOException e) {
+                                e.printStackTrace();
                             }
                         }
+                    }
 
-                        @Override
-                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                            System.out.println("CAR UPLOAD ERR  2" + t.getMessage());
-                        }
-                    });
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        System.out.println("CAR UPLOAD ERR  2" + t.getMessage());
+                        Common.statusToast(2,"Try again",AddNewCar.this);
+                        avLoadingIndicatorView.hide();
+                        return;
+                    }
+                });
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
+
         });
 
     }
 
 
     private void setUpViews() {
+        scrollView = findViewById(R.id.scrollView);
+        avLoadingIndicatorView = findViewById(R.id.avi);
         checkBox1= findViewById(R.id.cb1);
         selectedFileTXT= findViewById(R.id.selectedFile);
         disk = findViewById(R.id.uploadLicense);

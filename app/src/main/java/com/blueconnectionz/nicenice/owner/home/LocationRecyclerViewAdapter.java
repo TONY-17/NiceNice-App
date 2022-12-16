@@ -90,7 +90,6 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
 
         holder.constraintLayout.setOnClickListener(view -> activity.runOnUiThread(() -> openDialogAndConnect(single.getName(), single.getId())));
 
-
     }
 
     @Override
@@ -151,6 +150,7 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
                             JSONObject jsonObject = new JSONObject(data);
                             String ownerID = jsonObject.getString("ownerID");
                             String driverID = jsonObject.getString("driverID");
+                            String token = jsonObject.getString("token");
 
                             ChatClient client = MyApp.client;
 
@@ -187,7 +187,7 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
                             });
 
 
-                            client.connectUser(user, client.devToken(user.getId())).enqueue((result) -> {
+                            client.connectUser(user, token).enqueue((result) -> {
                                 if (result.isSuccess()) {
                                     // Handle success
                                     System.out.println("USER CONNECTED ):");

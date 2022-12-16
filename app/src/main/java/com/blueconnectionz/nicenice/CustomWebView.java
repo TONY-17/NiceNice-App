@@ -1,9 +1,7 @@
 package com.blueconnectionz.nicenice;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.webkit.WebView;
@@ -41,20 +39,23 @@ public class CustomWebView extends Activity {
     public void WebAction(){
         webView = findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setAppCacheEnabled(true);
-       // https://pos.snapscan.io/qr/ylMvTKMB
-        webView.loadUrl("https://forms.gle/izUzKvCdMnbhLN8a7");
+        //webView.getSettings().setAppCacheEnabled(true);
+        webView.loadUrl("https://pos.snapscan.io/qr/ylMvTKMB");
 
         swipe.setRefreshing(true);
         webView.setWebViewClient(new WebViewClient(){
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                webView.loadUrl("file:///android_assets/error.html");
+                webView.loadUrl("https://pos.snapscan.io/qr/ylMvTKMB");
             }
             public void onPageFinished(WebView view, String url) {
                 swipe.setRefreshing(false);
             }
         });
 
+
+
+        // Owner after they found a driver they should deativate the car and then the drivers that did not get the car they
+        // will be refunded
     }
 
     @Override

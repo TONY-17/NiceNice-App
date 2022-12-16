@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_regular"
                 android:hint="Email"
-                android:textSize="14sp"
+                android:textSize="15sp"
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -121,6 +121,7 @@
                 android:maxLength="10"
                 android:fontFamily="@font/inter_regular"
                 android:hint="Phone Number"
+                android:textSize="15sp"
                 android:inputType="number" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -232,6 +233,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_regular"
                 android:hint="Password"
+                android:textSize="15sp"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>

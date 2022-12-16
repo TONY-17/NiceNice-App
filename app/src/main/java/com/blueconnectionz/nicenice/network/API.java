@@ -47,10 +47,13 @@ public interface API {
     Call<ResponseBody> getAllCars();
 
     @PUT("driver/{carID}/{userID}/update-view")
-    Call<ResponseBody> updateNumViews(@Path("carID") Long carID, @Path("userID") Long userID);
+    Call<ResponseBody> updateViews(@Path("carID") Long carID, @Path("userID") Long userID);
 
     @GET("owner/{userID}/drivers")
     Call<ResponseBody> getAllDrivers(@Path("userID") Long userID);
+
+    @GET("owner/{userID}/dashboard-info")
+    Call<ResponseBody> getAllOwnersCars(@Path("userID") Long userID);
 
     @POST("owner/{userID}/{driverID}/connect-driver")
     Call<ResponseBody> connectWithDriver(@Path("userID") Long userID, @Path("driverID") Long driverID);
@@ -60,4 +63,8 @@ public interface API {
     Call<ResponseBody> addNewCar(@Path("userID") Long userID,
                                  @Part("car") Map<String,Object> carDetails,
                                  @Part MultipartBody.Part document);
+
+
+    @GET("owner/{userID}/transaction-history")
+    Call<ResponseBody> allTransactions(@Path("userID") Long userID);
 }

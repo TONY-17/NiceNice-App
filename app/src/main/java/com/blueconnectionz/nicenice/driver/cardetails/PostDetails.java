@@ -1,11 +1,13 @@
 package com.blueconnectionz.nicenice.driver.cardetails;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.NestedScrollView;
 
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 
 import com.blueconnectionz.nicenice.R;
 import com.blueconnectionz.nicenice.utils.Common;
+import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.saadahmedsoft.popupdialog.PopupDialog;
@@ -26,6 +29,7 @@ import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 
 public class PostDetails extends AppCompatActivity {
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +80,12 @@ public class PostDetails extends AppCompatActivity {
 
         headerName.setText(getIntent().getStringExtra("make"));
         car.setText(getIntent().getStringExtra("model"));
-        carImage.setImageResource(getIntent().getIntExtra("image", 0));
+        Glide.with(carImage)
+                .asBitmap()
+                .placeholder(new ColorDrawable(carImage.getContext().getResources().getColor(R.color.light_gray, null)))
+                .load(getIntent().getStringExtra("image"))
+                .into(carImage);
+
         description.setText(getIntent().getStringExtra("description"));
         price.setText("R " + getIntent().getStringExtra("price"));
         location.setText(getIntent().getStringExtra("location"));

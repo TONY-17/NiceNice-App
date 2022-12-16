@@ -31,7 +31,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:cardBackgroundColor="@color/fill_light"
-                app:cardCornerRadius="12dp"
+                app:cardCornerRadius="0dp"
                 app:cardElevation="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline13"
@@ -43,6 +43,7 @@
                     android:id="@+id/ownerCarImg"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/car_img2" />
             </com.google.android.material.card.MaterialCardView>
 
@@ -55,15 +56,18 @@
 
             <TextView
                 android:id="@+id/ownerCarName"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:fontFamily="@font/inter_medium"
                 android:text="FORD MUSTANG"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/materialCardView4"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -71,13 +75,13 @@
                 android:id="@+id/ownerCarInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:fontFamily="@font/inter_regular"
-                app:tint="@color/text_color"
                 android:src="@drawable/ic_outline_supervisor_account_24"
-                app:layout_constraintEnd_toStartOf="@+id/imageView15"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/ownerCarName"
-                app:layout_constraintTop_toBottomOf="@+id/ownerCarName" />
+                app:layout_constraintBottom_toBottomOf="@+id/materialCardView13"
+                app:layout_constraintStart_toEndOf="@+id/materialCardView13"
+                app:layout_constraintTop_toTopOf="@+id/materialCardView13"
+                app:tint="@color/text_color" />
 
 
             <com.google.android.material.card.MaterialCardView
@@ -85,13 +89,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:cardCornerRadius="0dp"
                 android:layout_marginBottom="16dp"
                 app:cardBackgroundColor="@color/green"
+                app:cardCornerRadius="0dp"
                 app:cardElevation="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/ownerCarInfo"
-                app:layout_constraintTop_toBottomOf="@+id/ownerCarInfo">
+                app:layout_constraintStart_toStartOf="@+id/ownerCarName"
+                app:layout_constraintTop_toBottomOf="@+id/ownerCarName">
 
                 <TextView
                     android:id="@+id/ownerCarStatus"
@@ -115,13 +119,12 @@
                 app:layout_constraintBottom_toBottomOf="@+id/ownerCarInfo"
                 app:layout_constraintStart_toEndOf="@+id/ownerCarInfo"
                 app:layout_constraintTop_toTopOf="@+id/ownerCarInfo" />
+
             <ImageView
                 android:id="@+id/imageView15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="38dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="55dp"
                 android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

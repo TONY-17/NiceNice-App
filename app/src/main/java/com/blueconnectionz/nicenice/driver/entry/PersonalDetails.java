@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import io.getstream.chat.android.client.models.User;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -161,6 +162,9 @@ public class PersonalDetails extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     runOnUiThread(() -> {
+
+
+
                         Common.statusToast(1, "Account created", PersonalDetails.this);
                         startActivity(new Intent(PersonalDetails.this, LandingPage.class));
                         finish();

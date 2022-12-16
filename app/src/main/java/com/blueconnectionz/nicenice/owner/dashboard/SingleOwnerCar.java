@@ -1,16 +1,16 @@
 package com.blueconnectionz.nicenice.owner.dashboard;
 
 public class SingleOwnerCar {
-    int image;
+    String image;
     String name;
     String info;
     String status;
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -38,7 +38,7 @@ public class SingleOwnerCar {
         this.status = status;
     }
 
-    public SingleOwnerCar(int image, String name, String info, String status) {
+    public SingleOwnerCar(String image, String name, String info, String status) {
         this.image = image;
         this.name = name;
         this.info = info;

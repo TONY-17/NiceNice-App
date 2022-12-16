@@ -5,7 +5,7 @@ package com.blueconnectionz.nicenice.recyclerviews.discover;
  */
 public class HomeItem {
     private Long id;
-    private int image;
+    private String image;
     private String owner;
     private String car;
     private String location;
@@ -59,7 +59,7 @@ public class HomeItem {
         this.id = id;
     }
 
-    public HomeItem(Long id, int image, String owner, String car, String location, String weeklyCheckInAmount,
+    public HomeItem(Long id, String image, String owner, String car, String location, String weeklyCheckInAmount,
                     boolean requiresDeposit,
                     String description,
                     int views,
@@ -89,11 +89,11 @@ public class HomeItem {
         this.car = car;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

@@ -5,6 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/scrollView"
+    android:animateLayoutChanges="true"
     tools:context=".owner.AddNewCar">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -72,6 +74,7 @@
             android:fontFamily="@font/inter_regular"
             android:text="(1) Double Disk "
             android:textAllCaps="true"
+            android:visibility="gone"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +87,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/inter_regular"
-            android:text="(2) CAR IMAGE"
+            android:text="(1) CAR IMAGE"
             android:textAllCaps="true"
             android:textColor="@color/black"
             android:textSize="16sp"
@@ -159,6 +162,7 @@
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:visibility="gone"
             android:layout_marginEnd="16dp"
             app:cardBackgroundColor="@color/fill_light"
             app:cardCornerRadius="6dp"
@@ -221,7 +225,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/inter_regular"
-            android:text="(3) Make"
+            android:text="(2) Make"
             android:textAllCaps="true"
             android:textColor="@color/black"
             android:textSize="16sp"
@@ -272,7 +276,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/inter_regular"
-            android:text="(4) Model"
+            android:text="(3) Model"
             android:textAllCaps="true"
             android:textColor="@color/black"
             android:textSize="16sp"
@@ -324,7 +328,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/inter_regular"
-            android:text="(5) Year"
+            android:text="(4) Year"
             android:textAllCaps="true"
             android:textColor="@color/black"
             android:textSize="16sp"
@@ -376,7 +380,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/inter_regular"
-            android:text="(6) City"
+            android:text="(5) City"
             android:textAllCaps="true"
             android:textColor="@color/black"
             android:textSize="16sp"
@@ -632,5 +636,21 @@
 
 
 
+
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/avi"
+            style="@style/AVLoadingIndicatorView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:indicatorColor="@color/main"
+            app:indicatorName="BallPulseSyncIndicator"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>

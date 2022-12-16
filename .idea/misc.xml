@@ -5,9 +5,11 @@
       <map>
         <entry key="..\:/Users/lebea/.gradle/caches/transforms-3/b645af7405dd2d8b8596a1e08b82115b/transformed/jetified-popup-dialog-1.0.1/res/drawable/bg_red_10.xml" value="0.2075" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/drawable/checkbox_selector.xml" value="0.2065" />
+        <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/drawable/ic_baseline_attach_money_24.xml" value="0.1865" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/drawable/ic_baseline_check_circle_24.xml" value="0.1125" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.1295" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/drawable/ic_baseline_error_outline_24.xml" value="0.18" />
+        <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/drawable/ic_baseline_money_off_24.xml" value="0.1865" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/drawable/ic_baseline_numbers_24.xml" value="0.18" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/drawable/ic_outline_check_24.xml" value="0.1995" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/drawable/ic_outline_circle_24.xml" value="0.1125" />
@@ -36,30 +38,31 @@
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/activity_owner_main.xml" value="0.1" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/activity_personal_details.xml" value="0.22" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/activity_post_details.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/activity_profile_information.xml" value="0.22" />
+        <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/activity_profile_information.xml" value="0.26740947075208915" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/activity_profile_upload.xml" value="0.22" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/activity_sign_in.xml" value="0.22" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/activity_splash.xml" value="0.2" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/activity_verify_number.xml" value="0.14666666666666667" />
-        <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/activity_welcome_page.xml" value="0.22" />
+        <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/activity_welcome_page.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/connect_bottom_sheet.xml" value="0.22" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/dailog_layout.xml" value="0.16417272338606242" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/driver_summary_info.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/filtered_item.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/filtered_item.xml" value="0.3417085427135678" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/fragment_dashboard.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/fragment_home.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/fragment_notifications.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/fragment_profile.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/item_chat_me.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/item_chat_other.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/owner_car_item.xml" value="0.4466666666666667" />
-        <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/owner_fragment_dashboard.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/owner_car_item.xml" value="0.6" />
+        <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/owner_fragment_dashboard.xml" value="0.22" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/owner_fragment_home.xml" value="0.22" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/owner_fragment_profile.xml" value="0.22" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/single_car_details.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/single_car_shimmer.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/single_driver_details.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/single_msg_item.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/single_transaction.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/layout/slides_layout.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2" />
         <entry key="..\:/Users/lebea/AndroidStudioProjects/NiceNice/app/src/main/res/menu/bottom_nav_menu_owner.xml" value="0.1513467293715263" />

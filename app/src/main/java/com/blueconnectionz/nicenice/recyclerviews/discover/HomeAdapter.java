@@ -96,8 +96,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
         MaterialCardView parent = holder.parentCardView;
         parent.setOnClickListener(view -> {
-            Call<ResponseBody> updateViews = RetrofitClient.getRetrofitClient().getAPI().updateNumViews(
-                    homeItemList.get(position).getId(), LandingPage.userID);
+
+            System.out.println("CAR ID " + homeItemList.get(position).getId() + "|" + LandingPage.userID );
+
+            Call<ResponseBody> updateViews = RetrofitClient.getRetrofitClient().getAPI()
+                    .updateViews(homeItemList.get(position).getId(), LandingPage.userID);
+
             updateViews.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

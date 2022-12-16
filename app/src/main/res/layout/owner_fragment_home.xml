@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true">
 
+
     <TextView
         android:id="@+id/searchCardView"
         android:layout_width="0dp"
@@ -17,6 +18,7 @@
         android:fontFamily="@font/inter_bold"
         android:textColor="@color/black"
         android:textSize="24sp"
+
         app:layout_constraintEnd_toStartOf="@+id/notifications"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +35,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/searchCardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/searchCardView"
-        app:strokeColor="@color/light_gray"
+        app:strokeColor="@color/fill"
         app:strokeWidth="1dp">
 
         <ImageView
@@ -43,16 +45,63 @@
             android:src="@drawable/ic_notifications_black_24dp" />
     </com.google.android.material.card.MaterialCardView>
 
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView17"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardBackgroundColor="@color/fill"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchCardView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/searchTXT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/inter_medium"
+                android:text="Search"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/searchIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ios_search"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
     <View
         android:id="@+id/view7"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
         android:animateLayoutChanges="true"
-        android:background="@color/fill_light"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchCardView" />
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView17" />
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -138,7 +187,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="75dp"
-        android:visibility="gone"
         app:cardBackgroundColor="@color/main"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"

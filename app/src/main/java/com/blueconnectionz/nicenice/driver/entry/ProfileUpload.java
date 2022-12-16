@@ -96,7 +96,10 @@ public class ProfileUpload extends AppCompatActivity {
                         selectPictureFromGallery.setVisibility(View.GONE);
                         Common.setStatusBarColor(getWindow(), ProfileUpload.this, getResources().getColor(R.color.background, null));
                         Handler handler = new Handler();
-                        handler.postDelayed(() -> startActivity(new Intent(ProfileUpload.this, DocumentUpload.class)), 2000);
+                        handler.postDelayed(() -> {
+                            startActivity(new Intent(ProfileUpload.this, DocumentUpload.class));
+                            finish();
+                        },2000);
 
                     });
                 } else {

@@ -136,6 +136,7 @@ public class LandingPage extends AppCompatActivity {
         loginRequest.setEmail(email);
         loginRequest.setPassword(password);
 
+        System.out.println("LOGIN REQUEST " + loginRequest.toString());
         runOnUiThread(() -> {
             // Hide buttons when login button clicked
             hideOrShowButtons(View.GONE);

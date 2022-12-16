@@ -2,6 +2,8 @@ package com.blueconnectionz.nicenice.owner.dashboard;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 import com.blueconnectionz.nicenice.R;
+import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
@@ -30,11 +34,19 @@ public class CarRecyclerViewAdapter extends RecyclerView.Adapter<CarRecyclerView
         return new ViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         SingleOwnerCar singleOwnerCar = singleOwnerCarList.get(position);
-        holder.carImage.setImageResource(singleOwnerCar.getImage());
+
+        Glide.with(holder.carImage)
+                .asBitmap()
+                .placeholder(new ColorDrawable(activity.getResources().getColor(R.color.light_gray, null)))
+                .load(singleOwnerCar.getImage())
+                .into(holder.carImage);
+
+
         holder.carName.setText(singleOwnerCar.getName());
        // holder.carInfo.setText(singleOwnerCar.getInfo());
         holder.status.setText(singleOwnerCar.getStatus());

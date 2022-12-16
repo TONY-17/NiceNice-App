@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -45,6 +47,8 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
     ShimmerFrameLayout shimmerFrameLayout;
 
+    ImageView filteredView;
+    TextView filteredView1;
     @RequiresApi(api = Build.VERSION_CODES.M)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -56,6 +60,9 @@ public class HomeFragment extends Fragment {
         shimmerFrameLayout.startShimmer();
 
 
+
+        filteredView1 = root.findViewById(R.id.filtered2);
+        filteredView = root.findViewById(R.id.filtered1);
         recyclerView = binding.carsListRV;
 
 
@@ -95,59 +102,85 @@ public class HomeFragment extends Fragment {
                     getActivity().runOnUiThread(() -> {
                         try {
                             String data = response.body().string();
-                            System.out.println("RESPONSE FROM DB " + data);
-                            JSONArray jsonArray = new JSONArray(data);
-                            List<HomeItem> homeItemList = new ArrayList<>();
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                                JSONObject carJsonObj = jsonObject.getJSONObject("car");
-                                Long id = carJsonObj.getLong("id");
-                                String make = carJsonObj.getString("make");
-                                String model = carJsonObj.getString("model");
-                                String year = carJsonObj.getString("year");
-                                String city = carJsonObj.getString("city");
-                                //String description = jsonObject.getString("description");
-                                String description = "Description ";
+                            if(!data.contains("No cars available")){
+                                JSONArray jsonArray = new JSONArray(data);
+                                List<HomeItem> homeItemList = new ArrayList<>();
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-
-                                String weeklyTarget = carJsonObj.getString("weeklyTarget");
-                                boolean depositRequired = carJsonObj.getBoolean("depositRequired");
-                                boolean hasInsurance = carJsonObj.getBoolean("hasInsurance");
-                                boolean hasTracker = carJsonObj.getBoolean("hasTracker");
-                                boolean activeOnHailingPlatforms = carJsonObj.getBoolean("activeOnHailingPlatforms");
-                                String views = carJsonObj.getString("views");
-                                String age = carJsonObj.getString("age");
-                                String numConnections = carJsonObj.getString("numConnections");
+                                    JSONObject carJsonObj = jsonObject.getJSONObject("car");
+                                    Long id = carJsonObj.getLong("id");
+                                    String make = carJsonObj.getString("make");
+                                    String model = carJsonObj.getString("model");
+                                    String year = carJsonObj.getString("year");
+                                    String city = carJsonObj.getString("city");
+                                    String description = carJsonObj.getString("description");
+                                    //String description = "Description ";
 
 
-                                homeItemList.add(new HomeItem(id, R.drawable.car_img1, make, model, city, weeklyTarget, depositRequired, description,
-                                        Integer.valueOf(views), Integer.valueOf(numConnections), Integer.valueOf(age), activeOnHailingPlatforms));
+                                    String weeklyTarget = carJsonObj.getString("weeklyTarget");
+                                    boolean depositRequired = carJsonObj.getBoolean("depositRequired");
+                                    boolean hasInsurance = carJsonObj.getBoolean("hasInsurance");
+                                    boolean hasTracker = carJsonObj.getBoolean("hasTracker");
+                                    boolean activeOnHailingPlatforms = carJsonObj.getBoolean("activeOnHailingPlatforms");
+                                    String views = carJsonObj.getString("views");
+                                    String age = carJsonObj.getString("age");
+                                    String numConnections = carJsonObj.getString("numConnections");
 
+
+                                    String imageURL = jsonObject.getString("imageURL");
+
+                                    homeItemList.add(new HomeItem(id, imageURL, make, model, city, weeklyTarget, depositRequired, description,
+                                            Integer.valueOf(views), Integer.valueOf(numConnections), Integer.valueOf(age), activeOnHailingPlatforms));
+
+                                    shimmerFrameLayout.stopShimmer();
+                                    shimmerFrameLayout.setVisibility(View.GONE);
+                                }
+                                HomeAdapter homeAdapter = new HomeAdapter(homeItemList);
+                                recyclerView.setLayoutManager(new VegaLayoutManager());
+                                //recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                                recyclerView.setHasFixedSize(true);
+                                recyclerView.setAdapter(homeAdapter);
+                                items = homeItemList;
+                            }
+
+                            // We do have cars in the system
+                            else{
+
+                                filteredView.setVisibility(View.VISIBLE);
+                                filteredView1.setVisibility(View.VISIBLE);
                                 shimmerFrameLayout.stopShimmer();
                                 shimmerFrameLayout.setVisibility(View.GONE);
                             }
 
-                            HomeAdapter homeAdapter = new HomeAdapter(homeItemList);
-                            recyclerView.setLayoutManager(new VegaLayoutManager());
-                            //recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                            recyclerView.setHasFixedSize(true);
-                            recyclerView.setAdapter(homeAdapter);
-                            items = homeItemList;
+
+
+
+
+
                         } catch (IOException | JSONException e) {
                             e.printStackTrace();
                         }
                     });
 
                 } else {
-                    Toast.makeText(getContext(), "FAILED TO RETRIEVE CARS", Toast.LENGTH_SHORT).show();
+
+                    filteredView.setVisibility(View.VISIBLE);
+                    filteredView1.setVisibility(View.VISIBLE);
+
+                    shimmerFrameLayout.stopShimmer();
+                    shimmerFrameLayout.setVisibility(View.GONE);
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
 
-                Toast.makeText(getContext(), "FAILED TO RETRIEVE CARS", Toast.LENGTH_SHORT).show();
+                filteredView.setVisibility(View.VISIBLE);
+                filteredView1.setVisibility(View.VISIBLE);
+                shimmerFrameLayout.stopShimmer();
+                shimmerFrameLayout.setVisibility(View.GONE);
             }
         });
 

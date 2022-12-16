@@ -103,22 +103,43 @@ public class Common {
     public static void statusToast(int type, String message, Activity activity) {
         switch (type) {
             case 1:
-                MotionToast.Companion.createColorToast(activity, "Success",
+                activity.runOnUiThread(() -> MotionToast.Companion.createColorToast(activity, "Success",
                         message,
                         MotionToastStyle.SUCCESS,
                         MotionToast.GRAVITY_BOTTOM,
                         MotionToast.LONG_DURATION,
-                        ResourcesCompat.getFont(activity, R.font.inter_regular));
+                        ResourcesCompat.getFont(activity, R.font.inter_regular)));
                 break;
             case 2:
-                MotionToast.Companion.createColorToast(activity, "Error",
+                activity.runOnUiThread(() -> MotionToast.Companion.createColorToast(activity, "Error",
                         message,
                         MotionToastStyle.ERROR,
                         MotionToast.GRAVITY_BOTTOM,
                         MotionToast.LONG_DURATION,
-                        ResourcesCompat.getFont(activity, R.font.inter_regular));
-
+                        ResourcesCompat.getFont(activity, R.font.inter_regular)));
+                break;
         }
+    }
+
+    public static void successMessage(Activity activity){
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                PopupDialog.getInstance(activity)
+                        .setStyle(Styles.SUCCESS)
+                        .setHeading("Well Done")
+                        .setHeading("Your listing will be reviewed in < 2 days.")
+                        .setCancelable(false)
+                        .showDialog(new OnDialogButtonClickListener() {
+                            @Override
+                            public void onDismissClicked(Dialog dialog) {
+                                super.onDismissClicked(dialog);
+                                activity.finish();
+                            }
+                        });
+            }
+        });
+
     }
 
     private void openWhatsApp(String driver, Activity activity) {
@@ -149,7 +170,7 @@ public class Common {
         return generatedString;
     }
 
-    public static void loadingBalls(Activity activity){
+    public static void loadingBalls(Activity activity) {
         PopupDialog popupDialog = PopupDialog.getInstance(activity);
         popupDialog.setStyle(Styles.LOTTIE_ANIMATION)
                 //Required if no RawRes
