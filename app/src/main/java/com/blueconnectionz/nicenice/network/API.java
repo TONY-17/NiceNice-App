@@ -67,4 +67,10 @@ public interface API {
 
     @GET("owner/{userID}/transaction-history")
     Call<ResponseBody> allTransactions(@Path("userID") Long userID);
+
+    @POST("driver/{userId}/check-password")
+    Call<ResponseBody> checkIfPasswordIsValid(@Path("userId") Long userId,@Body String password);
+
+    @POST("driver/{userId}/new-password")
+    Call<ResponseBody> changePassword(@Path("userId") Long userId,@Body String password);
 }

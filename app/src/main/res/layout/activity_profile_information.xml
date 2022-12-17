@@ -163,7 +163,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/textView55"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -189,7 +189,7 @@
             app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            app:layout_constraintTop_toBottomOf="@+id/textView55"
             app:strokeColor="@color/text_color"
             app:strokeWidth="1dp">
 
@@ -366,7 +366,7 @@
 
 
                 <TextView
-                    android:id="@id/textView5"
+                    android:id="@+id/textView90"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -438,7 +438,7 @@
 
 
                 <TextView
-
+                    android:id="@+id/tv89"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
