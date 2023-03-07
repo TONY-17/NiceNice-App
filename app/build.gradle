@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    compileSdk 32
 
     defaultConfig {
         applicationId "com.blueconnectionz.nicenice"
@@ -40,9 +40,6 @@ android {
 }
 
 dependencies {
-
-    // Pdf viewer
-    implementation 'com.github.afreakyelf:Pdf-Viewer:v1.1.1'
     //Beautiful toast messages
     implementation 'com.github.Spikeysanju:MotionToast:1.4'
     // URI Convertor

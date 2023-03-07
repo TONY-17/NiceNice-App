@@ -89,16 +89,17 @@ public class ProfileUpload extends AppCompatActivity {
                     System.out.println("CAMERA IMAGE " + data.getData().toString());
 
                     runOnUiThread(() -> {
+                        openCamera.setVisibility(View.GONE);
+                        selectPictureFromGallery.setVisibility(View.GONE);
                         //imageView.setImageBitmap(imageBitmap);
                         loadingView.setVisibility(View.VISIBLE);
                         avLoadingIndicatorView.setVisibility(View.VISIBLE);
-                        openCamera.setVisibility(View.GONE);
-                        selectPictureFromGallery.setVisibility(View.GONE);
+
                         Common.setStatusBarColor(getWindow(), ProfileUpload.this, getResources().getColor(R.color.background, null));
                         Handler handler = new Handler();
                         handler.postDelayed(() -> {
                             startActivity(new Intent(ProfileUpload.this, DocumentUpload.class));
-                            finish();
+                            ProfileUpload.this.finish();
                         },2000);
 
                     });

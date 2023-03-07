@@ -60,10 +60,6 @@ public class OnBoarding extends AppCompatActivity {
         circularSeekBar.setProgress(1);
     }
 
-    public void skip(View view) {
-        startActivity(new Intent(this, DocumentUpload.class));
-        finish();
-    }
 
     public void next(View view) {
         viewPager.setCurrentItem(currentPos + 1);

@@ -5,6 +5,15 @@ public class SingleOwnerCar {
     String name;
     String info;
     String status;
+    int connections;
+
+    public int getConnections() {
+        return connections;
+    }
+
+    public void setConnections(int connections) {
+        this.connections = connections;
+    }
 
     public String getImage() {
         return image;
@@ -38,10 +47,11 @@ public class SingleOwnerCar {
         this.status = status;
     }
 
-    public SingleOwnerCar(String image, String name, String info, String status) {
+    public SingleOwnerCar(String image, String name, String info, String status, int connections) {
         this.image = image;
         this.name = name;
         this.info = info;
         this.status = status;
+        this.connections = connections;
     }
 }

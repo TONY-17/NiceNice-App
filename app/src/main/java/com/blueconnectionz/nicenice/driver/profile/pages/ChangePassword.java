@@ -17,6 +17,7 @@ import com.blueconnectionz.nicenice.utils.Common;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.io.IOException;
 
@@ -38,6 +39,8 @@ public class ChangePassword extends AppCompatActivity {
 
     TextView header;
 
+    AVLoadingIndicatorView avLoadingIndicatorView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +49,7 @@ public class ChangePassword extends AppCompatActivity {
         Common.setStatusBarColor(getWindow(), this, Color.WHITE);
 
 
+        avLoadingIndicatorView = findViewById(R.id.avi);
         ImageView backButton = findViewById(R.id.imageView13);
         backButton.setOnClickListener(view -> ChangePassword.super.onBackPressed());
 
@@ -73,6 +77,7 @@ public class ChangePassword extends AppCompatActivity {
     }
 
     private void passwordValid() {
+        avLoadingIndicatorView.setVisibility(View.VISIBLE);
         Call<ResponseBody> checkIfPasswordValid = RetrofitClient.getRetrofitClient().getAPI()
                 .checkIfPasswordIsValid(LandingPage.userID, String.valueOf(current1.getText().toString().trim()));
         checkIfPasswordValid.enqueue(new Callback<ResponseBody>() {
@@ -85,6 +90,8 @@ public class ChangePassword extends AppCompatActivity {
                         if (Boolean.valueOf(data) == true) {
                             runOnUiThread(() -> {
                                 current.setEnabled(false);
+
+                                avLoadingIndicatorView.setVisibility(View.GONE);
                                 password.setVisibility(View.VISIBLE);
                                 update.setVisibility(View.VISIBLE);
                                 confirm.setVisibility(View.VISIBLE);
@@ -94,6 +101,7 @@ public class ChangePassword extends AppCompatActivity {
                         } else if(Boolean.valueOf(data) == false) {
                             runOnUiThread(() -> {
                                 current1.requestFocus();
+                                avLoadingIndicatorView.setVisibility(View.GONE);
                                 current1.setError("Password is wrong");
                             });
                         }
@@ -101,6 +109,7 @@ public class ChangePassword extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 } else {
+                    avLoadingIndicatorView.setVisibility(View.GONE);
                     Common.statusToast(2, "Try again later", ChangePassword.this);
                     return;
                 }
@@ -108,6 +117,7 @@ public class ChangePassword extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                avLoadingIndicatorView.setVisibility(View.GONE);
                 Common.statusToast(2, "Try again later", ChangePassword.this);
                 return;
             }
@@ -116,30 +126,46 @@ public class ChangePassword extends AppCompatActivity {
 
     private void changePassword(){
         if(password1.getText().length() <= 0){
-            password1.setError("Password required");
+            password.setError("Password required");
             password.requestFocus();
+            return;
+        }
+        if(password1.getText().length() < 6){
+            password.setError("Password less than 6 characters");
+            password.requestFocus();
+            return;
         }
 
         if(confirm1.getText().length() <= 0){
-            confirm1.setError("Password required");
+            confirm.setError("Password required");
             confirm.requestFocus();
+            return;
+        }
+        if(confirm1.getText().length() < 6){
+            confirm.setError("Password less than 6 characters");
+            confirm.requestFocus();
+            return;
         }
 
         if(!password1.getText().toString().trim().equals(confirm1.getText().toString().trim())){
             confirm.requestFocus();
             password.requestFocus();
             Common.statusToast(2, "Passwords not the same", ChangePassword.this);
+            return;
         }
 
+        avLoadingIndicatorView.setVisibility(View.VISIBLE);
         Call<ResponseBody> changePassword = RetrofitClient.getRetrofitClient().getAPI().changePassword(LandingPage.userID,
                 confirm1.getText().toString().trim());
         changePassword.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){
+                    avLoadingIndicatorView.setVisibility(View.GONE);
                     Common.statusToast(1, "Password updated", ChangePassword.this);
                     finish();
                 }else{
+                    avLoadingIndicatorView.setVisibility(View.GONE);
                     Common.statusToast(2, "Try again later", ChangePassword.this);
                     return;
                 }
@@ -147,6 +173,7 @@ public class ChangePassword extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                avLoadingIndicatorView.setVisibility(View.GONE);
                 Common.statusToast(2, "Try again later", ChangePassword.this);
                 return;
             }

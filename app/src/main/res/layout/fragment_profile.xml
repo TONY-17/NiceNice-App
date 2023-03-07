@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context=".driver.profile.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -319,6 +320,7 @@
             android:id="@+id/view8"
             android:layout_width="match_parent"
             android:layout_height="10dp"
+
             android:layout_marginTop="16dp"
             android:background="@color/fill_light"
             app:layout_constraintEnd_toEndOf="parent"
@@ -332,8 +334,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+
             android:fontFamily="@font/inter_medium"
-            android:text="Notifications"
+            android:text="OPEN TO WORK"
             android:textAllCaps="true"
             android:textColor="@color/text_color"
             android:textSize="16sp"
@@ -344,6 +347,7 @@
             android:id="@+id/materialCardView15"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
@@ -362,20 +366,22 @@
                     android:layout_height="24dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
-                    android:src="@drawable/ic_round_notifications_none_24"
+                    android:src="@drawable/ic_baseline_online_prediction_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:tint="@color/text_color" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchMaterial"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:trackTint="@color/switch_track_selector"
-                    app:thumbTint="@color/switch_thumb_selector"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:visibility="gone"
+                    app:thumbTint="@color/switch_thumb_selector"
+                    app:trackTint="@color/switch_track_selector" />
 
                 <View
                     android:id="@+id/v543"
@@ -392,7 +398,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/inter_medium"
-                    android:text="Push Notifications"
+                    android:text="Availability"
                     android:textColor="@color/black2"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toTopOf="@+id/v543"
@@ -402,13 +408,16 @@
 
                 <TextView
                     android:id="@+id/txt231"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
                     android:fontFamily="@font/inter_regular"
-                    android:text="Get notified when there's updates"
+                    android:text="Owners will be able to contact you"
                     android:textColor="@color/text_color"
                     android:textSize="14sp"
+                    app:layout_constraintEnd_toStartOf="@+id/switchMaterial"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/im89"
                     app:layout_constraintTop_toBottomOf="@+id/v543" />
 
@@ -681,6 +690,18 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
+
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/avi"
+            style="@style/AVLoadingIndicatorView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:indicatorColor="@color/main"
+            app:indicatorName="BallBeatIndicator"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

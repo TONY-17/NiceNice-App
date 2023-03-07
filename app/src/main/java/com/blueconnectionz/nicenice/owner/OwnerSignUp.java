@@ -50,6 +50,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.hbisoft.pickit.PickiT;
 import com.hbisoft.pickit.PickiTCallbacks;
 import com.wang.avi.AVLoadingIndicatorView;
@@ -92,9 +93,14 @@ public class OwnerSignUp extends AppCompatActivity implements PickiTCallbacks {
     PickiT pickiT;
 
 
+
     public static TextInputEditText emailField;
+    TextInputLayout emailField2;
     public static TextInputEditText phoneNumberField;
+    TextInputLayout phoneNumberField2;
+
     public static TextInputEditText passwordField;
+    TextInputLayout passwordField2;
 
     View loadingView;
     AVLoadingIndicatorView avLoadingIndicatorView;
@@ -125,6 +131,9 @@ public class OwnerSignUp extends AppCompatActivity implements PickiTCallbacks {
         emailField = findViewById(R.id.emailTxT);
         phoneNumberField = findViewById(R.id.phoneNumberTxT);
         passwordField = findViewById(R.id.passwordTxt);
+        emailField2 = findViewById(R.id.textInputLayout8);
+        phoneNumberField2 = findViewById(R.id.textInputLayout14);
+        passwordField2 = findViewById(R.id.textInputLayout9);
         uploadIDCopy = findViewById(R.id.uploadIdCopy);
 
         uploadIDCopy.setOnClickListener(view -> {
@@ -213,32 +222,32 @@ public class OwnerSignUp extends AppCompatActivity implements PickiTCallbacks {
         String password = Objects.requireNonNull(passwordField.getText()).toString().trim();
 
         if (email.isEmpty()) {
-            emailField.setError("Email required");
+            emailField2.setError("Email required *");
             emailField.requestFocus();
             return;
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailField.setError("Email invalid");
+            emailField2.setError("Email invalid");
             emailField.requestFocus();
             return;
         }
         if (number.isEmpty()) {
-            phoneNumberField.setError("Phone number required");
+            phoneNumberField2.setError("Phone number required *");
             phoneNumberField.requestFocus();
             return;
 
         } else if (!PhoneNumberUtils.isGlobalPhoneNumber(number)) {
-            phoneNumberField.setError("Phone number invalid");
+            phoneNumberField2.setError("Phone number invalid");
             phoneNumberField.requestFocus();
             return;
         }
 
         if (password.isEmpty()) {
-            passwordField.setError("Password required");
+            passwordField2.setError("Password required *");
             passwordField.requestFocus();
             return;
         }
         if (password.length() < 6) {
-            passwordField.setError("Password less than 6 characters");
+            passwordField2.setError("Password less than 6 characters");
             passwordField.requestFocus();
             return;
         }
@@ -307,6 +316,15 @@ public class OwnerSignUp extends AppCompatActivity implements PickiTCallbacks {
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
                     runOnUiThread(() -> {
+                        if(t.getMessage().contains("timeout")){
+                            Common.statusToast(1,"Account created",OwnerSignUp.this);
+                            startActivity(new Intent(OwnerSignUp.this, LandingPage.class));
+                            finish();
+                        }
+
+                        System.out.println("Network error " + t.getMessage());
+
+
                         Common.statusToast(2,"Network error",OwnerSignUp.this);
                         loadingView.setVisibility(View.GONE);
                         avLoadingIndicatorView.setVisibility(View.GONE);

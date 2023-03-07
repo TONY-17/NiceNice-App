@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:animateLayoutChanges="true"
     android:layout_height="match_parent"
     tools:context=".driver.cardetails.Checkout">
     <ImageView
@@ -17,27 +18,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/carNameTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:fontFamily="@font/inter_medium"
-        android:text="Connect with Samketi"
-        android:animateLayoutChanges="true"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/imageView3" />
-
     <View
         android:id="@+id/view6"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
+        android:visibility="gone"
         android:animateLayoutChanges="true"
-        android:background="@color/light_gray"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
@@ -66,10 +54,9 @@
                 android:text="Don't miss the chance"
                 android:textColor="@color/black"
                 android:textSize="22sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/textView16"
@@ -101,7 +88,6 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
                     android:fontFamily="@font/inter_regular"
-                    android:text="2/3 Drivers have already offered above the minimum amount."
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -127,12 +113,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
             <TextView
+                android:id="@+id/balances"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/inter_regular"
-                android:text=":  50 Credits\n:  200 Credits\n:  R1200 p/w"
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
                 android:textSize="16sp"
@@ -155,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/inter_medium"
-                android:text="Make an offer"
+                android:text="AGREE WITH TARGET"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="22sp"
@@ -170,7 +156,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:stepSize="50"
+                android:stepSize="0"
+                android:visibility="gone"
                 android:valueFrom="1000"
                 android:valueTo="2000"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -183,7 +170,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/inter_medium"
-                android:text="R1300.00"
+
                 android:textColor="@color/main"
                 android:textSize="22sp"
                 android:textStyle="bold"
@@ -313,6 +300,7 @@
                 android:elevation="0dp"
                 android:fontFamily="@font/inter_semibold"
                 android:text="Connect"
+                android:enabled="false"
                 app:cornerRadius="12dp"
                 app:elevation="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -333,9 +321,8 @@
         style="@style/AVLoadingIndicatorView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         app:indicatorColor="@color/main"
-        app:indicatorName="BallPulseSyncIndicator"
+        app:indicatorName="BallBeatIndicator"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -350,5 +337,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

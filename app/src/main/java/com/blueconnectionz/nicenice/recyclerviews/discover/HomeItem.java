@@ -19,6 +19,12 @@ public class HomeItem {
     private int age;
     private boolean onPlatform;
 
+
+    private boolean hasInsurance;
+    private boolean hasTracker;
+    private boolean activeOnHailingPlatforms;
+    private boolean available;
+
     public int getViews() {
         return views;
     }
@@ -55,6 +61,38 @@ public class HomeItem {
         return id;
     }
 
+    public boolean isHasInsurance() {
+        return hasInsurance;
+    }
+
+    public void setHasInsurance(boolean hasInsurance) {
+        this.hasInsurance = hasInsurance;
+    }
+
+    public boolean isHasTracker() {
+        return hasTracker;
+    }
+
+    public void setHasTracker(boolean hasTracker) {
+        this.hasTracker = hasTracker;
+    }
+
+    public boolean isActiveOnHailingPlatforms() {
+        return activeOnHailingPlatforms;
+    }
+
+    public void setActiveOnHailingPlatforms(boolean activeOnHailingPlatforms) {
+        this.activeOnHailingPlatforms = activeOnHailingPlatforms;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -65,7 +103,11 @@ public class HomeItem {
                     int views,
                     int connections,
                     int age,
-                    boolean onPlatform) {
+                    boolean onPlatform,
+                    boolean hasInsurance,
+                            boolean hasTracker,
+                            boolean activeOnHailingPlatforms,
+                            boolean available) {
         this.id = id;
         this.image = image;
         this.owner = owner;
@@ -79,6 +121,11 @@ public class HomeItem {
         this.connections = connections;
         this.age = age;
         this.onPlatform = onPlatform;
+
+        this.hasTracker = hasTracker;
+        this.activeOnHailingPlatforms = activeOnHailingPlatforms;
+        this.available = available;
+        this.hasInsurance = hasInsurance;
     }
 
     public String getCar() {

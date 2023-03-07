@@ -47,14 +47,13 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearProgressIndicator" />
-
         <TextView
             android:id="@+id/textView2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:fontFamily="@font/inter_light"
+            android:fontFamily="@font/regular"
             android:text="@string/your_email_and_password_will_be_required_for_you_to_login"
             android:textAlignment="textStart"
             android:textColor="@color/text_color"
@@ -67,11 +66,12 @@
             android:id="@+id/outlinedTextField"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
-
+            app:helperTextTextColor="@color/red"
+            app:helperTextEnabled="true"
             android:backgroundTint="@color/white"
             app:boxBackgroundColor="@color/white"
             android:fontFamily="@font/inter_medium"
@@ -105,75 +105,204 @@
             android:id="@+id/textInputLayout2"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
 
-            android:fontFamily="@font/inter_medium"
-
-
-
             android:backgroundTint="@color/white"
+
+            android:fontFamily="@font/inter_medium"
             app:boxBackgroundColor="@color/white"
 
             app:boxCornerRadiusBottomEnd="6dp"
             app:boxCornerRadiusBottomStart="6dp"
+
             app:boxCornerRadiusTopEnd="6dp"
             app:boxCornerRadiusTopStart="6dp"
-
             app:boxStrokeColor="@color/main"
             app:boxStrokeWidth="1dp"
-            app:startIconTint="@color/black2"
+
             app:endIconTint="@color/black2"
-            app:passwordToggleTint="@color/black2"
             app:errorEnabled="true"
             app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/outlinedTextField"
+            app:passwordToggleTint="@color/black2"
             app:prefixTextColor="@color/text_color"
-            app:startIconDrawable="@drawable/ic_baseline_numbers_24">
+            app:startIconDrawable="@drawable/ic_baseline_numbers_24"
+            app:startIconTint="@color/black2">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/phoneNumberTxT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLength="10"
                 android:fontFamily="@font/inter_regular"
                 android:hint="Phone Number"
-                android:textSize="15sp"
-                android:inputType="number" />
+                android:inputType="number"
+                android:maxLength="10"
+                android:textSize="15sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tex41"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+
+            android:layout_marginEnd="16dp"
+
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/inter_medium"
+
+            app:boxBackgroundColor="@color/white"
+            app:boxCornerRadiusBottomEnd="6dp"
+
+            app:boxCornerRadiusBottomStart="6dp"
+            app:boxCornerRadiusTopEnd="6dp"
+            app:boxCornerRadiusTopStart="6dp"
+            app:boxStrokeColor="@color/main"
+
+            app:boxStrokeWidth="1dp"
+            app:endIconTint="@color/black2"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+            app:passwordToggleTint="@color/black2"
+            app:prefixTextColor="@color/text_color"
+            app:startIconDrawable="@drawable/ic_baseline_phone_enabled_24"
+            app:startIconTint="@color/black2">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reference1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
+                android:hint="Reference 1"
+                android:inputType="number"
+                android:maxLength="10"
+                android:textSize="15sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout16"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+
+            android:layout_marginEnd="16dp"
+
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/inter_medium"
+
+            app:boxBackgroundColor="@color/white"
+            app:boxCornerRadiusBottomEnd="6dp"
+
+            app:boxCornerRadiusBottomStart="6dp"
+            app:boxCornerRadiusTopEnd="6dp"
+            app:boxCornerRadiusTopStart="6dp"
+            app:boxStrokeColor="@color/main"
+
+            app:boxStrokeWidth="1dp"
+            app:endIconTint="@color/black2"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tex41"
+            app:passwordToggleTint="@color/black2"
+            app:prefixTextColor="@color/text_color"
+            app:startIconDrawable="@drawable/ic_baseline_phone_enabled_24"
+            app:startIconTint="@color/black2">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reference2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
+                android:hint="Reference 2"
+                android:inputType="number"
+                android:maxLength="10"
+                android:textSize="15sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout17"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/inter_medium"
+            app:boxBackgroundColor="@color/white"
+            app:boxCornerRadiusBottomEnd="6dp"
+            app:boxCornerRadiusBottomStart="6dp"
+            app:boxCornerRadiusTopEnd="6dp"
+            app:boxCornerRadiusTopStart="6dp"
+            app:boxStrokeColor="@color/main"
+            app:boxStrokeWidth="1dp"
+            app:endIconTint="@color/black2"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout16"
+            app:passwordToggleTint="@color/black2"
+            app:prefixTextColor="@color/text_color"
+            app:startIconDrawable="@drawable/ic_baseline_location_city_24"
+            app:startIconTint="@color/black2">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/locationBased"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
+                android:hint="Where are you based?"
+                android:inputType="text"
+                android:textSize="15sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout3"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:fontFamily="@font/inter_medium"
             android:backgroundTint="@color/white"
+            android:fontFamily="@font/inter_medium"
             app:boxBackgroundColor="@color/white"
             app:boxCornerRadiusBottomEnd="6dp"
             app:boxCornerRadiusBottomStart="6dp"
             app:boxCornerRadiusTopEnd="6dp"
             app:boxCornerRadiusTopStart="6dp"
-
             app:boxStrokeColor="@color/main"
             app:boxStrokeWidth="1dp"
-            app:errorEnabled="true"
-            app:startIconTint="@color/black2"
             app:endIconTint="@color/black2"
-            app:passwordToggleTint="@color/black2"
+            app:errorEnabled="true"
             app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout17"
+            app:passwordToggleTint="@color/black2"
             app:prefixTextColor="@color/text_color"
-            app:startIconDrawable="@drawable/ic_outline_email_24">
+            app:startIconDrawable="@drawable/ic_outline_email_24"
+            app:startIconTint="@color/black2">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailTxT"
@@ -181,39 +310,38 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_regular"
                 android:hint="Email"
-                android:textSize="15sp"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:textSize="15sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout4"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:backgroundTint="@color/white"
-            app:boxBackgroundColor="@color/white"
             android:fontFamily="@font/inter_medium"
+            app:boxBackgroundColor="@color/white"
             app:boxCornerRadiusBottomEnd="6dp"
             app:boxCornerRadiusBottomStart="6dp"
             app:boxCornerRadiusTopEnd="6dp"
             app:boxCornerRadiusTopStart="6dp"
-
             app:boxStrokeColor="@color/main"
             app:boxStrokeWidth="1dp"
+            app:endIconTint="@color/black2"
             app:errorEnabled="true"
             app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
             app:passwordToggleEnabled="true"
-            app:startIconTint="@color/black2"
-            app:endIconTint="@color/black2"
             app:passwordToggleTint="@color/black2"
             app:startIconDrawable="@drawable/ic_outline_lock_24"
-            >
+            app:startIconTint="@color/black2">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordTxT"
@@ -221,8 +349,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_regular"
                 android:hint="Password"
-                android:textSize="15sp"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textSize="15sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.button.MaterialButton
@@ -230,7 +358,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:backgroundTint="@color/main"
             android:text="Continue"
@@ -238,25 +366,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
-
-
-
         <com.wang.avi.AVLoadingIndicatorView
             android:id="@+id/avi"
             style="@style/AVLoadingIndicatorView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:indicatorColor="@color/main"
             android:visibility="gone"
-            app:indicatorName="BallPulseSyncIndicator"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:indicatorColor="@color/main"
+            app:indicatorName="BallBeatIndicator"
+            app:layout_constraintBottom_toBottomOf="@+id/textInputLayout4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.65" />
         <View
             android:id="@+id/loadingView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="10000dp"
             android:background="#80000000"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -264,7 +390,89 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/parentMail"
+            android:animateLayoutChanges="true"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/imageView20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="64dp"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.3"
+
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/review"
+
+
+                    />
+
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="Reviewing application"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView20" />
+
+
+                <TextView
+                    android:id="@+id/textView43"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/regular"
+                    android:text="Our team has received your information and will confirm the correctness of the documentation."
+                    android:textAlignment="center"
+                    android:textColor="@color/text_color"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/materialButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="32dp"
+                    android:text="continue"
+                    app:cornerRadius="6dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView43" />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

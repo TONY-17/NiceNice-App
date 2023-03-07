@@ -25,6 +25,7 @@
     <application
         android:name=".MyApp"
         android:allowBackup="true"
+        android:allowClearUserData="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/ic_outline_directions_car_filled_24"
@@ -37,11 +38,25 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".InReview"
+            android:exported="false" />
+        <activity
             android:name=".ChannelActivity"
             android:exported="false" />
         <activity
             android:name=".ForgotPassword"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="nicenice-globe.com"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".DriverFilter"
             android:exported="false"
@@ -65,12 +80,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".owner.OwnerMainActivity"
-            android:exported="false"
-            android:label="@string/title_activity_owner_main"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".driver.auth.SignUp"
             android:exported="true"
+            android:label="@string/title_activity_owner_main"
             android:screenOrientation="portrait" />
         <activity
             android:name=".driver.entry.LandingPage"

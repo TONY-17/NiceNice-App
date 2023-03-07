@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.blueconnectionz.nicenice.R;
 import com.blueconnectionz.nicenice.driver.entry.LandingPage;
 import com.blueconnectionz.nicenice.network.RetrofitClient;
@@ -32,6 +33,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -45,15 +48,18 @@ public class OwnerDashboardFragment extends Fragment {
     View root;
     MaterialCardView addNewCar;
 
-    TextView totalCars, totalAccepted,totalRejected;
+    TextView totalCars, totalAccepted, totalRejected, markCar;
+    LottieAnimationView lottieAnimationView;
     @RequiresApi(api = Build.VERSION_CODES.M)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         root = inflater.inflate(R.layout.owner_fragment_dashboard, container, false);
         totalCars = root.findViewById(R.id.totalCars);
+        lottieAnimationView= root.findViewById(R.id.animationView);
         totalAccepted = root.findViewById(R.id.textView41);
         totalRejected = root.findViewById(R.id.totalRejected);
+        markCar = root.findViewById(R.id.textView29);
         ownerCars();
 
         addNewCar = root.findViewById(R.id.addANewCar);
@@ -80,8 +86,14 @@ public class OwnerDashboardFragment extends Fragment {
 
 
                         totalCars.setText(String.valueOf(totalListings));
+/*
                         totalAccepted.setText(String.valueOf(accepted));
                         totalRejected.setText(String.valueOf(rejected));
+
+*/
+
+                        totalAccepted.setText("-");
+                        totalRejected.setText("-");
 
                         JSONArray ownerCars = jsonObject.getJSONArray("ownerCars");
                         for (int i = 0; i < ownerCars.length(); i++) {
@@ -93,15 +105,20 @@ public class OwnerDashboardFragment extends Fragment {
                             boolean available = singleCar.getBoolean("available");
 
                             String status = "";
-                            if(available == true){
+                            if (available == true) {
                                 status = "Available";
-                            }else {
+                            } else {
                                 status = "Not Available";
                             }
 
-                            carList.add(new SingleOwnerCar(image, name, String.valueOf(numConnections), status));
+                            carList.add(new SingleOwnerCar(image, name, String.valueOf(numConnections), status,numConnections));
+                        }
+                        if (!carList.isEmpty()) {
+                            markCar.setVisibility(View.VISIBLE);
+                            lottieAnimationView.setVisibility(View.VISIBLE);
                         }
 
+                        Collections.reverse(carList);
                         CarRecyclerViewAdapter adapter = new CarRecyclerViewAdapter(carList, getActivity());
                         RecyclerView recyclerView = root.findViewById(R.id.ownerCars);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

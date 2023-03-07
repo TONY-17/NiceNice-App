@@ -10,17 +10,17 @@
         android:id="@+id/ownerCar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:paddingBottom="16dp"
         app:cardBackgroundColor="@color/fill_light"
         app:cardCornerRadius="0dp"
-        app:strokeColor="@color/light_gray"
-        app:strokeWidth="1dp"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/light_gray"
+        app:strokeWidth="1dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -88,7 +88,7 @@
                 android:id="@+id/materialCardView13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginBottom="16dp"
                 app:cardBackgroundColor="@color/green"
                 app:cardCornerRadius="0dp"
@@ -109,13 +109,14 @@
             </com.google.android.material.card.MaterialCardView>
 
             <TextView
+                android:id="@+id/numConnections"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:fontFamily="@font/inter_medium"
                 android:text="2"
-                android:textSize="14sp"
                 android:textColor="@color/black"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/ownerCarInfo"
                 app:layout_constraintStart_toEndOf="@+id/ownerCarInfo"
                 app:layout_constraintTop_toTopOf="@+id/ownerCarInfo" />

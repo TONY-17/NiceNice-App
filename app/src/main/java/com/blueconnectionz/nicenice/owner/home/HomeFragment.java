@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.blueconnectionz.nicenice.MyApp;
 import com.blueconnectionz.nicenice.R;
 import com.blueconnectionz.nicenice.driver.entry.LandingPage;
 import com.blueconnectionz.nicenice.driver.messaging.Dialog;
@@ -24,6 +26,7 @@ import com.blueconnectionz.nicenice.owner.dashboard.ChatActivity;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
+import com.wang.avi.AVLoadingIndicatorView;
 
 
 import org.json.JSONArray;
@@ -35,6 +38,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import io.getstream.chat.android.client.ChatClient;
+import io.getstream.chat.android.client.models.User;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,10 +52,13 @@ public class HomeFragment extends Fragment {
 
     ShimmerFrameLayout shimmerFrameLayout;
 
-
-    ImageView noDriver1;
+    LottieAnimationView noDriver1;
     TextView noDriver2;
 
+    AVLoadingIndicatorView avLoadingIndicatorView;
+    TextView unreadCount;
+
+    MaterialCardView unreadCountView;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.owner_fragment_home, container, false);
@@ -59,14 +67,30 @@ public class HomeFragment extends Fragment {
         HEADER_TEXT.setText(Html.fromHtml(text));
         recyclerView = root.findViewById(R.id.rv_on_top_of_map);
 
+        unreadCount = root.findViewById(R.id.messagesCount);
+        unreadCountView = root.findViewById(R.id.unreadMC);
+
         noDriver1 = root.findViewById(R.id.imageView18);
         noDriver2 = root.findViewById(R.id.txtN);
-
+        avLoadingIndicatorView= root.findViewById(R.id.avi);
         shimmerFrameLayout = root.findViewById(R.id.shimmer_view_container);
         shimmerFrameLayout.startShimmer();
         fetchDrivers();
         initRecyclerView();
 
+        User user = new User();
+        String email = LandingPage.userEmail.toLowerCase();
+        user.setId(email.replaceAll("[.]", ""));
+
+        ChatClient client = MyApp.client;
+        client.connectUser(user, client.devToken(user.getId())).enqueue(result -> {
+            if (result.isSuccess()) {
+                User userRes = result.data().getUser();
+                int totalUnreadCount = userRes.getTotalUnreadCount();
+                unreadCountView.setVisibility(View.VISIBLE);
+                unreadCount.setText(String.valueOf(totalUnreadCount));
+            }
+        });
 
         MaterialCardView notifications = root.findViewById(R.id.notifications);
         notifications.setOnClickListener(view ->
@@ -112,7 +136,7 @@ public class HomeFragment extends Fragment {
                                 String location = jsonObject.getString("location");
                                 int numReferences = jsonObject.getInt("numReferences");
                                 String imageURL = jsonObject.getString("imageURL");
-
+                                boolean online = jsonObject.getBoolean("online");
                                 SingleRecyclerViewLocation singleLocation = new SingleRecyclerViewLocation();
                                 singleLocation.setId(id);
                                 singleLocation.setName(fullName);
@@ -121,6 +145,7 @@ public class HomeFragment extends Fragment {
                                 singleLocation.setNumReferences(numReferences);
                                 singleLocation.setLocation(location);
                                 singleLocation.setViews(views);
+                                singleLocation.setAvailable(online);
 
                                 driversList.add(singleLocation);
 
@@ -128,7 +153,7 @@ public class HomeFragment extends Fragment {
                                 shimmerFrameLayout.setVisibility(View.GONE);
                             }
                             LocationRecyclerViewAdapter locationAdapter =
-                                    new LocationRecyclerViewAdapter(driversList, getActivity());
+                                    new LocationRecyclerViewAdapter(driversList, getActivity(),avLoadingIndicatorView);
                             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                             recyclerView.setItemAnimator(new DefaultItemAnimator());
                             recyclerView.setAdapter(locationAdapter);

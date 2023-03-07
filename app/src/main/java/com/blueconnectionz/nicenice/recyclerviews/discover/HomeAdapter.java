@@ -25,7 +25,9 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
 
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -69,7 +71,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                 homeItemList.get(position).getLocation());
 
         TextView carWeeklyCheckIn = holder.weekly;
-        carWeeklyCheckIn.setText("R " + homeItemList.get(position).getWeeklyCheckInAmount());
+        Locale SOUTH_AFRICA = new Locale("en", "ZA");
+        NumberFormat dollarFormat = NumberFormat.getCurrencyInstance(SOUTH_AFRICA);
+
+        carWeeklyCheckIn.setText(String.valueOf(dollarFormat.format(Double.valueOf(homeItemList.get(position).getWeeklyCheckInAmount()))));
 
         TextView numViews = holder.views;
         numViews.setText(String.valueOf(homeItemList.get(position).getViews()) + " views");
@@ -94,45 +99,28 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             holder.deposit.setText("Deposit Required");
         }
 
+        if(!homeItemList.get(position).isAvailable()){
+            holder.isAvailable.setVisibility(View.VISIBLE);
+        }
+
         MaterialCardView parent = holder.parentCardView;
         parent.setOnClickListener(view -> {
-
-            System.out.println("CAR ID " + homeItemList.get(position).getId() + "|" + LandingPage.userID );
-
-            Call<ResponseBody> updateViews = RetrofitClient.getRetrofitClient().getAPI()
-                    .updateViews(homeItemList.get(position).getId(), LandingPage.userID);
-
-            updateViews.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    if (response.isSuccessful()) {
-                        Intent i = new Intent(parent.getContext(), PostDetails.class);
-                        i.putExtra("image", homeItemList.get(position).getImage());
-                        i.putExtra("price", homeItemList.get(position).getWeeklyCheckInAmount());
-                        i.putExtra("description", homeItemList.get(position).getDescription());
-                        i.putExtra("location", homeItemList.get(position).getLocation());
-                        i.putExtra("make", homeItemList.get(position).getCar());
-                        i.putExtra("model", homeItemList.get(position).getOwner());
-                        parent.getContext().startActivity(i);
-                    } else {
-                        try {
-                            System.out.println("ERROR MSG " + response.errorBody().string());
-                            Toast.makeText(connections.getContext(), "FAILED TO UPDATE ID " + homeItemList.get(position).getId(), Toast.LENGTH_SHORT).show();
-                            return;
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                    System.out.println("ERROR MSG 2 " + t.getMessage());
-                    Toast.makeText(connections.getContext(), "FAILED TO UPDATE", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-            });
+            Intent i = new Intent(parent.getContext(), PostDetails.class);
+            i.putExtra("carId", homeItemList.get(position).getId());
+            i.putExtra("image", homeItemList.get(position).getImage());
+            i.putExtra("price",String.valueOf(dollarFormat.format(Double.valueOf(homeItemList.get(position).getWeeklyCheckInAmount()))));
+            i.putExtra("description", homeItemList.get(position).getDescription());
+            i.putExtra("location", homeItemList.get(position).getLocation());
+            i.putExtra("make", homeItemList.get(position).getCar());
+            i.putExtra("model", homeItemList.get(position).getOwner());
+            i.putExtra("views", homeItemList.get(position).getViews());
+            i.putExtra("connections", homeItemList.get(position).getConnections());
+            i.putExtra("age", homeItemList.get(position).getAge());
+            i.putExtra("insurance", homeItemList.get(position).isHasInsurance());
+            i.putExtra("uber", homeItemList.get(position).isActiveOnHailingPlatforms());
+            i.putExtra("tracker", homeItemList.get(position).isHasTracker());
+            i.putExtra("available", homeItemList.get(position).isAvailable());
+            parent.getContext().startActivity(i);
         });
 
 
@@ -154,6 +142,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         ImageView onPlatform;
         ImageView depositRequired;
 
+
+        MaterialCardView isAvailable;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             carImage = itemView.findViewById(R.id.carImage);
@@ -169,6 +160,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
             onPlatform = itemView.findViewById(R.id.imageView7);
             depositRequired = itemView.findViewById(R.id.imageView6);
+
+            isAvailable = itemView.findViewById(R.id.isAvailable2);
         }
     }
 

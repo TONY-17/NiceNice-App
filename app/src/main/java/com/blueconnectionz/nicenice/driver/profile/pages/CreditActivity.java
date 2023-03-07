@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import com.blueconnectionz.nicenice.driver.entry.LandingPage;
 import com.blueconnectionz.nicenice.network.RetrofitClient;
 import com.blueconnectionz.nicenice.utils.Common;
 import com.google.android.material.button.MaterialButton;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,6 +39,7 @@ public class CreditActivity extends AppCompatActivity {
 
     TextView creditBalance;
     RecyclerView recyclerView;
+    AVLoadingIndicatorView avLoadingIndicatorView;
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,7 @@ public class CreditActivity extends AppCompatActivity {
         Common.setStatusBarColor(getWindow(),this,getResources().getColor(R.color.colorBlue,null));
 
         ImageView backButton = findViewById(R.id.imageView13);
+        avLoadingIndicatorView = findViewById(R.id.avi);
         backButton.setOnClickListener(view -> CreditActivity.super.onBackPressed());
         creditBalance = findViewById(R.id.textView);
         MaterialButton loadCredit = findViewById(R.id.loadMoreCredit);
@@ -66,6 +70,7 @@ public class CreditActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){
                     try {
+                        avLoadingIndicatorView.setVisibility(View.GONE);
                         String data = response.body().string();
                         JSONObject jsonObject = new JSONObject(data);
                         int balance = jsonObject.getInt("balance");
@@ -92,12 +97,12 @@ public class CreditActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }else{
-
+                    return;
                 }
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                return;
             }
         });
 

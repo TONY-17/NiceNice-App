@@ -29,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blueconnectionz.nicenice.R;
+import com.blueconnectionz.nicenice.network.RetrofitClient;
 import com.blueconnectionz.nicenice.utils.Common;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
@@ -38,6 +39,7 @@ import com.hbisoft.pickit.PickiTCallbacks;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -48,6 +50,10 @@ import java.util.Random;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DocumentUpload extends AppCompatActivity implements PickiTCallbacks {
 
@@ -58,7 +64,6 @@ public class DocumentUpload extends AppCompatActivity implements PickiTCallbacks
     private static final int PICK_PDF_FILE_4 = 4;
     private static final int PICK_PDF_FILE_5 = 5;
 
-    int documentsUpload = 1;
     // Views to upload files
     MaterialCardView idCopy;
     MaterialCardView report;
@@ -96,7 +101,6 @@ public class DocumentUpload extends AppCompatActivity implements PickiTCallbacks
 
     PickiT pickiT;
     List<Intent> documents = ProfileUpload.documents;
-
 
 
     public static List<MultipartBody.Part> document = new ArrayList<>();
@@ -155,17 +159,63 @@ public class DocumentUpload extends AppCompatActivity implements PickiTCallbacks
 
         uploadDocuments = findViewById(R.id.uploadDocuments);
         uploadDocuments.setOnClickListener(view -> {
-            System.out.println("DOCUMENTS SIZE " + document.toString());
+
+            avLoadingIndicatorView.setVisibility(View.VISIBLE);
             //convertToMultipart(documents);
-            if(document.size() >= 6){
-                startActivity(new Intent(DocumentUpload.this, PersonalDetails.class));
-            }else{
-                Common.statusToast(2,"Files missing",this);
+            if (document.size() >= 6) {
+                List<MultipartBody.Part> toUpload = DocumentUpload.document;
+                Call<ResponseBody> uploadDocuments = RetrofitClient.getRetrofitClient().getAPI().uploadDriverDocs(toUpload);
+                uploadDocuments.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            try {
+                                Intent i = new Intent(DocumentUpload.this, PersonalDetails.class);
+                                String data = response.body().string();
+                                i.putExtra("uniqueDocumentId", data);
+                                startActivity(i);
+                                finish();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+
+                            try {
+                                System.out.println("UPLOAD ERR " + response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            avLoadingIndicatorView.setVisibility(View.GONE);
+                            Common.statusToast(2, "UPLOAD FAILED", DocumentUpload.this);
+                            return;
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+
+                        System.out.println("UPLOAD ERR " + t.getMessage().toString());
+
+                        avLoadingIndicatorView.setVisibility(View.GONE);
+                        Common.statusToast(2, "UPLOAD FAILED", DocumentUpload.this);
+                        return;
+                    }
+                });
+
+            } else {
+
+                avLoadingIndicatorView.setVisibility(View.GONE);
+                Common.statusToast(2, "Files missing", this);
+                avLoadingIndicatorView.setVisibility(View.GONE);
             }
         });
 
 
     }
+
 
     private void pdfIntent(int pdf_file) {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -336,13 +386,12 @@ public class DocumentUpload extends AppCompatActivity implements PickiTCallbacks
             }
         } else {
 
-            Toast.makeText(this, reason, Toast.LENGTH_LONG).show();
+            System.out.println("ERROR " + reason);
             //selectedDocumentTXT.setText(reason);
         }
     }
 
     private void convertToFile(String path) {
-        System.out.println("METHOD RUNNING " + count++);
         file = new File(path);
         Random random = new Random();
         String fileName = random.nextInt(1000) + file.getName();

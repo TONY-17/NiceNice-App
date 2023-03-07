@@ -24,11 +24,14 @@ public interface API {
     Call<ResponseBody> login(@Body LoginReq request);
 
     @Multipart
+    @POST("auth/upload-driver-docs")
+    Call<ResponseBody> uploadDriverDocs(@Part List<MultipartBody.Part> documents);
+
+    @Multipart
     @POST("auth/register-driver")
     Call<ResponseBody> registerDriver(
             @Part("data1") Map<String,Object> user,
-            @Part("data2") Map<String,Object> driver,
-            @Part List<MultipartBody.Part> documents
+            @Part("data2") Map<String,Object> driver
     );
 
     @Multipart
@@ -58,6 +61,9 @@ public interface API {
     @POST("owner/{userID}/{driverID}/connect-driver")
     Call<ResponseBody> connectWithDriver(@Path("userID") Long userID, @Path("driverID") Long driverID);
 
+    @POST("driver/{userID}/{carID}/connect-owner")
+    Call<ResponseBody> connectWithOwner(@Path("userID") Long userID, @Path("carID") Long carID);
+
     @Multipart
     @POST("owner/{userID}/car-application")
     Call<ResponseBody> addNewCar(@Path("userID") Long userID,
@@ -73,4 +79,23 @@ public interface API {
 
     @POST("driver/{userId}/new-password")
     Call<ResponseBody> changePassword(@Path("userId") Long userId,@Body String password);
+
+    @GET("driver/{userID}/{carID}/car-info")
+    Call<ResponseBody> getCarData(@Path("userID") Long userID,
+                                  @Path("carID") Long carID);
+
+    @POST("auth/email-exists")
+    Call<ResponseBody> checkIfEmailExists(@Body String email);
+
+    @PUT("owner/{carID}/disable-car")
+    Call<ResponseBody> disableCar(@Path("carID") Long carID);
+
+
+    @GET("driver/{userID}/is-online")
+    Call<ResponseBody> isAvailable(@Path("userID") Long userID);
+
+    @PUT("driver/{userID}/is-online")
+    Call<ResponseBody> changeStatus(@Path("userID") Long userID, @Body boolean value);
+
+
 }

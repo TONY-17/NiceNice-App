@@ -2,21 +2,18 @@ package com.blueconnectionz.nicenice.driver.profile.pages;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blueconnectionz.nicenice.R;
 import com.blueconnectionz.nicenice.driver.entry.LandingPage;
-import com.blueconnectionz.nicenice.driver.profile.ProfileFragment;
 import com.blueconnectionz.nicenice.network.RetrofitClient;
 import com.blueconnectionz.nicenice.network.model.ProfileInfo;
 import com.blueconnectionz.nicenice.utils.Common;
@@ -24,7 +21,8 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.rajat.pdfviewer.PdfViewerActivity;
+import com.wang.avi.AVLoadingIndicatorView;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,7 +59,10 @@ public class ProfileInformation extends AppCompatActivity {
     TextView file4;
     TextView file5;
 
-    MaterialCardView openFile1,openFile2,openFile3,openFile4,openFile5;
+    MaterialCardView openFile1, openFile2, openFile3, openFile4, openFile5;
+
+
+    AVLoadingIndicatorView avLoadingIndicatorView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +77,8 @@ public class ProfileInformation extends AppCompatActivity {
         emailAddress = findViewById(R.id.userEmailAddress);
         phoneNumber = findViewById(R.id.userPhoneNumber);
         updateProfile = findViewById(R.id.verifyNumber);
+
+        avLoadingIndicatorView = findViewById(R.id.avi);
         // Doc pdf view
         idCopy = findViewById(R.id.materialCardView19);
         license = findViewById(R.id.materialCardView20);
@@ -100,14 +103,11 @@ public class ProfileInformation extends AppCompatActivity {
         fetchProfileInfo(LandingPage.userID);
 
 
-
-
         updateProfile.setOnClickListener(view -> updateProfile(LandingPage.userID));
 
     }
 
     private String extractFileName(String path) {
-        // http://192.168.0.23:9091/api/v1/auth/files/132Downs potty trianing.pdf
         int indexOfFile = path.lastIndexOf('/');
         return path.substring(indexOfFile + 1);
     }
@@ -120,7 +120,8 @@ public class ProfileInformation extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     try {
                         String data = response.body().string();
-                        System.out.println("PROFILE INFO " + data);
+                        updateProfile.setEnabled(true);
+                        avLoadingIndicatorView.setVisibility(View.GONE);
                         JSONObject jsonObject = new JSONObject(data);
                         if (jsonObject.getString("fullName").contains("null")) {
                             fullName.setVisibility(View.GONE);
@@ -129,14 +130,22 @@ public class ProfileInformation extends AppCompatActivity {
                             address.setVisibility(View.GONE);
                             report.setVisibility(View.GONE);
                             rating.setVisibility(View.GONE);
+
+
+                            JSONArray documents = jsonObject.getJSONArray("documents");
+                            JSONObject singleDocument = documents.getJSONObject(0);
+                            String url = singleDocument.getString("url");
+                            file1.setText(extractFileName(url));
+                            openFile1.setOnClickListener(v -> openPDFViewer(url));
+
                         } else {
                             JSONArray documents = jsonObject.getJSONArray("documents");
                             for (int i = 0; i < documents.length(); i++) {
                                 JSONObject singleDocument = documents.getJSONObject(i);
                                 String url = singleDocument.getString("url");
                                 // Ignore the profile Image
-                                if(url.contains(".png") || url.contains(".jpg") || url.contains(".jpeg")){
-                                }else{
+                                if (url.contains(".png") || url.contains(".jpg") || url.contains(".jpeg")) {
+                                } else {
                                     documentURLs.add(url);
                                 }
                             }
@@ -175,15 +184,21 @@ public class ProfileInformation extends AppCompatActivity {
         });
     }
 
-    private void openPDFViewer(String filePath){
-        System.out.println("OPENING PDF");
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(filePath));
-        startActivity(browserIntent);
+    private void openPDFViewer(String filePath) {
+        Uri path = Uri.parse(filePath);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(path, "application/pdf");
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Common.statusToast(2, "No Application Available to View PDF", ProfileInformation.this);
+        }
     }
 
     private void updateProfile(Long userID) {
         if (fullName.length() < 0 || fullName.getText().toString().trim().indexOf(' ') < 0) {
-            fullName.setError("Full name required");
+            fullName2.setHelperText("Full name required");
             fullName.requestFocus();
             return;
         }

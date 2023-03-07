@@ -27,15 +27,15 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/notifications"
         android:layout_width="40dp"
+        android:animateLayoutChanges="true"
         android:layout_height="40dp"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/ic_notifications_black_24dp"
         app:cardCornerRadius="20dp"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/searchCardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/searchCardView"
-        app:strokeColor="@color/fill"
+        app:strokeColor="@color/card_stroke"
         app:strokeWidth="1dp">
 
         <ImageView
@@ -43,6 +43,29 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:src="@drawable/ic_notifications_black_24dp" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/unreadMC"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:cardBackgroundColor="@color/red"
+        app:cardCornerRadius="10dp"
+        android:animateLayoutChanges="true"
+        app:cardElevation="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/notifications"
+        app:layout_constraintEnd_toEndOf="@+id/notifications"
+        app:layout_constraintTop_toTopOf="@+id/notifications"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/messagesCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/regular"
+            android:textColor="@color/white" />
     </com.google.android.material.card.MaterialCardView>
 
 
@@ -56,6 +79,9 @@
         app:cardBackgroundColor="@color/fill"
         app:cardCornerRadius="12dp"
         app:cardElevation="0dp"
+        android:visibility="gone"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/card_stroke"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchCardView">
@@ -152,13 +178,16 @@
         </LinearLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
 
-    <ImageView
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/imageView18"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
         android:animateLayoutChanges="true"
-        android:src="@drawable/ic_outline_supervisor_account_24"
+        app:layout_constraintVertical_bias="0.3"
         android:visibility="gone"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/not_found"
         app:layout_constraintBottom_toBottomOf="@+id/shimmer_view_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -170,62 +199,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:animateLayoutChanges="true"
-        android:fontFamily="@font/inter_semibold"
-        android:text="NO DRIVERS YET"
-        android:textColor="@color/text_color"
-        android:textSize="18sp"
+        android:fontFamily="@font/inter_bold"
+        android:text="No Drivers Yet"
         android:visibility="gone"
+        android:textColor="@color/text_color"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView18"
         app:layout_constraintStart_toStartOf="@+id/imageView18"
         app:layout_constraintTop_toBottomOf="@+id/imageView18" />
 
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/filterCardView"
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        style="@style/AVLoadingIndicatorView"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="75dp"
-        app:cardBackgroundColor="@color/main"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="8dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:indicatorColor="@color/main"
+        app:indicatorName="BallPulseSyncIndicator"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="16dp"
-                android:src="@drawable/slider"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/white" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="@font/inter_semibold"
-                android:text="Filter"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

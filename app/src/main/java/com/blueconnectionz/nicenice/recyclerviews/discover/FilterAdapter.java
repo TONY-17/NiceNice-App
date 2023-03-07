@@ -15,11 +15,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.blueconnectionz.nicenice.R;
 import com.blueconnectionz.nicenice.driver.cardetails.PostDetails;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder> {
     List<HomeItem> items;
     Activity activity;
+
+    Locale SOUTH_AFRICA = new Locale("en", "ZA");
+    NumberFormat dollarFormat = NumberFormat.getCurrencyInstance(SOUTH_AFRICA);
+
+
 
     public FilterAdapter(List<HomeItem> items, Activity activity) {
         this.items = items;
@@ -36,7 +43,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
     }
 
 
-    public void filter(List<HomeItem> items){
+    public void filter(List<HomeItem> items) {
         this.items = items;
         notifyDataSetChanged();
     }
@@ -49,6 +56,7 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
         top.setText(item.getCar());
         bottom.setText(item.getOwner() + " - " + item.getLocation());
 
+
         holder.constraintLayout.setOnClickListener(view -> {
 
             Intent i = new Intent(activity.getApplicationContext(), PostDetails.class);
@@ -60,6 +68,15 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
             i.putExtra("make", items.get(position).getCar());
             i.putExtra("model", items.get(position).getOwner());
 
+            i.putExtra("price",String.valueOf(dollarFormat.format(Double.valueOf(items.get(position).getWeeklyCheckInAmount()))));
+            i.putExtra("carId", items.get(position).getId());
+            i.putExtra("views", items.get(position).getViews());
+            i.putExtra("connections", items.get(position).getConnections());
+            i.putExtra("age", items.get(position).getAge());
+            i.putExtra("insurance", items.get(position).isHasInsurance());
+            i.putExtra("uber", items.get(position).isActiveOnHailingPlatforms());
+            i.putExtra("tracker", items.get(position).isHasTracker());
+            i.putExtra("available", items.get(position).isAvailable());
 
 
             activity.startActivity(i);
@@ -72,10 +89,11 @@ public class FilterAdapter extends RecyclerView.Adapter<FilterAdapter.ViewHolder
         return items.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder {
         TextView header;
         TextView bottom;
         ConstraintLayout constraintLayout;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             header = itemView.findViewById(R.id.headerText);

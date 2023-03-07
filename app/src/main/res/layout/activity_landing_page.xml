@@ -31,11 +31,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:fontFamily="@font/inter_light"
+            android:fontFamily="@font/regular"
             android:text="Please sign in to continue or create a new account below."
             android:textAlignment="textStart"
             android:textColor="@color/text_color"
             android:textSize="16sp"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +45,7 @@
             android:id="@+id/textInputLayout8"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
 
             android:layout_marginTop="16dp"
@@ -56,7 +57,8 @@
             app:boxCornerRadiusBottomEnd="6dp"
             app:boxCornerRadiusBottomStart="6dp"
             app:boxCornerRadiusTopEnd="6dp"
-
+            app:helperTextTextColor="@color/red"
+            app:helperTextEnabled="true"
             app:boxCornerRadiusTopStart="6dp"
             app:boxStrokeColor="@color/main"
             app:boxStrokeWidth="1dp"
@@ -75,16 +77,17 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_regular"
                 android:hint="Email"
+                android:textSize="15sp"
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout9"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:backgroundTint="@color/white"
 
@@ -95,19 +98,20 @@
             app:boxCornerRadiusBottomStart="6dp"
             app:boxCornerRadiusTopEnd="6dp"
             app:boxCornerRadiusTopStart="6dp"
-
             app:boxStrokeColor="@color/main"
             app:boxStrokeWidth="1dp"
+            app:endIconTint="@color/black2"
             app:errorEnabled="true"
             app:errorIconDrawable="@drawable/ic_baseline_error_outline_24"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/red"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout8"
             app:passwordToggleEnabled="true"
-            app:startIconTint="@color/black2"
-            app:endIconTint="@color/black2"
             app:passwordToggleTint="@color/black2"
-            app:startIconDrawable="@drawable/ic_outline_lock_24">
+            app:startIconDrawable="@drawable/ic_outline_lock_24"
+            app:startIconTint="@color/black2">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordTxt"
@@ -115,18 +119,19 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_regular"
                 android:hint="Password"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textSize="15sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
         <TextView
             android:id="@+id/forgotPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:background="?android:attr/selectableItemBackground"
-            android:fontFamily="@font/inter_regular"
+            android:fontFamily="@font/regular"
             android:text="Forgot password?"
             android:textAlignment="viewEnd"
             android:textColor="@color/text_color"
@@ -238,7 +243,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="32dp"
             android:background="?android:attr/selectableItemBackground"
-            android:fontFamily="@font/inter_light"
+            android:fontFamily="@font/regular"
             android:text="@string/already_have_an_account_sign_in"
             android:textAlignment="center"
             android:textColor="@color/text_color"
@@ -255,7 +260,7 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             app:indicatorColor="@color/main"
-            app:indicatorName="BallPulseSyncIndicator"
+            app:indicatorName="BallBeatIndicator"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

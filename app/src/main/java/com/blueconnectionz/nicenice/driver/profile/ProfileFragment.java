@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
 import com.blueconnectionz.nicenice.CustomWebView;
 import com.blueconnectionz.nicenice.MainActivity;
@@ -22,15 +23,24 @@ import com.blueconnectionz.nicenice.driver.entry.LandingPage;
 import com.blueconnectionz.nicenice.driver.profile.pages.ChangePassword;
 import com.blueconnectionz.nicenice.driver.profile.pages.CreditActivity;
 import com.blueconnectionz.nicenice.driver.profile.pages.ProfileInformation;
+import com.blueconnectionz.nicenice.network.RetrofitClient;
 import com.droidbyme.dialoglib.AnimUtils;
 import com.droidbyme.dialoglib.DroidDialog;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.saadahmedsoft.popupdialog.PopupDialog;
 import com.saadahmedsoft.popupdialog.Styles;
 import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
+import com.wang.avi.AVLoadingIndicatorView;
 
+import java.io.IOException;
 import java.net.URLEncoder;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -82,11 +92,21 @@ public class ProfileFragment extends Fragment {
 
     // Indicates in the opened activity that a driver opened the page
     public static boolean isDriver = false;
+    SwitchMaterial switchMaterial;
+    AVLoadingIndicatorView avLoadingIndicatorView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
+
+
+        switchMaterial = root.findViewById(R.id.switchMaterial);
+        avLoadingIndicatorView = root.findViewById(R.id.avi);
+        checkAvailabilityStatus();
         // Edit profile page
         root.findViewById(R.id.profileCardView).setOnClickListener(view -> {
             isDriver = true;
@@ -98,13 +118,34 @@ public class ProfileFragment extends Fragment {
             startActivity(new Intent(getContext(), ChangePassword.class));
         });
         // Opens the loading credit page
-        root.findViewById(R.id.creditsCardView).setOnClickListener(view -> startActivity(new Intent(getContext(),CreditActivity.class)));
+        root.findViewById(R.id.creditsCardView).setOnClickListener(view -> startActivity(new Intent(getContext(), CreditActivity.class)));
         // Opens the Terms and Conditions Dialog
         root.findViewById(R.id.termsCardView).setOnClickListener(view -> openTermsDialog());
         // Opens WhatsApp Help center
         root.findViewById(R.id.feedBack).setOnClickListener(view -> openWhatsApp());
         // Logs out the user
         root.findViewById(R.id.logOutUser).setOnClickListener(view -> openLogoutView());
+
+        // Go on or offline
+        switchMaterial.setOnCheckedChangeListener((compoundButton, b) -> {
+            Call<ResponseBody> changeStatus = RetrofitClient.getRetrofitClient().getAPI().changeStatus(LandingPage.userID,
+                    b);
+            changeStatus.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if(response.isSuccessful()){
+
+                    }else{
+
+                    }
+                }
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                }
+            });
+        });
+
 
         return root;
     }
@@ -175,22 +216,52 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    private void openCreditsView() {
-        isDriver = true;
-        getActivity().runOnUiThread(new Runnable() {
+    private void checkAvailabilityStatus() {
+        Call<ResponseBody> isAvailable = RetrofitClient.getRetrofitClient().getAPI().isAvailable(LandingPage.userID);
+        isAvailable.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void run() {
-                PopupDialog.getInstance(getContext())
-                        .setStyle(Styles.ALERT)
-                        .setHeading("Pending")
-                        .setDescription("This feature is not yet available")
-                        .setCancelable(false)
-                        .showDialog(new OnDialogButtonClickListener() {
-                            @Override
-                            public void onDismissClicked(Dialog dialog) {
-                                super.onDismissClicked(dialog);
-                            }
-                        });
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    try {
+                        String data = response.body().string();
+                        System.out.println("PROFILE INFO " + data);
+                        if (data.contains("false")) {
+                            getActivity().runOnUiThread(() -> {
+                                switchMaterial.setVisibility(View.VISIBLE);
+                                switchMaterial.setChecked(false);
+                                avLoadingIndicatorView.setVisibility(View.GONE);
+                            });
+
+                        } else if (data.contains("true")) {
+                            getActivity().runOnUiThread(() -> {
+                                switchMaterial.setVisibility(View.VISIBLE);
+                                switchMaterial.setChecked(true);
+
+                                avLoadingIndicatorView.setVisibility(View.GONE);
+                            });
+                        }
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    getActivity().runOnUiThread(() -> {
+                        switchMaterial.setVisibility(View.VISIBLE);
+                        switchMaterial.setEnabled(false);
+
+                        avLoadingIndicatorView.setVisibility(View.GONE);
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                getActivity().runOnUiThread(() -> {
+                    switchMaterial.setVisibility(View.VISIBLE);
+                    switchMaterial.setEnabled(false);
+
+                    avLoadingIndicatorView.setVisibility(View.GONE);
+                });
             }
         });
     }

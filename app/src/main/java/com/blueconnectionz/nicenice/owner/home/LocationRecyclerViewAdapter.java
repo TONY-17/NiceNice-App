@@ -1,15 +1,10 @@
 package com.blueconnectionz.nicenice.owner.home;
 
-import static com.blueconnectionz.nicenice.driver.entry.LandingPage.userEmail;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,26 +25,23 @@ import com.blueconnectionz.nicenice.owner.dashboard.ChatActivity;
 import com.blueconnectionz.nicenice.utils.Common;
 import com.bumptech.glide.Glide;
 import com.google.android.material.card.MaterialCardView;
-
 import com.saadahmedsoft.popupdialog.PopupDialog;
 import com.saadahmedsoft.popupdialog.Styles;
 import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import io.getstream.chat.android.client.ChatClient;
-import io.getstream.chat.android.client.channel.ChannelClient;
 import io.getstream.chat.android.client.models.Channel;
 import io.getstream.chat.android.client.models.User;
-import io.getstream.chat.android.client.utils.Result;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -59,10 +51,12 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
 
     private List<SingleRecyclerViewLocation> locationList;
     private Activity activity;
+    AVLoadingIndicatorView avLoadingIndicatorView;
 
-    public LocationRecyclerViewAdapter(List<SingleRecyclerViewLocation> locationList, Activity activity) {
+    public LocationRecyclerViewAdapter(List<SingleRecyclerViewLocation> locationList, Activity activity,AVLoadingIndicatorView avLoadingIndicatorView) {
         this.locationList = locationList;
         this.activity = activity;
+        this.avLoadingIndicatorView = avLoadingIndicatorView;
     }
 
     @NonNull
@@ -85,10 +79,18 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
         holder.name.setText(single.getName());
         holder.location.setText(single.getLocation());
         holder.joinedDate.setText(single.getJoinedDate());
-        holder.references.setText(single.getNumReferences() + " last owner references");
+        holder.references.setText(single.getNumReferences() + "+ last owner references");
         holder.views.setText(single.getViews() + " views");
 
-        holder.constraintLayout.setOnClickListener(view -> activity.runOnUiThread(() -> openDialogAndConnect(single.getName(), single.getId())));
+        if(!single.isAvailable()){
+            holder.notAvailable.setVisibility(View.VISIBLE);
+            holder.constraintLayout.setOnClickListener(view -> Toast.makeText(activity,"NOT AVAILABLE",Toast.LENGTH_LONG).show());
+        }else {
+            holder.notAvailable.setVisibility(View.GONE);
+            holder.constraintLayout.setOnClickListener(view ->
+                    activity.runOnUiThread(() ->
+                    openDialogAndConnect(single.getName(), single.getId())));
+        }
 
     }
 
@@ -101,12 +103,13 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
         ImageView image;
         TextView name, location, joinedDate, references, views;
         ItemClickListener clickListener;
-
         MaterialCardView constraintLayout;
+        MaterialCardView notAvailable;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.driverImg);
+            notAvailable = itemView.findViewById(R.id.isAvailable2);
             name = itemView.findViewById(R.id.driverName);
             location = itemView.findViewById(R.id.driverLocation);
             joinedDate = itemView.findViewById(R.id.driverJoinedDate);
@@ -131,9 +134,7 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
 
 
     private void connectWithDriver(Long driverID) {
-
-
-
+        avLoadingIndicatorView.setVisibility(View.VISIBLE);
         Call<ResponseBody> connect = RetrofitClient.getRetrofitClient().getAPI().connectWithDriver(
                 LandingPage.userID,
                 driverID);
@@ -144,73 +145,83 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
                     try {
                         String data = response.body().string();
                         // The owner has enough credit to chat with the driver
-                        if (!data.equals("NOT ENOUGH CREDIT")) {
+                        if (!data.equals("NOT ENOUGH CREDIT") && !data.equals("ALREADY CONNECTED")) {
 
-                            // The API response contains user IDs that should be allowed to communicate
-                            JSONObject jsonObject = new JSONObject(data);
-                            String ownerID = jsonObject.getString("ownerID");
-                            String driverID = jsonObject.getString("driverID");
-                            String token = jsonObject.getString("token");
+                            try{
+                                // The API response contains user IDs that should be allowed to communicate
+                                JSONObject jsonObject = new JSONObject(data);
+                                String ownerID = jsonObject.getString("ownerID");
+                                String driverID = jsonObject.getString("driverID");
+                                String token = jsonObject.getString("token");
 
-                            ChatClient client = MyApp.client;
+                                ChatClient client = MyApp.client;
 
-                            // Client requires User object
-                            User user = new User();
-                            String email = ownerID.toLowerCase();
-                            int atIndex = email.indexOf('@');
-                            user.setId(email.replaceAll("[.]", ""));
-                            user.setName(email.substring(0, atIndex));
-                            // replace with Avatar API collection
-                            String profileURL = "https://avatars.dicebear.com/api/adventurer/" + Common.randomString() + ".svg";
-                            user.setImage(profileURL);
+                                // Client requires User object
+                                User user = new User();
+                                String email = ownerID.toLowerCase();
+                                int atIndex = email.indexOf('@');
+                                user.setId(email.replaceAll("[.]", ""));
+                                user.setName(email.substring(0, atIndex));
+                                // replace with Avatar API collection
+                                String profileURL = "https://avatars.dicebear.com/api/adventurer/" + Common.randomString() + ".svg";
+                                user.setImage(profileURL);
 
-                            // List of users in the channel
-                            Map<String, Object> extraData = new HashMap<>();
-                            extraData.put("name", "Chat with [ " + driverID + " ]");
-                            List<String> memberIds = new LinkedList<>();
-                            memberIds.add(ownerID.replaceAll("[.]", ""));
-                            memberIds.add(driverID.replaceAll("[.]", ""));
+                                // List of users in the channel
+                                Map<String, Object> extraData = new HashMap<>();
+                                extraData.put("name", "Chat with [ " + driverID + " ]");
+                                List<String> memberIds = new LinkedList<>();
+                                memberIds.add(ownerID.replaceAll("[.]", ""));
+                                memberIds.add(driverID.replaceAll("[.]", ""));
 
-                            io.getstream.chat.android.client.call.Call<Channel> newChannel = client.createChannel("messaging", "", memberIds, extraData);
-                            newChannel.enqueue(result -> {
-                                if (result.isSuccess()) {
-                                    Channel newChannel1 = result.data();
+                                io.getstream.chat.android.client.call.Call<Channel> newChannel = client.createChannel("messaging", "", memberIds, extraData);
+                                newChannel.enqueue(result -> {
+                                    if (result.isSuccess()) {
+                                        avLoadingIndicatorView.setVisibility(View.GONE);
+                                        Channel newChannel1 = result.data();
+                                        activity.startActivity(ChannelActivity.newIntent(activity, newChannel1));
+                                    } else {
+                                        avLoadingIndicatorView.setVisibility(View.GONE);
+                                        Common.statusToast(2,"Failed. Please try again",activity);
+                                        Intent intent = activity.getIntent();
+                                        activity.finish();
+                                        activity.startActivity(intent);
+                                    }
+                                });
+
+                                client.connectUser(user, token).enqueue((result) -> {
+                                    if (result.isSuccess()) {
+                                        // Handle success
+                                        avLoadingIndicatorView.setVisibility(View.GONE);
+                                        System.out.println("USER CONNECTED ):");
+                                    } else {
+                                        // Handler error
+                                        avLoadingIndicatorView.setVisibility(View.GONE);
+                                        System.out.println("USER DIS-CONNECTED ):");
+                                    }
+                                });
+                            }catch (JSONException e){
+                                avLoadingIndicatorView.setVisibility(View.GONE);
+                                Common.featureComingSoon(activity,data);
+                            }
 
 
-                                    activity.startActivity(ChannelActivity.newIntent(activity, newChannel1));
 
-
-                                } else {
-
-                                    System.out.println("MESSAGE ERR " + result.error());
-                                }
-                            });
-
-
-                            client.connectUser(user, token).enqueue((result) -> {
-                                if (result.isSuccess()) {
-                                    // Handle success
-                                    System.out.println("USER CONNECTED ):");
-                                } else {
-                                    // Handler error
-                                    System.out.println("USER DIS-CONNECTED ):");
-                                }
-                            });
-
-                        } else {
 
                         }
-                    } catch (IOException | JSONException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    try {
-                        System.out.println("CONNECTION DRIVER : " + response.errorBody().string());
+                        else if(data.contains("ALREADY CONNECTED")){
+                            avLoadingIndicatorView.setVisibility(View.GONE);
+                            Common.statusToast(1,"ALREADY CONNECTED",activity);
+                            activity.startActivity(new Intent(activity, ChatActivity.class));
+                        }
+                        else {
+                            avLoadingIndicatorView.setVisibility(View.GONE);
+                            Common.featureComingSoon(activity,"Please load credits before connecting with driver");
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
-
+                }else {
+                    avLoadingIndicatorView.setVisibility(View.GONE);
                     Toast.makeText(activity, "CONNECTION FAILED", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -218,10 +229,7 @@ public class LocationRecyclerViewAdapter extends RecyclerView.Adapter<LocationRe
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                // Dismiss loading dialog
-
-                System.out.println("CONNECTION DRIVER : " + t.getMessage());
+                avLoadingIndicatorView.setVisibility(View.GONE);
                 Toast.makeText(activity, "CONNECTION FAILED", Toast.LENGTH_SHORT).show();
                 return;
             }

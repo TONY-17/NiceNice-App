@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.blueconnectionz.nicenice.DriverFilter;
 import com.blueconnectionz.nicenice.R;
 import com.blueconnectionz.nicenice.databinding.FragmentHomeBinding;
@@ -47,7 +48,7 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
     ShimmerFrameLayout shimmerFrameLayout;
 
-    ImageView filteredView;
+    LottieAnimationView filteredView;
     TextView filteredView1;
     @RequiresApi(api = Build.VERSION_CODES.M)
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -123,6 +124,7 @@ public class HomeFragment extends Fragment {
                                     boolean depositRequired = carJsonObj.getBoolean("depositRequired");
                                     boolean hasInsurance = carJsonObj.getBoolean("hasInsurance");
                                     boolean hasTracker = carJsonObj.getBoolean("hasTracker");
+                                    boolean available = carJsonObj.getBoolean("available");
                                     boolean activeOnHailingPlatforms = carJsonObj.getBoolean("activeOnHailingPlatforms");
                                     String views = carJsonObj.getString("views");
                                     String age = carJsonObj.getString("age");
@@ -132,7 +134,8 @@ public class HomeFragment extends Fragment {
                                     String imageURL = jsonObject.getString("imageURL");
 
                                     homeItemList.add(new HomeItem(id, imageURL, make, model, city, weeklyTarget, depositRequired, description,
-                                            Integer.valueOf(views), Integer.valueOf(numConnections), Integer.valueOf(age), activeOnHailingPlatforms));
+                                            Integer.valueOf(views), Integer.valueOf(numConnections), Integer.valueOf(age), activeOnHailingPlatforms,
+                                            hasInsurance,hasTracker,activeOnHailingPlatforms,available));
 
                                     shimmerFrameLayout.stopShimmer();
                                     shimmerFrameLayout.setVisibility(View.GONE);

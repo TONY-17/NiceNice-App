@@ -6,10 +6,12 @@
     android:paddingBottom="16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/parentCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/fill_light"
         app:cardCornerRadius="12dp"
         app:cardElevation="0dp"
@@ -30,8 +32,8 @@
                 android:id="@+id/carImage"
                 android:layout_width="0dp"
                 android:layout_height="120dp"
-                android:src="@drawable/bike_img"
                 android:scaleType="centerCrop"
+                android:src="@drawable/bike_img"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -52,32 +54,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/carImage" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                app:cardBackgroundColor="@color/red"
-                app:cardCornerRadius="2dp"
-                android:visibility="gone"
-                app:cardElevation="0dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/carImage"
-                app:shapeAppearance="@style/Availability.Rounded">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/inter_medium"
-                    android:padding="2dp"
-                    android:text="Not available"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-            </com.google.android.material.card.MaterialCardView>
-
-
-
-
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="wrap_content"
@@ -87,18 +63,20 @@
                 app:layout_constraintStart_toStartOf="@+id/driverName"
                 app:layout_constraintTop_toBottomOf="@+id/driverName"
                 app:tint="@color/text_color" />
+
             <TextView
                 android:id="@+id/viewsTXT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:fontFamily="@font/inter_regular"
                 android:text="10 views"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:fontFamily="@font/inter_regular"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView4"
                 app:layout_constraintStart_toEndOf="@+id/imageView4"
                 app:layout_constraintTop_toTopOf="@+id/imageView4" />
+
             <ImageView
                 android:id="@+id/imageView44"
                 android:layout_width="wrap_content"
@@ -109,18 +87,20 @@
                 app:layout_constraintStart_toEndOf="@+id/viewsTXT"
                 app:layout_constraintTop_toTopOf="@+id/imageView4"
                 app:tint="@color/text_color" />
+
             <TextView
                 android:id="@+id/connectionsTXT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:fontFamily="@font/inter_regular"
                 android:text="2/3 "
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:fontFamily="@font/inter_regular"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView44"
                 app:layout_constraintStart_toEndOf="@+id/imageView44"
                 app:layout_constraintTop_toTopOf="@+id/imageView44" />
+
             <ImageView
                 android:id="@+id/imageView45"
                 android:layout_width="wrap_content"
@@ -131,15 +111,16 @@
                 app:layout_constraintStart_toEndOf="@+id/connectionsTXT"
                 app:layout_constraintTop_toTopOf="@+id/imageView44"
                 app:tint="@color/text_color" />
+
             <TextView
                 android:id="@+id/driverJoinedDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:fontFamily="@font/inter_regular"
                 android:text="4d. ago"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:fontFamily="@font/inter_regular"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView45"
                 app:layout_constraintStart_toEndOf="@+id/imageView45"
                 app:layout_constraintTop_toTopOf="@+id/imageView45" />
@@ -149,8 +130,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:visibility="gone"
                 android:src="@drawable/ic_outline_wb_sunny_24"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView45"
                 app:layout_constraintStart_toEndOf="@+id/driverJoinedDate"
                 app:layout_constraintTop_toTopOf="@+id/imageView45"
@@ -161,9 +142,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="A/C"
-                android:visibility="gone"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView46"
                 app:layout_constraintStart_toEndOf="@+id/imageView46"
                 app:layout_constraintTop_toTopOf="@+id/imageView46" />
@@ -177,8 +158,8 @@
                 android:text="Views: 10 \u2022  Connections:  2/3 \u2022 Listed: 3 days ago"
                 android:textColor="@color/text_color"
                 android:textSize="16sp"
-                android:visibility="gone"
                 android:textStyle="italic"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/imageView4"
@@ -210,11 +191,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
                         android:src="@drawable/ic_round_check_24"
+                        app:layout_constraintBottom_toBottomOf="@+id/driverLocation"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                         />
+                        app:layout_constraintTop_toTopOf="@+id/driverLocation" />
 
                     <ImageView
                         android:id="@+id/imageView7"
@@ -226,7 +206,7 @@
                         android:src="@drawable/ic_round_check_24"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+                        app:layout_constraintTop_toBottomOf="@+id/driverLocation"
                         app:layout_constraintVertical_bias="0.0"
                         app:tint="@color/green" />
 
@@ -235,16 +215,16 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
                         android:fontFamily="@font/inter_medium"
                         android:text="No deposit "
                         android:textColor="@color/black"
                         android:textSize="14sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
                         app:layout_constraintEnd_toStartOf="@+id/textView8"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toEndOf="@+id/imageView6"
-                        app:layout_constraintTop_toTopOf="@+id/imageView6" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <TextView
@@ -252,10 +232,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
+                        android:fontFamily="@font/inter_medium"
                         android:text="Uber | Bolt"
                         android:textColor="@color/black"
                         android:textSize="14sp"
-                        android:fontFamily="@font/inter_medium"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView7"
                         app:layout_constraintStart_toEndOf="@+id/imageView7"
                         app:layout_constraintTop_toTopOf="@+id/imageView7" />
@@ -265,10 +245,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
+                        android:fontFamily="@font/inter_medium"
                         android:text="Weekly check-in/"
                         android:textColor="@color/black"
                         android:textSize="14sp"
-                        android:fontFamily="@font/inter_medium"
                         app:layout_constraintBottom_toBottomOf="@+id/driverLocation"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/driverLocation" />
@@ -279,10 +259,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
+                        android:fontFamily="@font/inter_medium"
                         android:text="R250"
                         android:textColor="@color/green"
                         android:textSize="14sp"
-                        android:fontFamily="@font/inter_medium"
                         app:layout_constraintBottom_toBottomOf="@+id/driverReferences"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/driverReferences" />
@@ -295,4 +275,33 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/isAvailable2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:cardBackgroundColor="@color/red"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/parentCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/parentCard"
+        app:shapeAppearance="@style/Availability.Rounded">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/regular"
+            android:padding="4dp"
+            android:text="Not available"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

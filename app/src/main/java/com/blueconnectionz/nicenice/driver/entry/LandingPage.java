@@ -112,17 +112,17 @@ public class LandingPage extends AppCompatActivity {
         String password = Objects.requireNonNull(passwordField.getText()).toString().trim();
 
         if (email.isEmpty()) {
-            emailField.setError("Email required");
-            emailField.requestFocus();
+            emailLayout.setError("Email required *");
+            emailLayout.requestFocus();
             return;
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailField.setError("Email invalid");
+            emailLayout.setError("Email invalid");
             emailField.requestFocus();
             return;
         }
 
         if (password.isEmpty()) {
-            passwordLayout.setError("Password required");
+            passwordLayout.setError("Password required *");
             passwordLayout.requestFocus();
             return;
         }
