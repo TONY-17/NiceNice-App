@@ -1,5 +1,5 @@
 # FleetLink-Mobile-Application
-Legit vehicles and driver rentals (In development)
+An Android application for fleet owners to find drivers and drivers to find fleet that can they can use on e-hailing platforms.
 
 ## SCREENSHOTS 📷
 
